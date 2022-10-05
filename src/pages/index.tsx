@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { Login } from '../components/Login'
 
 const Home: NextPage = () => {
     return (
@@ -8,9 +9,7 @@ const Home: NextPage = () => {
                 <title>Ovord 2</title>
                 <meta name="description" content="Ovord 2 Dashboard" />
             </Head>
-            <h1 className="text-3xl font-bold text-center">
-                Ovord 2 Dashboard
-            </h1>
+            <Login />
         </>
     )
 }
