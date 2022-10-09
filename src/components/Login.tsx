@@ -1,5 +1,8 @@
 import * as React from 'react'
 import { useFormik } from 'formik'
+import Link from 'next/link'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../utils/firebase'
 
 interface MyFormValues {
     email: string
@@ -12,15 +15,18 @@ export const Login: React.FC<{}> = () => {
             email: '',
             password: '',
         },
-        onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2))
+        onSubmit: async (values) => {
+            await signInWithEmailAndPassword(
+                auth,
+                values.email,
+                values.password
+            ).catch((err) => console.log(err))
         },
     })
 
     return (
         <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm m-auto mt-32 p-4 sm:p-6 lg:p-8 ">
             <h1 className="text-2xl text-center font-bold pb-3">Login</h1>
-
             <form
                 onSubmit={formik.handleSubmit}
                 className="space-y-6 flex flex-col"
@@ -64,6 +70,16 @@ export const Login: React.FC<{}> = () => {
                 >
                     Submit
                 </button>
+                <div className="block">
+                    <p className="text-sm text-center">
+                        You don`t have an account?{' '}
+                        <Link href="#" passHref>
+                            <a className="text-sm text-purple-500 font-semibold">
+                                Register now
+                            </a>
+                        </Link>
+                    </p>
+                </div>
             </form>
         </div>
     )
