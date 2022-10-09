@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { User, onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../utils/firebase'
+import auth from '../utils/firebase'
 import cookies from 'js-cookie'
 import Router from 'next/router'
 

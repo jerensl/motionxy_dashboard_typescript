@@ -11,4 +11,4 @@ if (!firebaseApp.getApps.length) {
     firebaseApp.initializeApp(firebaseConfig)
 }
 
-export const auth = getAuth()
+export default getAuth()

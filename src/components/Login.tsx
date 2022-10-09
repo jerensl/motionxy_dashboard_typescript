@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useFormik } from 'formik'
 import Link from 'next/link'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../utils/firebase'
+import auth from '../utils/firebase'
 
 interface MyFormValues {
     email: string

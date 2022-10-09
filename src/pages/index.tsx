@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Navbar } from '../components/Navbar'
 import { useAuth } from '../context/useAuth'
-import { auth } from '../utils/firebase'
+import auth from '../utils/firebase'
 
 const Home: NextPage = () => {
     const router = useRouter()
