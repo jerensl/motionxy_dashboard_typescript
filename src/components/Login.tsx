@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import Link from 'next/link'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import auth from '../utils/firebase'
+import clsx from 'clsx'
 
 interface MyFormValues {
     email: string
@@ -65,8 +66,15 @@ export const Login: React.FC<{}> = () => {
                     />
                 </div>
                 <button
+                    disabled={!formik.isValidating && formik.isSubmitting}
                     type="submit"
-                    className="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline"
+                    className={clsx(
+                        'border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline',
+                        {
+                            'bg-slate-500':
+                                !formik.isValidating && formik.isSubmitting,
+                        }
+                    )}
                 >
                     Submit
                 </button>
