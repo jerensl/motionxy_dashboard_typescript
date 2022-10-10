@@ -6,15 +6,15 @@ import Router from 'next/router'
 
 const AuthContext = React.createContext<{
     user: User | null
-    loading: boolean
+    isLoading: boolean
 }>({
     user: null,
-    loading: true,
+    isLoading: true,
 })
 
 export function AuthProvider({ children }: any) {
     const [user, setUser] = React.useState<User | null>(null)
-    const [loading, setLoading] = React.useState(true)
+    const [isLoading, setIsLoading] = React.useState(true)
 
     React.useEffect(() => {
         const userFromCookie = cookies.get('auth')
@@ -35,19 +35,19 @@ export function AuthProvider({ children }: any) {
             }
         })
 
-        setLoading(false)
+        setIsLoading(false)
         return () => unsubscribe()
     }, [])
 
     return (
-        <AuthContext.Provider value={{ user, loading }}>
+        <AuthContext.Provider value={{ user, isLoading }}>
             {children}
         </AuthContext.Provider>
     )
 }
 
-export const useAuth = (): { user: User | null; loading: boolean } => {
-    return React.useContext<{ user: User | null; loading: boolean }>(
+export const useAuth = (): { user: User | null; isLoading: boolean } => {
+    return React.useContext<{ user: User | null; isLoading: boolean }>(
         AuthContext
     )
 }
