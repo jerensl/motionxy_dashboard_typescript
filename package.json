@@ -9,6 +9,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@headlessui/react": "^1.7.3",
         "firebase": "^9.11.0",
         "formik": "^2.2.9",
         "js-cookie": "^3.0.1",
