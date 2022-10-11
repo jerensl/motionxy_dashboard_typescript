@@ -2,10 +2,12 @@ import { Menu } from '@headlessui/react'
 import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useAuth } from '../context/useAuth'
 import auth from '../utils/firebase'
 
 export const Profile = () => {
     const router = useRouter()
+    const { user } = useAuth()
 
     return (
         <Menu>
@@ -58,17 +60,13 @@ export const Profile = () => {
             </Menu.Button>
             <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
-                    <Menu.Item>
-                        {({ active }) => (
-                            <a
-                                className={`${
-                                    active && 'bg-blue-500'
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                href="/account-settings"
-                            >
-                                Account settings
-                            </a>
-                        )}
+                    <Menu.Item disabled>
+                        <p className="text-sm px-2 py-2">
+                            Welcome
+                            <span className="font-bold ml-1">
+                                {user?.displayName?.split(' ')[0]}
+                            </span>
+                        </p>
                     </Menu.Item>
                     <Menu.Item>
                         {({ active }) => (
