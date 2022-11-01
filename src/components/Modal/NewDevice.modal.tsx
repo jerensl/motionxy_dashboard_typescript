@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { createNewDevice } from '../../utils/device'
 
 interface NewDeviceValues {
-    name: string
+    deviceName: string
 }
 
 interface SuccessModalProps {
@@ -18,10 +18,12 @@ export default function NewDeviceModal({
 }: SuccessModalProps) {
     const formik = useFormik<NewDeviceValues>({
         initialValues: {
-            name: '',
+            deviceName: '',
         },
         onSubmit: async (values, action) => {
-            await createNewDevice(values.name)
+            await createNewDevice(values.deviceName)
+                .then(() => handleClose())
+                .catch((e) => console.log(e))
         },
     })
 
@@ -64,7 +66,7 @@ export default function NewDeviceModal({
                                 >
                                     <div>
                                         <label
-                                            htmlFor="name"
+                                            htmlFor="deviceName"
                                             className="text-sm font-medium text-gray-900 block "
                                         >
                                             Device Name
@@ -72,22 +74,26 @@ export default function NewDeviceModal({
                                                 *
                                             </span>
                                         </label>
-                                        {formik.errors.name &&
-                                        formik.touched.name ? (
+                                        {formik.errors.deviceName &&
+                                        formik.touched.deviceName ? (
                                             <span className="text-xs text-red-500">
-                                                {formik.errors.name}
+                                                {formik.errors.deviceName}
                                             </span>
                                         ) : null}
                                         <input
-                                            id="name"
-                                            name="name"
+                                            id="deviceName"
+                                            name="deviceName"
                                             placeholder="Device Name"
                                             onChange={formik.handleChange}
-                                            value={formik.values.name}
+                                            value={formik.values.deviceName}
                                             className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                         />
                                     </div>
                                     <button
+                                        disabled={
+                                            !formik.isValidating &&
+                                            formik.isSubmitting
+                                        }
                                         type="submit"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                     >

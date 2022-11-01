@@ -1,11 +1,21 @@
+import { useQuery } from '@tanstack/react-query'
 import Head from 'next/head'
 import React from 'react'
+import { DeviceCard } from '../../components/Card/Device.card'
 import Layout from '../../components/Layout'
 import NewDeviceModal from '../../components/Modal/NewDevice.modal'
+import { useAuth } from '../../context/useAuth'
+import { getDevices } from '../../utils/device'
 import { NextPageWithLayout } from '../_app'
 
 const DevicePage: NextPageWithLayout = () => {
     const [newDeviceOpen, setNewDeviceOpen] = React.useState(false)
+    const { user } = useAuth()
+    const { data: devices } = useQuery({
+        queryKey: ['devices', user?.getIdTokenResult],
+        queryFn: getDevices,
+        enabled: !!user?.getIdTokenResult,
+    })
 
     const handleNewDeviceOpen = () => {
         setNewDeviceOpen(true)
@@ -32,6 +42,10 @@ const DevicePage: NextPageWithLayout = () => {
                     isOpen={newDeviceOpen}
                     handleClose={handleNewDeviceClosed}
                 />
+
+                {devices?.map(({ name, token }: any) => (
+                    <DeviceCard key={token} name={name} token={token} />
+                ))}
             </div>
         </>
     )
