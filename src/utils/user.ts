@@ -5,9 +5,6 @@ export function createNewUser(
 ) {
     return window.fetch('https://cec.azurewebsites.net/api/user/new', {
         method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-        },
         mode: 'cors',
         body: JSON.stringify({
             fullName,
