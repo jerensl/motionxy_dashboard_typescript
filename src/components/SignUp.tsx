@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import SuccessModal from './Modal/Sucess.modal'
 import { createNewUser } from '../utils/user'
 
-interface MyFormValues {
+interface SignUpValues {
     email: string
     fullName: string
     password: string
@@ -26,7 +26,7 @@ const SignUpValidation = Yup.object().shape({
 
 export const SignUp: React.FC<{}> = () => {
     const [isOpen, setIsOpen] = React.useState(false)
-    const formik = useFormik<MyFormValues>({
+    const formik = useFormik<SignUpValues>({
         initialValues: {
             email: '',
             fullName: '',

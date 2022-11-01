@@ -1,5 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { useFormik } from 'formik'
+import { Fragment } from 'react'
+
+interface NewDeviceValues {
+    name: string
+}
 
 interface SuccessModalProps {
     isOpen: boolean
@@ -10,6 +15,13 @@ export default function NewDeviceModal({
     isOpen,
     handleClose,
 }: SuccessModalProps) {
+    const formik = useFormik<NewDeviceValues>({
+        initialValues: {
+            name: '',
+        },
+        onSubmit: async (values, action) => {},
+    })
+
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={handleClose}>
@@ -43,15 +55,42 @@ export default function NewDeviceModal({
                                 >
                                     New Device
                                 </Dialog.Title>
-                                <div className="mt-4">
+                                <form
+                                    onSubmit={formik.handleSubmit}
+                                    className="mt-4 space-y-6 flex flex-col"
+                                >
+                                    <div>
+                                        <label
+                                            htmlFor="name"
+                                            className="text-sm font-medium text-gray-900 block "
+                                        >
+                                            Device Name
+                                            <span className="text-red-500">
+                                                *
+                                            </span>
+                                        </label>
+                                        {formik.errors.name &&
+                                        formik.touched.name ? (
+                                            <span className="text-xs text-red-500">
+                                                {formik.errors.name}
+                                            </span>
+                                        ) : null}
+                                        <input
+                                            id="name"
+                                            name="name"
+                                            placeholder="Device Name"
+                                            onChange={formik.handleChange}
+                                            value={formik.values.name}
+                                            className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                        />
+                                    </div>
                                     <button
-                                        type="button"
+                                        type="submit"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                        onClick={handleClose}
                                     >
                                         Submit
                                     </button>
-                                </div>
+                                </form>
                             </Dialog.Panel>
                         </Transition.Child>
                     </div>
