@@ -8,6 +8,7 @@ export function createNewUser(
         headers: {
             'content-type': 'application/json',
         },
+        mode: 'cors',
         body: JSON.stringify({
             fullName,
             email,
