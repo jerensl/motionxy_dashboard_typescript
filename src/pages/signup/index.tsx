@@ -1,17 +1,17 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Login } from '../../components/Login'
+import { SignUp } from '../../components/SignUp'
 
-const LoginPage: NextPage = () => {
+const SignUpPage: NextPage = () => {
     return (
         <>
             <Head>
                 <title>Ovord 2</title>
                 <meta name="description" content="Ovord 2 Dashboard" />
             </Head>
-            <Login />
+            <SignUp />
         </>
     )
 }
 
-export default LoginPage
+export default SignUpPage
