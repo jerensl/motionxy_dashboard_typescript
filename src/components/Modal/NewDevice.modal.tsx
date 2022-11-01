@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { useFormik } from 'formik'
 import { Fragment } from 'react'
+import { createNewDevice } from '../../utils/device'
 
 interface NewDeviceValues {
     name: string
@@ -19,7 +20,9 @@ export default function NewDeviceModal({
         initialValues: {
             name: '',
         },
-        onSubmit: async (values, action) => {},
+        onSubmit: async (values, action) => {
+            await createNewDevice(values.name)
+        },
     })
 
     return (
