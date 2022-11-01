@@ -3,7 +3,7 @@ export function createNewUser(
     email: string,
     password: string
 ) {
-    return window.fetch('/api/user/new', {
+    return window.fetch('https://cec.azurewebsites.net/api/user/new', {
         method: 'POST',
         headers: {
             'content-type': 'application/json',

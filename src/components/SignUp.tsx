@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { useFormik } from 'formik'
 import Link from 'next/link'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import auth from '../utils/firebase'
 import clsx from 'clsx'
 import * as Yup from 'yup'
+import SuccessModal from './Modal/Sucess.modal'
+import { createNewUser } from '../utils/user'
 
 interface MyFormValues {
     email: string
@@ -25,6 +25,7 @@ const SignUpValidation = Yup.object().shape({
 })
 
 export const SignUp: React.FC<{}> = () => {
+    const [isOpen, setIsOpen] = React.useState(false)
     const formik = useFormik<MyFormValues>({
         initialValues: {
             email: '',
@@ -32,8 +33,18 @@ export const SignUp: React.FC<{}> = () => {
             password: '',
         },
         validationSchema: SignUpValidation,
-        onSubmit: async (values, action) => {},
+        onSubmit: async (values, action) => {
+            await createNewUser(
+                values.fullName,
+                values.email,
+                values.password
+            ).then(() => setIsOpen(true))
+        },
     })
+
+    const handleClose = () => {
+        setIsOpen(false)
+    }
 
     return (
         <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm m-auto mt-10 p-4 sm:p-6 lg:p-8 ">
@@ -130,6 +141,7 @@ export const SignUp: React.FC<{}> = () => {
                     </p>
                 </div>
             </form>
+            <SuccessModal isOpen={isOpen} handleClose={handleClose} />
         </div>
     )
 }
