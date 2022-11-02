@@ -4,6 +4,7 @@ import { AuthProvider } from '../context/useAuth'
 import React from 'react'
 import { NextPage } from 'next'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import ErrorBoundary from '../components/ErrorBoundary'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -18,11 +19,13 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     const [queryClient] = React.useState(() => new QueryClient())
 
     return (
-        <AuthProvider>
-            <QueryClientProvider client={queryClient}>
-                {getLayout(<Component {...pageProps} />)}
-            </QueryClientProvider>
-        </AuthProvider>
+        <ErrorBoundary>
+            <AuthProvider>
+                <QueryClientProvider client={queryClient}>
+                    {getLayout(<Component {...pageProps} />)}
+                </QueryClientProvider>
+            </AuthProvider>
+        </ErrorBoundary>
     )
 }
 

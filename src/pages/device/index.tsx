@@ -25,13 +25,15 @@ const DevicePage: NextPageWithLayout = () => {
         setNewDeviceOpen(false)
     }
 
+    console.log(devices)
+
     return (
         <>
             <Head>
                 <title>Ovord 2</title>
                 <meta name="description" content="Ovord 2 Dashboard" />
             </Head>
-            <div className="flex flex-row ml-80 mt-10 max-w-full px-10">
+            <div className="flex flex-col ml-80 mt-10 max-w-full px-10">
                 <button
                     onClick={handleNewDeviceOpen}
                     className="m-auto text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/30 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2 "
@@ -43,9 +45,15 @@ const DevicePage: NextPageWithLayout = () => {
                     handleClose={handleNewDeviceClosed}
                 />
 
-                {devices?.map(({ name, token }: any) => (
-                    <DeviceCard key={token} name={name} token={token} />
-                ))}
+                <div className="grid grid-cols-3 gap-4">
+                    {devices?.map(({ deviceName, token }: any) => (
+                        <DeviceCard
+                            key={token}
+                            name={deviceName}
+                            token={token}
+                        />
+                    ))}
+                </div>
             </div>
         </>
     )
