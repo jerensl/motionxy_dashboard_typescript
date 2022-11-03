@@ -14,14 +14,16 @@ type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout
 }
 
+export const queryClient = new QueryClient()
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     const getLayout = Component.getLayout ?? ((page) => page)
-    const [queryClient] = React.useState(() => new QueryClient())
+    const [reactQueryClient] = React.useState(() => queryClient)
 
     return (
         <ErrorBoundary>
             <AuthProvider>
-                <QueryClientProvider client={queryClient}>
+                <QueryClientProvider client={reactQueryClient}>
                     {getLayout(<Component {...pageProps} />)}
                 </QueryClientProvider>
             </AuthProvider>

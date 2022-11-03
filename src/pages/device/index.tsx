@@ -4,19 +4,12 @@ import React from 'react'
 import { DeviceCard } from '../../components/Card/Device.card'
 import Layout from '../../components/Layout'
 import NewDeviceModal from '../../components/Modal/NewDevice.modal'
-import { useAuth } from '../../context/useAuth'
-import { getDevices } from '../../utils/device'
+import { useDevices } from '../../features/device/query'
 import { NextPageWithLayout } from '../_app'
 
 const DevicePage: NextPageWithLayout = () => {
     const [newDeviceOpen, setNewDeviceOpen] = React.useState(false)
-    const { user } = useAuth()
-    const { data: devices } = useQuery({
-        queryKey: ['devices', user?.getIdTokenResult],
-        queryFn: getDevices,
-        enabled: !!user?.getIdTokenResult,
-    })
-
+    const { data: devices } = useDevices()
     const handleNewDeviceOpen = () => {
         setNewDeviceOpen(true)
     }
@@ -24,8 +17,6 @@ const DevicePage: NextPageWithLayout = () => {
     const handleNewDeviceClosed = () => {
         setNewDeviceOpen(false)
     }
-
-    console.log(devices)
 
     return (
         <>
