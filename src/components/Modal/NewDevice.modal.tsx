@@ -2,7 +2,6 @@ import { Dialog, Transition } from '@headlessui/react'
 import { useFormik } from 'formik'
 import { Fragment } from 'react'
 import { useAddDevice } from '../../features/device/query'
-import { createNewDevice } from '../../utils/device'
 
 interface NewDeviceValues {
     deviceName: string
