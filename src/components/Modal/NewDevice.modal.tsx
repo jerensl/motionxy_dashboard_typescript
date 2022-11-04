@@ -1,10 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { useFormik } from 'formik'
 import { Fragment } from 'react'
+import { useAddDevice } from '../../features/device/query'
 import { createNewDevice } from '../../utils/device'
 
 interface NewDeviceValues {
     deviceName: string
+    deviceShortName: string
 }
 
 interface SuccessModalProps {
@@ -16,14 +18,20 @@ export default function NewDeviceModal({
     isOpen,
     handleClose,
 }: SuccessModalProps) {
+    const mutation = useAddDevice()
+
     const formik = useFormik<NewDeviceValues>({
         initialValues: {
             deviceName: '',
+            deviceShortName: '',
         },
         onSubmit: async (values, action) => {
-            await createNewDevice(values.deviceName)
-                .then(() => handleClose())
-                .catch((e) => console.log(e))
+            await mutation.mutate({
+                deviceName: values.deviceName,
+                deviceShortName: values.deviceShortName,
+            })
+            action.setSubmitting(false)
+            handleClose()
         },
     })
 
@@ -86,6 +94,33 @@ export default function NewDeviceModal({
                                             placeholder="Device Name"
                                             onChange={formik.handleChange}
                                             value={formik.values.deviceName}
+                                            className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label
+                                            htmlFor="deviceShortName"
+                                            className="text-sm font-medium text-gray-900 block "
+                                        >
+                                            Device Short Name
+                                            <span className="text-red-500">
+                                                *
+                                            </span>
+                                        </label>
+                                        {formik.errors.deviceShortName &&
+                                        formik.touched.deviceShortName ? (
+                                            <span className="text-xs text-red-500">
+                                                {formik.errors.deviceShortName}
+                                            </span>
+                                        ) : null}
+                                        <input
+                                            id="deviceShortName"
+                                            name="deviceShortName"
+                                            placeholder="Device Short Name"
+                                            onChange={formik.handleChange}
+                                            value={
+                                                formik.values.deviceShortName
+                                            }
                                             className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                         />
                                     </div>

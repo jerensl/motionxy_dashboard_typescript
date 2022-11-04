@@ -3,8 +3,9 @@ import type { AppProps } from 'next/app'
 import { AuthProvider } from '../context/useAuth'
 import React from 'react'
 import { NextPage } from 'next'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClientProvider } from '@tanstack/react-query'
 import ErrorBoundary from '../components/ErrorBoundary'
+import { queryClient } from '../features/device/query'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -13,8 +14,6 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout
 }
-
-export const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     const getLayout = Component.getLayout ?? ((page) => page)

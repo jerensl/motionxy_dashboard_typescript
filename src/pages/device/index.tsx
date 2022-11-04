@@ -39,7 +39,7 @@ const DevicePage: NextPageWithLayout = () => {
                 <div className="grid grid-cols-3 gap-4">
                     {devices?.map(({ deviceName, token }: any) => (
                         <DeviceCard
-                            key={token}
+                            key={deviceName}
                             name={deviceName}
                             token={token}
                         />

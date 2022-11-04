@@ -1,6 +1,11 @@
 import Cookies from 'js-cookie'
 
-export function createNewDevice(deviceName: string) {
+interface NewDevice {
+    deviceName: string
+    deviceShortName: string
+}
+
+export function createNewDevice({ deviceName, deviceShortName }: NewDevice) {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
@@ -14,6 +19,7 @@ export function createNewDevice(deviceName: string) {
         mode: 'cors',
         body: JSON.stringify({
             deviceName,
+            deviceShortName,
         }),
         headers: {
             Authorization: 'Bearer ' + user?.stsTokenManager.accessToken,
@@ -21,7 +27,7 @@ export function createNewDevice(deviceName: string) {
     })
 }
 
-export function getDevices(bearerToken: any) {
+export function getDevices() {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {

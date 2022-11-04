@@ -27,7 +27,6 @@ export function AuthProvider({ children }: any) {
                 await user.getIdToken(true)
                 setUser(user)
                 cookies.set('auth', JSON.stringify(user), { expires: 1 / 24 })
-                Router.push('/')
             } else {
                 setUser(null)
                 cookies.remove('auth')
