@@ -27,7 +27,7 @@ const DevicePage: NextPageWithLayout = () => {
             <div className="flex flex-col ml-80 mt-10 max-w-full px-10">
                 <button
                     onClick={handleNewDeviceOpen}
-                    className="m-auto text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/30 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2 "
+                    className="m-auto text-white bg-primary hover:bg-primary/85 focus:ring-4 focus:outline-none focus:ring-primary/40 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2 "
                 >
                     Add new device
                 </button>

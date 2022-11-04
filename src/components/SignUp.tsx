@@ -114,14 +114,14 @@ export const SignUp: React.FC<{}> = () => {
                         placeholder="password"
                         onChange={formik.handleChange}
                         value={formik.values.password}
-                        className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                     />
                 </div>
                 <button
                     disabled={!formik.isValidating && formik.isSubmitting}
                     type="submit"
                     className={clsx(
-                        'border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline',
+                        'border border-primary bg-primary text-white rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-orange-600 focus:outline-none focus:shadow-outline',
                         {
                             'bg-slate-500':
                                 !formik.isValidating && formik.isSubmitting,

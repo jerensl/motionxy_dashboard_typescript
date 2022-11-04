@@ -8,48 +8,43 @@ export const useDevices = () => {
     const { user } = useAuth()
 
     return useQuery({
-        queryKey: ['devices', user?.getIdTokenResult],
+        queryKey: ['devices'],
         queryFn: getDevices,
         enabled: !!user?.getIdTokenResult,
-        refetchInterval: 60 * 1000,
+        staleTime: 1000,
+        retry: false,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
     })
 }
 
 export const useAddDevice = () => {
-    const { user } = useAuth()
-
     return useMutation({
         mutationFn: createNewDevice,
         onMutate: async (newDevice) => {
-            // Cancel current queries for the todos list
+            // Cancel current queries for the device list
             await queryClient.cancelQueries({
-                queryKey: ['devices', user?.getIdTokenResult],
+                queryKey: ['devices'],
             })
 
             // Snapshot the previous value
-            const previousDevices = queryClient.getQueryData([
-                'devices',
-                user?.getIdTokenResult,
-            ])
+            const previousDevices = queryClient.getQueryData(['devices'])
 
-            // Add optimistic todo to todos list
-            queryClient.setQueryData(
-                ['devices', user?.getIdTokenResult],
-                (old: any) => [...old, newDevice]
-            )
+            // Add optimistic device to devices list
+            queryClient.setQueryData(['devices'], (old: any) => [
+                ...old,
+                newDevice,
+            ])
 
             // Return context with the optimistic todo
             return { previousDevices }
         },
         onError: (err, newDevice, context) => {
-            queryClient.setQueryData(
-                ['devices', user?.getIdTokenResult],
-                context?.previousDevices
-            )
+            queryClient.setQueryData(['devices'], context?.previousDevices)
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: ['devices', user?.getIdTokenResult],
+                queryKey: ['devices'],
             })
         },
     })
