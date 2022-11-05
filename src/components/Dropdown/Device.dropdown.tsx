@@ -1,7 +1,18 @@
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
+import DeleteModal from '../Modal/ConfirmDelete.modal'
 
 export default function DeviceDropdown() {
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
+    const handleDeleteModalClosed = () => {
+        setIsDeleteModalOpen(false)
+    }
+
+    const handleDeleteModalOpen = () => {
+        setIsDeleteModalOpen(true)
+    }
+
     return (
         <div className="text-right">
             <Menu as="div" className="relative inline-block text-left">
@@ -68,6 +79,7 @@ export default function DeviceDropdown() {
                             <Menu.Item>
                                 {({ active }) => (
                                     <button
+                                        onClick={handleDeleteModalOpen}
                                         className={`${
                                             active
                                                 ? 'bg-violet-500 text-white'
@@ -93,6 +105,10 @@ export default function DeviceDropdown() {
                     </Menu.Items>
                 </Transition>
             </Menu>
+            <DeleteModal
+                isOpen={isDeleteModalOpen}
+                handleClose={handleDeleteModalClosed}
+            />
         </div>
     )
 }
