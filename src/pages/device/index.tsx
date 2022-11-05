@@ -10,6 +10,7 @@ import { NextPageWithLayout } from '../_app'
 const DevicePage: NextPageWithLayout = () => {
     const [newDeviceOpen, setNewDeviceOpen] = React.useState(false)
     const { data: devices } = useDevices()
+    console.log(devices)
     const handleNewDeviceOpen = () => {
         setNewDeviceOpen(true)
     }
@@ -37,13 +38,16 @@ const DevicePage: NextPageWithLayout = () => {
                 />
 
                 <div className="grid grid-cols-3 gap-4">
-                    {devices?.map(({ deviceName, token }: any) => (
-                        <DeviceCard
-                            key={deviceName}
-                            name={deviceName}
-                            token={token}
-                        />
-                    ))}
+                    {devices?.map(
+                        ({ deviceName, deviceShortName, token }: any) => (
+                            <DeviceCard
+                                key={deviceShortName}
+                                deviceName={deviceName}
+                                shortName={deviceShortName}
+                                token={token}
+                            />
+                        )
+                    )}
                 </div>
             </div>
         </>
