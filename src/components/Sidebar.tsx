@@ -23,9 +23,9 @@ export const Sidebar = () => {
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
                                         <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
                                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                                         ></path>
                                     </svg>
@@ -42,13 +42,13 @@ export const Sidebar = () => {
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
-                                        stroke-width="1.5"
+                                        strokeWidth="1.5"
                                         stroke="currentColor"
                                         className="w-5 h-5"
                                     >
                                         <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
                                             d="M10.5 19.5h3m-6.75 2.25h10.5a2.25 2.25 0 002.25-2.25v-15a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 4.5v15a2.25 2.25 0 002.25 2.25z"
                                         />
                                     </svg>

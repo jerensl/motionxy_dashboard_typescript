@@ -27,6 +27,29 @@ export function createNewDevice({ deviceName, deviceShortName }: NewDevice) {
     })
 }
 
+export function deleteDevice({
+    deviceShortName,
+}: Pick<NewDevice, 'deviceShortName'>) {
+    const userFromCookie = Cookies.get('auth')
+
+    if (userFromCookie === undefined) {
+        return Promise.reject()
+    }
+
+    const user = JSON.parse(userFromCookie)
+
+    return window.fetch('https://cec.azurewebsites.net/api/device/delete', {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify({
+            deviceShortName,
+        }),
+        headers: {
+            Authorization: 'Bearer ' + user?.stsTokenManager.accessToken,
+        },
+    })
+}
+
 export function getDevices() {
     const userFromCookie = Cookies.get('auth')
 

@@ -1,12 +1,25 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
+import { useDeleteDevice } from '../../features/device/query'
 
 interface SuccessModalProps {
     isOpen: boolean
     handleClose: () => void
+    deviceShortName: string
 }
 
-const DeleteModal: React.FC<SuccessModalProps> = ({ isOpen, handleClose }) => {
+const DeleteModal: React.FC<SuccessModalProps> = ({
+    isOpen,
+    handleClose,
+    deviceShortName,
+}) => {
+    const mutation = useDeleteDevice()
+
+    const handleDeleteDevice = () => {
+        mutation.mutate({ deviceShortName: deviceShortName })
+        handleClose()
+    }
+
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={handleClose}>
@@ -62,7 +75,7 @@ const DeleteModal: React.FC<SuccessModalProps> = ({ isOpen, handleClose }) => {
                                         <button
                                             type="button"
                                             className="inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                            onClick={handleClose}
+                                            onClick={handleDeleteDevice}
                                         >
                                             Got it, thanks!
                                         </button>

@@ -1,8 +1,9 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import { IDeletedDevice } from '../../types/device'
 import DeleteModal from '../Modal/ConfirmDelete.modal'
 
-export default function DeviceDropdown() {
+const DeviceDropdown: React.FC<IDeletedDevice> = ({ shortName }) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
     const handleDeleteModalClosed = () => {
@@ -106,6 +107,7 @@ export default function DeviceDropdown() {
                 </Transition>
             </Menu>
             <DeleteModal
+                deviceShortName={shortName}
                 isOpen={isDeleteModalOpen}
                 handleClose={handleDeleteModalClosed}
             />
@@ -194,3 +196,5 @@ function DeleteActiveIcon(props: any) {
         </svg>
     )
 }
+
+export default DeviceDropdown
