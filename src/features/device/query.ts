@@ -8,7 +8,7 @@ export const queryClient = new QueryClient()
 export const useDevices = () => {
     const { user } = useAuth()
 
-    return useQuery({
+    return useQuery<IDevice[], Error>({
         queryKey: ['devices'],
         queryFn: getDevices,
         enabled: !!user?.getIdTokenResult,
@@ -28,12 +28,10 @@ export const useAddDevice = () => {
             const previousDevices = queryClient.getQueryData(['devices'])
 
             // Add optimistic device to devices list
-            queryClient.setQueryData(['devices'], (old: any) => {
-                if (old !== undefined) {
-                    return [...old, newDevice]
-                }
-                return [newDevice]
-            })
+            queryClient.setQueryData(['devices'], (old: any) => [
+                ...old,
+                newDevice,
+            ])
 
             // Return context with the optimistic todo
             return { previousDevices }

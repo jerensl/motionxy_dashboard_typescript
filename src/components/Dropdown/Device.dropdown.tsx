@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 import { IDeletedDevice } from '../../types/device'
 import DeleteModal from '../Modal/ConfirmDelete.modal'
 
-const DeviceDropdown: React.FC<IDeletedDevice> = ({ shortName }) => {
+const DeviceDropdown: React.FC<IDeletedDevice> = ({ deviceShortName }) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
     const handleDeleteModalClosed = () => {
@@ -107,7 +107,7 @@ const DeviceDropdown: React.FC<IDeletedDevice> = ({ shortName }) => {
                 </Transition>
             </Menu>
             <DeleteModal
-                deviceShortName={shortName}
+                deviceShortName={deviceShortName}
                 isOpen={isDeleteModalOpen}
                 handleClose={handleDeleteModalClosed}
             />

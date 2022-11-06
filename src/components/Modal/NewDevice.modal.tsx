@@ -24,13 +24,13 @@ export default function NewDeviceModal({
             deviceName: '',
             deviceShortName: '',
         },
-        onSubmit: async (values, action) => {
+        onSubmit: async (values, { resetForm }) => {
             await mutation.mutate({
                 deviceName: values.deviceName,
                 deviceShortName: values.deviceShortName,
             })
-            action.setSubmitting(false)
             handleClose()
+            resetForm()
         },
     })
 

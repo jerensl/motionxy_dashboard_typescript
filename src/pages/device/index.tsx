@@ -40,8 +40,8 @@ const DevicePage: NextPageWithLayout = () => {
                         ({ deviceName, deviceShortName, token }: any) => (
                             <DeviceCard
                                 key={deviceShortName}
-                                name={deviceName}
-                                shortName={deviceShortName}
+                                deviceName={deviceName}
+                                deviceShortName={deviceShortName}
                                 token={token}
                             />
                         )

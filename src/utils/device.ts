@@ -1,11 +1,7 @@
 import Cookies from 'js-cookie'
+import { IDeletedDevice, IDevice, INewDevice } from '../types/device'
 
-interface NewDevice {
-    deviceName: string
-    deviceShortName: string
-}
-
-export function createNewDevice({ deviceName, deviceShortName }: NewDevice) {
+export function createNewDevice({ deviceName, deviceShortName }: INewDevice) {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
@@ -27,9 +23,7 @@ export function createNewDevice({ deviceName, deviceShortName }: NewDevice) {
     })
 }
 
-export function deleteDevice({
-    deviceShortName,
-}: Pick<NewDevice, 'deviceShortName'>) {
+export function deleteDevice({ deviceShortName }: IDeletedDevice) {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
@@ -50,7 +44,7 @@ export function deleteDevice({
     })
 }
 
-export function getDevices() {
+export function getDevices(): Promise<IDevice[]> {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
