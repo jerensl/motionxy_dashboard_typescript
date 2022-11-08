@@ -5,7 +5,7 @@ import { useDeleteDevice } from '../../features/device/query'
 interface SuccessModalProps {
     isOpen: boolean
     handleClose: () => void
-    deviceShortName: string
+    deviceShortName: string | undefined
 }
 
 const DeleteModal: React.FC<SuccessModalProps> = ({
