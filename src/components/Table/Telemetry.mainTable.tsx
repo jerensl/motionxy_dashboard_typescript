@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import React from 'react'
 import { ITelemetryData } from '../../types/telemetry'
 
@@ -19,15 +20,17 @@ const Telemetry: React.FC<TelemetryProps> = ({
                             Device short name
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            Timestamp
+                            Time
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            Value
+                            Date
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Value 1
                         </th>
                         <th scope="col" className="py-3 px-6">
                             Value 2
                         </th>
-
                         <th scope="col" className="py-3 px-6">
                             Value 3
                         </th>
@@ -67,6 +70,7 @@ function TableBody(
     }: TableBodyProps,
     index: number
 ) {
+    const date = dayjs(timestamp)
     return (
         <tr className="bg-white border-b">
             <th
@@ -75,7 +79,8 @@ function TableBody(
             >
                 {deviceShortName}
             </th>
-            <td className="py-4 px-6">{timestamp}</td>
+            <td className="py-4 px-6">{date.format('HH:mm.ss A')}</td>
+            <td className="py-4 px-6">{date.format('DD/MM/YYYY')}</td>
             <td className="py-4 px-6">{value1}</td>
             <td className="py-4 px-6">{value2}</td>
             <td className="py-4 px-6">{value3}</td>
