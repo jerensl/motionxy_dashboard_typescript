@@ -10,7 +10,7 @@ export function createNewDevice({ deviceName, deviceShortName }: INewDevice) {
 
     const user = JSON.parse(userFromCookie)
 
-    return window.fetch('https://cec.azurewebsites.net/api/device/new', {
+    return window.fetch(`${process.env.NEXT_PUBLIC_REST_API}/api/device/new`, {
         method: 'POST',
         mode: 'cors',
         body: JSON.stringify({
@@ -32,16 +32,19 @@ export function deleteDevice({ deviceShortName }: IDeletedDevice) {
 
     const user = JSON.parse(userFromCookie)
 
-    return window.fetch('https://cec.azurewebsites.net/api/device/delete', {
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify({
-            deviceShortName,
-        }),
-        headers: {
-            Authorization: 'Bearer ' + user?.stsTokenManager.accessToken,
-        },
-    })
+    return window.fetch(
+        `${process.env.NEXT_PUBLIC_REST_API}/api/device/delete`,
+        {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify({
+                deviceShortName,
+            }),
+            headers: {
+                Authorization: 'Bearer ' + user?.stsTokenManager.accessToken,
+            },
+        }
+    )
 }
 
 export function getDevices(): Promise<IDevice[]> {
@@ -54,7 +57,7 @@ export function getDevices(): Promise<IDevice[]> {
     const user = JSON.parse(userFromCookie)
 
     return window
-        .fetch('https://cec.azurewebsites.net/api/devices', {
+        .fetch(`${process.env.NEXT_PUBLIC_REST_API}/api/devices`, {
             method: 'GET',
             mode: 'cors',
             headers: {
