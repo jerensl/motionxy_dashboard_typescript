@@ -11,10 +11,10 @@ export default function Layout({ children }: { children: React.ReactChild }) {
     }
 
     return (
-        <>
+        <div className="h-screen">
             <Navbar />
             <Sidebar />
-            <main>{children}</main>
-        </>
+            <main className="h-full">{children}</main>
+        </div>
     )
 }

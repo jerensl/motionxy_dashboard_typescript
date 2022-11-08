@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { IDevice } from '../types/device'
 
 interface ListDeviceProps {
-    devices: Array<IDevice>
+    devices: Array<IDevice> | undefined
     device: IDevice | null
     setDevice: React.Dispatch<React.SetStateAction<IDevice | null>>
 }
@@ -45,7 +45,7 @@ const ListDevice: React.FC<ListDeviceProps> = ({
                         leaveTo="opacity-0"
                     >
                         <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            {devices.map((device, deviceIdx) => (
+                            {devices?.map((device, deviceIdx) => (
                                 <Listbox.Option
                                     key={deviceIdx}
                                     className={({ active }) =>

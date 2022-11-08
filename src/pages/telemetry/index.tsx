@@ -4,14 +4,18 @@ import Layout from '../../components/Layout'
 import ListDevice from '../../components/ListDevice'
 import Telemetry from '../../components/Table/Telemetry.mainTable'
 import { useDevices } from '../../features/device/query'
+import { useTelemetry } from '../../features/telemetry'
 import { IDevice } from '../../types/device'
 import { NextPageWithLayout } from '../_app'
 
 const TelemetryPage: NextPageWithLayout = () => {
-    const { data: devices, isSuccess } = useDevices()
+    const { data: devices, isSuccess: isSuccessDevice } = useDevices()
     const [device, setDevice] = useState<IDevice | null>(null)
+    const { data: telemetry, isSuccess: isSuccessTelemetry } = useTelemetry({
+        deviceShortName: device?.deviceShortName,
+    })
 
-    if (!isSuccess) {
+    if (!isSuccessDevice && !isSuccessTelemetry) {
         return (
             <>
                 <Head>
@@ -22,20 +26,22 @@ const TelemetryPage: NextPageWithLayout = () => {
             </>
         )
     }
-
     return (
         <>
             <Head>
                 <title>Ovord 2</title>
                 <meta name="description" content="Ovord 2 Dashboard" />
             </Head>
-            <div className="flex flex-col ml-80 mt-10 max-w-full px-10">
+            <div className="flex flex-col pl-80 max-w-full max-h-full px-10">
                 <ListDevice
                     devices={devices}
                     device={device}
                     setDevice={setDevice}
                 />
-                <Telemetry />
+                <Telemetry
+                    deviceShortName={device?.deviceShortName}
+                    telemetry={telemetry}
+                />
             </div>
         </>
     )
