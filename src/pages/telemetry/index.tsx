@@ -9,23 +9,12 @@ import { IDevice } from '../../types/device'
 import { NextPageWithLayout } from '../_app'
 
 const TelemetryPage: NextPageWithLayout = () => {
-    const { data: devices, isSuccess: isSuccessDevice } = useDevices()
+    const { data: devices } = useDevices()
     const [device, setDevice] = useState<IDevice | null>(null)
-    const { data: telemetry, isSuccess: isSuccessTelemetry } = useTelemetry({
+    const { data: telemetry } = useTelemetry({
         deviceShortName: device?.deviceShortName,
     })
 
-    if (!isSuccessDevice && !isSuccessTelemetry) {
-        return (
-            <>
-                <Head>
-                    <title>Ovord 2</title>
-                    <meta name="description" content="Ovord 2 Dashboard" />
-                </Head>
-                <div className="flex flex-col ml-80 mt-10 max-w-full px-10"></div>
-            </>
-        )
-    }
     return (
         <>
             <Head>

@@ -35,41 +35,35 @@ export const options = {
 }
 
 const labels = [
-    '10 Minutes',
-    '9 Minutes',
-    '8 Minutes',
-    '7 Minutes',
-    '6 Minutes',
-    '5 Minutes',
-    '4 Minutes',
-    '3 Minutes',
-    '2 Minutes',
-    '1 Minutes',
+    '9 Second ago',
+    '8 Second ago',
+    '7 Second ago',
+    '6 Second ago',
+    '5 Second ago',
+    '4 Second ago',
+    '3 Second ago',
+    '2 Second ago',
+    '1 Second ago',
     'Now',
 ]
 
-function randomNumber(max: number) {
-    return Math.round(Math.random() * max)
+const Chart: React.FC<{ value1: number[] }> = ({ value1 }) => {
+    return (
+        <Line
+            options={options}
+            data={{
+                labels,
+                datasets: [
+                    {
+                        label: 'Sensor 1',
+                        data: value1,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    },
+                ],
+            }}
+        />
+    )
 }
 
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Sensor 1',
-            data: labels.map(() => randomNumber(30)),
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Sensor 2',
-            data: labels.map(() => randomNumber(30)),
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-    ],
-}
-
-export const Chart = () => {
-    return <Line options={options} data={data} />
-}
+export default Chart
