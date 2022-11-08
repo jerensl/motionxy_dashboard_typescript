@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { useFormik } from 'formik'
 import { Fragment } from 'react'
 import { useAddDevice } from '../../features/device/query'
+import * as Yup from 'yup'
 
 interface NewDeviceValues {
     deviceName: string
@@ -12,6 +13,18 @@ interface SuccessModalProps {
     isOpen: boolean
     handleClose: () => void
 }
+
+const NewDeviceValidationSchema = Yup.object().shape({
+    deviceName: Yup.string()
+        .required('Device name is required')
+        .min(3, 'Device name is too short - should be 3 chars minimum.')
+        .max(50, 'Device name is too long - should be 50 chars maximum.'),
+    deviceShortName: Yup.string()
+        .trim()
+        .min(3, 'Device short name is too short - should be 3 chars minimum.')
+        .max(25, 'Device short name  is too long - should be 25 chars maximum.')
+        .required('Device short name  Required'),
+})
 
 export default function NewDeviceModal({
     isOpen,
@@ -24,10 +37,14 @@ export default function NewDeviceModal({
             deviceName: '',
             deviceShortName: '',
         },
+        validationSchema: NewDeviceValidationSchema,
         onSubmit: async (values, { resetForm }) => {
+            const deviceShortName = values.deviceShortName
+                .trim()
+                .replace(/ /g, '')
             await mutation.mutate({
                 deviceName: values.deviceName,
-                deviceShortName: values.deviceShortName,
+                deviceShortName: deviceShortName,
             })
             handleClose()
             resetForm()
