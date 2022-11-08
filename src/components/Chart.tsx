@@ -21,19 +21,6 @@ ChartJS.register(
     Legend
 )
 
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top' as const,
-        },
-        title: {
-            display: true,
-            text: 'Temperature',
-        },
-    },
-}
-
 const labels = [
     '9 Second ago',
     '8 Second ago',
@@ -47,16 +34,32 @@ const labels = [
     'Now',
 ]
 
-const Chart: React.FC<{ value1: number[] }> = ({ value1 }) => {
+interface ChartProps {
+    name: string
+    data: number[]
+}
+
+const Chart: React.FC<ChartProps> = ({ name, data }) => {
     return (
         <Line
-            options={options}
+            options={{
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top' as const,
+                    },
+                    title: {
+                        display: true,
+                        text: name,
+                    },
+                },
+            }}
             data={{
                 labels,
                 datasets: [
                     {
-                        label: 'Sensor 1',
-                        data: value1,
+                        label: 'Sensor',
+                        data: data,
                         borderColor: 'rgb(255, 99, 132)',
                         backgroundColor: 'rgba(255, 99, 132, 0.5)',
                     },

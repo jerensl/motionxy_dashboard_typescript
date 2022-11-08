@@ -15,7 +15,9 @@ const Home: NextPageWithLayout = () => {
         deviceShortName: device?.deviceShortName,
     })
     const value1 = telemetry?.map(({ value1 }) => value1) ?? []
-    console.log(value1)
+    const value2 = telemetry?.map(({ value2 }) => value2) ?? []
+    const value3 = telemetry?.map(({ value3 }) => value3) ?? []
+    const value4 = telemetry?.map(({ value4 }) => value4) ?? []
     return (
         <>
             <Head>
@@ -30,7 +32,13 @@ const Home: NextPageWithLayout = () => {
                     device={device}
                     setDevice={setDevice}
                 />
-                <Chart value1={value1} />
+                <Chart name="Sensor 1" data={value1} />
+                <div className="h-10"></div>
+                <Chart name="Sensor 2" data={value2} />
+                <div className="h-10"></div>
+                <Chart name="Sensor 3" data={value3} />
+                <div className="h-10"></div>
+                <Chart name="Sensor 4" data={value4} />
             </div>
         </>
     )
