@@ -12,7 +12,7 @@ const Telemetry: React.FC<TelemetryProps> = ({
     deviceShortName,
 }) => {
     return (
-        <div className="overflow-y-auto">
+        <div className="overflow-y-auto shadow-md sm:rounded-lg">
             <table className="w-full h-full text-sm text-left text-gray-500">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
@@ -51,6 +51,11 @@ const Telemetry: React.FC<TelemetryProps> = ({
                     })}
                 </tbody>
             </table>
+            {telemetry?.length == 0 ? (
+                <p className="text-center text-sm py-5 m-auto">
+                    Telemetry data is empty
+                </p>
+            ) : null}
         </div>
     )
 }
