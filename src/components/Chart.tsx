@@ -44,6 +44,11 @@ const Chart: React.FC<ChartProps> = ({ name, data }) => {
         <Line
             options={{
                 responsive: true,
+                scales: {
+                    y: {
+                        min: 0,
+                    },
+                },
                 plugins: {
                     legend: {
                         position: 'top' as const,
