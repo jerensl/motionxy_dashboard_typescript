@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { User, onAuthStateChanged } from 'firebase/auth'
+import { User, onIdTokenChanged } from 'firebase/auth'
 import auth from '../utils/firebase'
 import cookies from 'js-cookie'
 import Router from 'next/router'
@@ -22,9 +22,8 @@ export function AuthProvider({ children }: any) {
             setUser(JSON.parse(userFromCookie))
         }
 
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        const unsubscribe = onIdTokenChanged(auth, async (user) => {
             if (user) {
-                await user.getIdToken(true)
                 setUser(user)
                 cookies.set('auth', JSON.stringify(user), { expires: 1 / 24 })
                 Router.push('/')
@@ -37,6 +36,15 @@ export function AuthProvider({ children }: any) {
 
         setIsLoading(false)
         return () => unsubscribe()
+    }, [])
+
+    React.useEffect(() => {
+        const intervalID = setInterval(async () => {
+            const user = auth.currentUser
+            if (user) await user.getIdToken(true)
+        }, 10 * 60 * 1000)
+
+        return () => clearInterval(intervalID)
     }, [])
 
     return (
