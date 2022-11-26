@@ -44,6 +44,13 @@ const Chart: React.FC<ChartProps> = ({ name, data }) => {
         <Line
             options={{
                 responsive: true,
+                animations: {
+                    radius: {
+                        duration: 400,
+                        easing: 'linear',
+                        loop: (context) => context.active,
+                    },
+                },
                 scales: {
                     y: {
                         min: 0,
@@ -65,6 +72,7 @@ const Chart: React.FC<ChartProps> = ({ name, data }) => {
                     {
                         label: 'Sensor',
                         data: data,
+                        cubicInterpolationMode: 'monotone',
                         borderColor: 'rgb(255, 99, 132)',
                         backgroundColor: 'rgba(255, 99, 132, 0.5)',
                     },
