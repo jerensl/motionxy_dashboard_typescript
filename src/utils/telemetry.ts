@@ -15,7 +15,9 @@ export function getTelemetryData({
 
     return window
         .fetch(
-            `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry?deviceShortName=${deviceShortName}`,
+            `${
+                process.env.NEXT_PUBLIC_REST_API
+            }/api/telemetry?deviceShortName=${deviceShortName}&page=${0}`,
             {
                 method: 'GET',
                 mode: 'cors',
