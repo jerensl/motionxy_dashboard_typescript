@@ -9,10 +9,12 @@ import { IDevice } from '../../types/device'
 import { NextPageWithLayout } from '../_app'
 
 const TelemetryPage: NextPageWithLayout = () => {
+    const [page, setPage] = React.useState(0)
     const { data: devices } = useDevices()
     const [device, setDevice] = useState<IDevice | null>(null)
     const { data: telemetry } = useTelemetry({
         deviceShortName: device?.deviceShortName,
+        page: page,
     })
 
     return (

@@ -56,7 +56,7 @@ const Telemetry: React.FC<TelemetryProps> = ({
                     Telemetry data is empty
                 </p>
             ) : null}
-            <Pagination />
+            <Pagination telemetry={telemetry} />
         </div>
     )
 }
@@ -95,7 +95,9 @@ function TableBody(
     )
 }
 
-function Pagination() {
+const Pagination: React.FC<Pick<TelemetryProps, 'telemetry'>> = ({
+    telemetry,
+}) => {
     return (
         <nav
             className="flex justify-between items-center pt-4"
@@ -104,7 +106,9 @@ function Pagination() {
             <span className="text-sm font-normal text-gray-500">
                 Showing{' '}
                 <span className="font-semibold text-gray-900">1-10</span> of{' '}
-                <span className="font-semibold text-gray-900">1000</span>
+                <span className="font-semibold text-gray-900">
+                    {telemetry?.totalAllData}
+                </span>
             </span>
             <ul className="inline-flex items-center -space-x-px">
                 <li>
@@ -131,7 +135,8 @@ function Pagination() {
                 <li>
                     <a
                         href="#"
-                        className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
+                        aria-current="page"
+                        className="z-10 py-2 px-3 leading-tight text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700"
                     >
                         1
                     </a>
@@ -147,8 +152,7 @@ function Pagination() {
                 <li>
                     <a
                         href="#"
-                        aria-current="page"
-                        className="z-10 py-2 px-3 leading-tight text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700"
+                        className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
                     >
                         3
                     </a>
@@ -166,7 +170,7 @@ function Pagination() {
                         href="#"
                         className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                     >
-                        100
+                        {telemetry?.totalPage}
                     </a>
                 </li>
                 <li>

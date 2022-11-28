@@ -8,4 +8,9 @@ export type INewDevice = Omit<IDevice, 'token'>
 
 export type IDeletedDevice = Pick<IDevice, 'deviceShortName'>
 
-export type IQueryTelemetry = Pick<IDevice, 'deviceShortName'>
+export type IQueryTelemetryRealtime = Pick<IDevice, 'deviceShortName'>
+
+export interface IQueryTelemetry {
+    deviceShortName: string | undefined
+    page: number
+}
