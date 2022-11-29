@@ -45,7 +45,7 @@ const Telemetry: React.FC<TelemetryProps> = ({
                     </tr>
                 </thead>
                 <tbody>
-                    {telemetry?.data.map((value, key) => {
+                    {telemetry?.data?.map((value, key) => {
                         return (
                             <TelemetryTableBody
                                 deviceShortName={deviceShortName}
@@ -56,7 +56,7 @@ const Telemetry: React.FC<TelemetryProps> = ({
                     })}
                 </tbody>
             </table>
-            {telemetry?.data.length == 0 ? (
+            {telemetry?.data?.length == 0 ? (
                 <p className="text-center text-sm py-5 m-auto">
                     Telemetry data is empty
                 </p>

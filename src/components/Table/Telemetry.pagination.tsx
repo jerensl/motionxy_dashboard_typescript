@@ -99,7 +99,7 @@ const Pagination: React.FC<Omit<TelemetryProps, 'deviceShortName'>> = ({
                 </span>{' '}
                 of{' '}
                 <span className="font-semibold text-gray-900">
-                    {telemetry?.totalAllData}
+                    {telemetry.total}
                 </span>
             </span>
             <ul className="inline-flex items-center -space-x-px">

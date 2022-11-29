@@ -11,7 +11,7 @@ export interface IData {
 export interface ITelemetryData {
     page: number
     totalPage: number
-    totalAllData: number
+    total: number
     totalData: number
     data: Array<IData>
 }
