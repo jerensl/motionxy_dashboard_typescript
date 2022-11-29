@@ -4,6 +4,7 @@ import { ITelemetryData } from '../types/telemetry'
 
 export function getTelemetryData({
     deviceShortName,
+    page,
 }: IQueryTelemetry): Promise<ITelemetryData> {
     const userFromCookie = Cookies.get('auth')
 
@@ -15,9 +16,7 @@ export function getTelemetryData({
 
     return window
         .fetch(
-            `${
-                process.env.NEXT_PUBLIC_REST_API
-            }/api/telemetry?deviceShortName=${deviceShortName}&page=${0}`,
+            `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry?deviceShortName=${deviceShortName}&page=${page}`,
             {
                 method: 'GET',
                 mode: 'cors',

@@ -4,9 +4,10 @@ import { getTelemetryData, getTelemetryRealTime } from '../../utils/telemetry'
 
 export function useTelemetry({ deviceShortName, page }: IQueryTelemetry) {
     return useQuery({
-        queryKey: ['telemetry', deviceShortName],
+        queryKey: ['telemetry', deviceShortName, page],
         queryFn: () => getTelemetryData({ deviceShortName, page }),
         enabled: !!deviceShortName,
+        refetchOnMount: true,
     })
 }
 
