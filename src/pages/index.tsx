@@ -18,7 +18,6 @@ const Home: NextPageWithLayout = () => {
     const value2 = telemetry?.map(({ value2 }) => value2) ?? []
     const value3 = telemetry?.map(({ value3 }) => value3) ?? []
     const value4 = telemetry?.map(({ value4 }) => value4) ?? []
-    console.log(devices)
 
     return (
         <>
