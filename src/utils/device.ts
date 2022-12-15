@@ -1,7 +1,11 @@
 import Cookies from 'js-cookie'
 import { IDeletedDevice, IDevice, INewDevice } from '../types/device'
 
-export function createNewDevice({ deviceName, deviceShortName }: INewDevice) {
+export function createNewDevice({
+    deviceName,
+    deviceShortName,
+    sensors,
+}: INewDevice) {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
@@ -16,6 +20,7 @@ export function createNewDevice({ deviceName, deviceShortName }: INewDevice) {
         body: JSON.stringify({
             deviceName,
             deviceShortName,
+            sensors,
         }),
         headers: {
             Authorization: 'Bearer ' + user?.stsTokenManager.accessToken,

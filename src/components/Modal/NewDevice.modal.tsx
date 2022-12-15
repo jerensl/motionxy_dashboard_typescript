@@ -3,18 +3,7 @@ import { FieldArray, Formik, FormikProps } from 'formik'
 import { Fragment } from 'react'
 import { useAddDevice } from '../../features/device/query'
 import * as Yup from 'yup'
-
-interface INewDeviceValues {
-    deviceName: string
-    deviceShortName: string
-    sensors: Array<ISensor>
-}
-
-interface ISensor {
-    sensorName: string
-    sensorType: string
-    sensorUnit: string
-}
+import { INewDevice } from '../../types/device'
 
 interface SuccessModalProps {
     isOpen: boolean
@@ -90,6 +79,7 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
                                         await mutation.mutate({
                                             deviceName: values.deviceName,
                                             deviceShortName: deviceShortName,
+                                            sensors: values.sensors,
                                         })
                                         handleClose()
                                         resetForm()
@@ -189,7 +179,7 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
     )
 }
 
-const Sensors = ({ props }: { props: FormikProps<INewDeviceValues> }) => {
+const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
     return (
         <FieldArray name="sensors">
             {({ insert, remove, push }) => (

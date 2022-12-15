@@ -4,7 +4,17 @@ export interface IDevice {
     token: string
 }
 
-export type INewDevice = Omit<IDevice, 'token'>
+export interface INewDevice {
+    deviceName: string
+    deviceShortName: string
+    sensors: Array<ISensor>
+}
+
+export interface ISensor {
+    sensorName: string
+    sensorType: string
+    sensorUnit: string
+}
 
 export type IDeletedDevice = Pick<IDevice, 'deviceShortName'>
 
