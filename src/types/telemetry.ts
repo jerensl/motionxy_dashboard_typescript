@@ -2,10 +2,9 @@ import { IDevice } from './device'
 
 export interface IData {
     timestamp: string
-    value1: number
-    value2: number
-    value3: number
-    value4: number
+    deviceName: string
+    sensorName: string
+    value: number
 }
 
 export interface ITelemetryData {

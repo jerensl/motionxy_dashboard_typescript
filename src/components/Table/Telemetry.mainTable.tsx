@@ -22,7 +22,10 @@ const Telemetry: React.FC<TelemetryProps> = ({
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" className="py-3 px-6">
-                            Device short name
+                            Device Short Name
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Sensor Name
                         </th>
                         <th scope="col" className="py-3 px-6">
                             Time
@@ -31,16 +34,7 @@ const Telemetry: React.FC<TelemetryProps> = ({
                             Date
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            Value 1
-                        </th>
-                        <th scope="col" className="py-3 px-6">
-                            Value 2
-                        </th>
-                        <th scope="col" className="py-3 px-6">
-                            Value 3
-                        </th>
-                        <th scope="col" className="py-3 px-6">
-                            Value 4
+                            Value
                         </th>
                     </tr>
                 </thead>

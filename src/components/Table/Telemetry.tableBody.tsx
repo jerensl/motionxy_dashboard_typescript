@@ -6,14 +6,7 @@ interface TableBodyProps extends IData {
 }
 
 const TelemetryTableBody = (
-    {
-        deviceShortName,
-        timestamp,
-        value1,
-        value2,
-        value3,
-        value4,
-    }: TableBodyProps,
+    { deviceShortName, deviceName, timestamp, value }: TableBodyProps,
     index: number
 ) => {
     const date = dayjs(timestamp)
@@ -25,12 +18,10 @@ const TelemetryTableBody = (
             >
                 {deviceShortName}
             </th>
+            <td className="py-4 px-6">{deviceName}</td>
             <td className="py-4 px-6">{date.format('HH:mm.ss A')}</td>
             <td className="py-4 px-6">{date.format('DD/MM/YYYY')}</td>
-            <td className="py-4 px-6">{value1}</td>
-            <td className="py-4 px-6">{value2}</td>
-            <td className="py-4 px-6">{value3}</td>
-            <td className="py-4 px-6">{value4}</td>
+            <td className="py-4 px-6">{value}</td>
         </tr>
     )
 }
