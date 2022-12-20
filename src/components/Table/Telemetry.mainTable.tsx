@@ -40,13 +40,7 @@ const Telemetry: React.FC<TelemetryProps> = ({
                 </thead>
                 <tbody>
                     {telemetry?.data?.map((value, key) => {
-                        return (
-                            <TelemetryTableBody
-                                deviceShortName={deviceShortName}
-                                {...value}
-                                key={key}
-                            />
-                        )
+                        return <TelemetryTableBody {...value} key={key} />
                     })}
                 </tbody>
             </table>
