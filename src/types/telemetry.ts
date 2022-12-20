@@ -1,9 +1,16 @@
 import { IDevice } from './device'
 
-export interface IData {
+export interface IRealtimeData {
     deviceName: string
     data: Array<Array<number>>
     sensors: Array<string>
+}
+
+export interface IData {
+    deviceName: string
+    sensorName: string
+    timestamp: string
+    value: string
 }
 
 export interface ITelemetryData {

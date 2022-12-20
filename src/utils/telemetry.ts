@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import { IQueryTelemetry, IQueryTelemetryRealtime } from '../types/device'
-import { IData, ITelemetryData } from '../types/telemetry'
+import { IRealtimeData, ITelemetryData } from '../types/telemetry'
 
 export function getTelemetryData({
     deviceShortName,
@@ -55,7 +55,7 @@ export function getTelemetryDataCSV({
 export function getTelemetryRealTime({
     deviceShortName,
     sensors,
-}: IQueryTelemetryRealtime): Promise<IData> {
+}: IQueryTelemetryRealtime): Promise<IRealtimeData> {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
