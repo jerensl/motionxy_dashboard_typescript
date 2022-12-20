@@ -4,7 +4,11 @@ import React, { useState } from 'react'
 import { IDevice } from '../../types/device'
 import DeviceDropdown from '../Dropdown/Device.dropdown'
 
-export const DeviceCard = ({ deviceName, deviceShortName, token }: IDevice) => {
+export const DeviceCard = ({
+    deviceName,
+    deviceShortName,
+    token,
+}: Omit<IDevice, 'sensors'>) => {
     const [showCopy, setShowCopy] = useState(false)
 
     return (
