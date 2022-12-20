@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Chart from '../components/Chart'
 import Layout from '../components/Layout'
 import ListDevice from '../components/ListDevice'
@@ -7,17 +7,52 @@ import { useDevices } from '../features/device/query'
 import { useTelemetryRealTime } from '../features/telemetry'
 import { IDevice } from '../types/device'
 import { NextPageWithLayout } from './_app'
+import SensorsDropdown from '../components/Dropdown/Sensors.dropdown'
 
 const Home: NextPageWithLayout = () => {
-    const { data: devices } = useDevices()
+    const {
+        data: devices,
+        isLoading: deviceIsLoading,
+        isError: deviceIsError,
+    } = useDevices()
+    const [sensor, setSensor] = useState<Array<string>>([])
     const [device, setDevice] = useState<IDevice | null>(null)
-    const { data: telemetry } = useTelemetryRealTime({
+    const {
+        data: telemetry,
+        isLoading: telemetryIsLoading,
+        isError: telemetryIsError,
+    } = useTelemetryRealTime({
         deviceShortName: device?.deviceShortName,
+        sensors: sensor,
     })
-    const value1 = telemetry?.map(({ value1 }) => value1) ?? []
-    const value2 = telemetry?.map(({ value2 }) => value2) ?? []
-    const value3 = telemetry?.map(({ value3 }) => value3) ?? []
-    const value4 = telemetry?.map(({ value4 }) => value4) ?? []
+
+    const handleCheckSensor = (event: React.ChangeEvent<HTMLInputElement>) => {
+        let updatedList = [...sensor]
+        if (event.target.checked) {
+            updatedList = [...sensor, event.target.value]
+        } else {
+            updatedList.splice(sensor.indexOf(event.target.value), 1)
+        }
+        setSensor(updatedList)
+    }
+
+    useEffect(() => {
+        setSensor([])
+    }, [device])
+
+    if (telemetryIsError || deviceIsError) {
+        return (
+            <>
+                <Head>
+                    <title>Ovord 2</title>
+                    <meta name="description" content="Ovord 2 Dashboard" />
+                    <link rel="manifest" href="/manifest.json" />
+                    <meta name="theme-color" content="#90cdf4" />
+                </Head>
+                <div className="ml-80 max-w-4xl">Something wrong...</div>
+            </>
+        )
+    }
 
     return (
         <>
@@ -28,18 +63,25 @@ const Home: NextPageWithLayout = () => {
                 <meta name="theme-color" content="#90cdf4" />
             </Head>
             <div className="ml-80 max-w-4xl">
-                <ListDevice
-                    devices={devices}
-                    device={device}
-                    setDevice={setDevice}
-                />
-                <Chart name="Sensor 1" data={value1} />
-                <div className="h-10"></div>
-                <Chart name="Sensor 2" data={value2} />
-                <div className="h-10"></div>
-                <Chart name="Sensor 3" data={value3} />
-                <div className="h-10"></div>
-                <Chart name="Sensor 4" data={value4} />
+                <div className="flex flex-row m-auto gap-4">
+                    <ListDevice
+                        devices={devices}
+                        device={device}
+                        setDevice={setDevice}
+                    />
+                    <SensorsDropdown
+                        sensor={sensor}
+                        sensors={device?.sensors}
+                        handleCheckSensor={handleCheckSensor}
+                    />
+                </div>
+                {!telemetryIsLoading && sensor.length > 0 ? (
+                    <Chart
+                        deviceName={telemetry.deviceName}
+                        sensors={telemetry.sensors}
+                        data={telemetry.data}
+                    />
+                ) : null}
             </div>
         </>
     )

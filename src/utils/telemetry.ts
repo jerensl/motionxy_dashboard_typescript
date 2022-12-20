@@ -54,7 +54,8 @@ export function getTelemetryDataCSV({
 
 export function getTelemetryRealTime({
     deviceShortName,
-}: IQueryTelemetryRealtime): Promise<Array<IData>> {
+    sensors,
+}: IQueryTelemetryRealtime): Promise<IData> {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
@@ -63,9 +64,12 @@ export function getTelemetryRealTime({
 
     const user = JSON.parse(userFromCookie)
 
+    const query = '&' + sensors?.map((sensor) => `sensor=${sensor}`).join('&')
+    console.log(query)
     return window
         .fetch(
-            `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry/realtime?deviceShortName=${deviceShortName}`,
+            `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry/realtime?deviceShortName=${deviceShortName}` +
+                query,
             {
                 method: 'GET',
                 mode: 'cors',

@@ -13,11 +13,12 @@ export function useTelemetry({ deviceShortName, page }: IQueryTelemetry) {
 
 export function useTelemetryRealTime({
     deviceShortName,
+    sensors,
 }: IQueryTelemetryRealtime) {
     return useQuery({
         queryKey: ['telemetry-real-time', deviceShortName],
-        queryFn: () => getTelemetryRealTime({ deviceShortName }),
-        enabled: !!deviceShortName,
+        queryFn: () => getTelemetryRealTime({ deviceShortName, sensors }),
+        enabled: deviceShortName !== undefined && sensors.length > 0,
         refetchInterval: 1000,
     })
 }

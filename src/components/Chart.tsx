@@ -8,6 +8,8 @@ import {
     Title,
     Tooltip,
     Legend,
+    ChartData,
+    ChartDataset,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 
@@ -35,11 +37,24 @@ const labels = [
 ]
 
 interface ChartProps {
-    name: string
-    data: number[]
+    deviceName: string
+    sensors: Array<string>
+    data: Array<Array<number>>
 }
 
-const Chart: React.FC<ChartProps> = ({ name, data }) => {
+const Chart: React.FC<ChartProps> = ({ deviceName, sensors, data }) => {
+    const dataset = data.map(
+        (data, idx) =>
+            ({
+                id: idx,
+                label: sensors[idx],
+                data: data,
+                cubicInterpolationMode: 'monotone',
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            } as ChartDataset<'line', number[]>)
+    )
+
     return (
         <Line
             options={{
@@ -62,21 +77,13 @@ const Chart: React.FC<ChartProps> = ({ name, data }) => {
                     },
                     title: {
                         display: true,
-                        text: name,
+                        text: deviceName,
                     },
                 },
             }}
             data={{
                 labels,
-                datasets: [
-                    {
-                        label: 'Sensor',
-                        data: data,
-                        cubicInterpolationMode: 'monotone',
-                        borderColor: 'rgb(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                ],
+                datasets: dataset,
             }}
         />
     )
