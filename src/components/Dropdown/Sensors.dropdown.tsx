@@ -48,13 +48,16 @@ group inline-flex items-center text-gray-900 bg-white border border-gray-300 foc
                         leaveTo="opacity-0 translate-y-1"
                     >
                         <Popover.Panel className="absolute z-10">
-                            <div className="z-10 w-60 bg-white rounded shadow">
+                            <div className="z-10 bg-white rounded shadow">
                                 <ul
-                                    className="overflow-y-auto px-3 pb-3 h-48 text-sm text-gray-700 dark:text-gray-200"
+                                    className="w-48 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200"
                                     aria-labelledby="dropdownSearchButton"
                                 >
                                     {sensors?.map((item, index) => (
-                                        <li key={index}>
+                                        <li
+                                            key={index}
+                                            className="w-full rounded-t-lg border-b border-gray-200"
+                                        >
                                             <div className="flex items-center p-2 rounded hover:bg-gray-100">
                                                 <input
                                                     value={item.sensorName}
@@ -62,7 +65,7 @@ group inline-flex items-center text-gray-900 bg-white border border-gray-300 foc
                                                     checked={sensor.includes(
                                                         item.sensorName
                                                     )}
-                                                    className="w-4 h-4 text-blue-600 bg-gray-100 rounded-lg border-gray-300 ring-offset-1 focus:ring-2 focus:ring-blue-500"
+                                                    className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 ring-offset-1 focus:ring-2 focus:ring-blue-500"
                                                     onChange={handleCheckSensor}
                                                     id={`checkbox-item-${index}`}
                                                 />

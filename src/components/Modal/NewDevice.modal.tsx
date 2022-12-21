@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { FieldArray, Formik, FormikProps } from 'formik'
+import { ErrorMessage, FieldArray, Formik, FormikProps } from 'formik'
 import { Fragment } from 'react'
 import { useAddDevice } from '../../features/device/query'
 import * as Yup from 'yup'
@@ -20,6 +20,19 @@ const NewDeviceValidationSchema = Yup.object().shape({
         .min(3, 'Device short name is too short - should be 3 chars minimum.')
         .max(25, 'Device short name  is too long - should be 25 chars maximum.')
         .required('Device short name  Required'),
+    sensors: Yup.array().of(
+        Yup.object().shape({
+            sensorName: Yup.string()
+                .required('Sensor name is required')
+                .min(3, 'Sensor name is too short - should be 3 chars minimum.')
+                .max(
+                    50,
+                    'Sensor name is too long - should be 50 chars maximum.'
+                ),
+            sensorType: Yup.string().required('Sensor type is required'),
+            sensorUnit: Yup.string().required('Sensor unit is required'),
+        })
+    ),
 })
 
 export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
@@ -196,6 +209,11 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                         Name
                                         <span className="text-red-500">*</span>
                                     </label>
+                                    <ErrorMessage
+                                        className="text-red-500 text-xs"
+                                        component="div"
+                                        name={`sensors.${idx}.sensorName`}
+                                    />
                                     <input
                                         id={`sensors.${idx}.sensorName`}
                                         name={`sensors.${idx}.sensorName`}
@@ -215,6 +233,11 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                         Type
                                         <span className="text-red-500">*</span>
                                     </label>
+                                    <ErrorMessage
+                                        className="text-red-500 text-xs"
+                                        component="div"
+                                        name={`sensors.${idx}.sensorType`}
+                                    />
                                     <select
                                         name={`sensors.${idx}.sensorType`}
                                         onChange={props.handleChange}
@@ -246,6 +269,11 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                         Unit
                                         <span className="text-red-500">*</span>
                                     </label>
+                                    <ErrorMessage
+                                        className="text-red-500 text-xs"
+                                        component="div"
+                                        name={`sensors.${idx}.sensorUnit`}
+                                    />
                                     <select
                                         name={`sensors.${idx}.sensorUnit`}
                                         onChange={props.handleChange}
