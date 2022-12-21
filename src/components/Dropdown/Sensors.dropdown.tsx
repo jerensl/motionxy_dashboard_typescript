@@ -18,6 +18,7 @@ const SensorsDropdown: React.FC<SensorsDropdownProps> = ({
             {({ open }) => (
                 <>
                     <Popover.Button
+                        disabled={sensors === undefined}
                         className={`
 ${open ? '' : 'text-opacity-90'}
 group inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`}
@@ -29,12 +30,12 @@ group inline-flex items-center text-gray-900 bg-white border border-gray-300 foc
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="w-6 h-6"
+                            className="inline w-4 h-4 ml-1"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5"
+                                d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75"
                             />
                         </svg>
                     </Popover.Button>
