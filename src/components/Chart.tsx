@@ -12,6 +12,7 @@ import {
     ChartDataset,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
+import { randomColors } from '../utils/random'
 
 ChartJS.register(
     CategoryScale,
@@ -50,8 +51,8 @@ const Chart: React.FC<ChartProps> = ({ deviceName, sensors, data }) => {
                 label: sensors[idx],
                 data: data,
                 cubicInterpolationMode: 'monotone',
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: randomColors[idx % randomColors.length],
+                backgroundColor: randomColors[idx % randomColors.length],
             } as ChartDataset<'line', number[]>)
     )
 
