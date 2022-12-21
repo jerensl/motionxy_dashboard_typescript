@@ -77,7 +77,7 @@ export const Profile = () => {
                                     )
                                 }
                                 className={`${
-                                    active && 'bg-blue-500'
+                                    active && 'bg-primary'
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                             >
                                 Logout
