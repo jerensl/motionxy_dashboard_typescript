@@ -22,8 +22,6 @@ const Page: React.FC<Omit<TelemetryProps, 'deviceShortName'>> = ({
         pages.push(currentPage + 1)
     } else if (currentPage === 1) {
         pages.push(currentPage)
-        pages.push(currentPage + 1)
-        pages.push(currentPage + 2)
     } else if (currentPage === maxPage) {
         pages.push(1)
         pages.push(2)
@@ -56,27 +54,31 @@ const Page: React.FC<Omit<TelemetryProps, 'deviceShortName'>> = ({
                     </li>
                 )
             })}
-            <li>
-                <a
-                    href="#"
-                    className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                >
-                    ...
-                </a>
-            </li>
-            <li>
-                <button
-                    onClick={() => setPage(maxPage)}
-                    className={clsx('py-2 px-3 leading-tight', {
-                        'text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700':
-                            maxPage === currentPage,
-                        'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700':
-                            maxPage !== currentPage,
-                    })}
-                >
-                    {telemetry.totalPage}
-                </button>
-            </li>
+            {currentPage > 1 && (
+                <>
+                    <li>
+                        <a
+                            href="#"
+                            className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                        >
+                            ...
+                        </a>
+                    </li>
+                    <li>
+                        <button
+                            onClick={() => setPage(maxPage)}
+                            className={clsx('py-2 px-3 leading-tight', {
+                                'text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700':
+                                    maxPage === currentPage,
+                                'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700':
+                                    maxPage !== currentPage,
+                            })}
+                        >
+                            {telemetry.totalPage}
+                        </button>
+                    </li>
+                </>
+            )}
         </ul>
     )
 }
@@ -88,7 +90,7 @@ const Pagination: React.FC<Omit<TelemetryProps, 'deviceShortName'>> = ({
 }) => {
     return (
         <nav
-            className="flex justify-between items-center pt-4"
+            className="flex justify-between items-center pt-2 m-2"
             aria-label="Table navigation"
         >
             <span className="text-sm font-normal text-gray-500">

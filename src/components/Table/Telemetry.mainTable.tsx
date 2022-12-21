@@ -49,7 +49,13 @@ const Telemetry: React.FC<TelemetryProps> = ({
                     Telemetry data is empty
                 </p>
             ) : null}
-            <Pagination telemetry={telemetry} page={page} setPage={setPage} />
+            {telemetry?.data?.length > 0 && (
+                <Pagination
+                    telemetry={telemetry}
+                    page={page}
+                    setPage={setPage}
+                />
+            )}
         </div>
     )
 }
