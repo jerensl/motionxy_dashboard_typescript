@@ -292,6 +292,9 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                         <option value="volt" label="Volt">
                                             Volt
                                         </option>
+                                        <option value="ampere" label="Ampere">
+                                            Ampere
+                                        </option>
                                     </select>
                                 </div>
                                 <div className="col">
