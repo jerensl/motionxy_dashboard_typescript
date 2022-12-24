@@ -81,6 +81,29 @@ export const Sidebar = () => {
                                 </p>
                             </a>
                         </Link>
+                        <Link href="/realtime" passHref>
+                            <a className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary pr-6">
+                                <span className="inline-flex justify-center items-center ml-4">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        stroke="currentColor"
+                                        className="w-6 h-6"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
+                                    </svg>
+                                </span>
+                                <p className="ml-2 text-sm tracking-wide truncate">
+                                    Realtime
+                                </p>
+                            </a>
+                        </Link>
                     </div>
                 </div>
             </div>

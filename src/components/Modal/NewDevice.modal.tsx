@@ -4,6 +4,8 @@ import { Fragment } from 'react'
 import { useAddDevice } from '../../features/device/query'
 import * as Yup from 'yup'
 import { INewDevice } from '../../types/device'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 interface SuccessModalProps {
     isOpen: boolean
@@ -41,6 +43,7 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-50" onClose={handleClose}>
+                <ToastContainer />
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -89,11 +92,12 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
                                             values.deviceShortName
                                                 .trim()
                                                 .replace(/ /g, '')
-                                        await mutation.mutate({
+                                        mutation.mutate({
                                             deviceName: values.deviceName,
                                             deviceShortName: deviceShortName,
                                             sensors: values.sensors,
                                         })
+
                                         handleClose()
                                         resetForm()
                                     }}

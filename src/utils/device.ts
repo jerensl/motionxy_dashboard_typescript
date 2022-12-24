@@ -5,7 +5,7 @@ export function createNewDevice({
     deviceName,
     deviceShortName,
     sensors,
-}: INewDevice) {
+}: INewDevice): Promise<any> {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
