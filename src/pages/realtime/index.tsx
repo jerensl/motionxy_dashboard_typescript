@@ -8,6 +8,7 @@ import { useTelemetryRealTime } from '../../features/telemetry'
 import { IDevice } from '../../types/device'
 import { NextPageWithLayout } from '../_app'
 import SensorsDropdown from '../../components/Dropdown/Sensors.dropdown'
+import dayjs from 'dayjs'
 
 const Realtime: NextPageWithLayout = () => {
     const {
@@ -80,6 +81,9 @@ const Realtime: NextPageWithLayout = () => {
                         deviceName={telemetry.deviceName}
                         sensors={telemetry.sensors}
                         data={telemetry.data}
+                        timestamps={telemetry.timestamps.map((value) =>
+                            dayjs(value).format('h:mm:ss A')
+                        )}
                     />
                 ) : null}
             </div>

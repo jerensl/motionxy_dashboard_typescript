@@ -41,9 +41,15 @@ interface ChartProps {
     deviceName: string
     sensors: Array<string>
     data: Array<Array<number>>
+    timestamps: Array<string>
 }
 
-const Chart: React.FC<ChartProps> = ({ deviceName, sensors, data }) => {
+const Chart: React.FC<ChartProps> = ({
+    deviceName,
+    sensors,
+    data,
+    timestamps,
+}) => {
     const dataset = data.map(
         (data, idx) =>
             ({
@@ -83,7 +89,7 @@ const Chart: React.FC<ChartProps> = ({ deviceName, sensors, data }) => {
                 },
             }}
             data={{
-                labels,
+                labels: timestamps,
                 datasets: dataset,
             }}
         />

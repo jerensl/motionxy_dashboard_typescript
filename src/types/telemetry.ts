@@ -4,6 +4,7 @@ export interface IRealtimeData {
     deviceName: string
     data: Array<Array<number>>
     sensors: Array<string>
+    timestamps: Array<string>
 }
 
 export interface IData {
