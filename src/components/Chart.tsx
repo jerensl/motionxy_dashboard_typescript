@@ -8,7 +8,6 @@ import {
     Title,
     Tooltip,
     Legend,
-    ChartData,
     ChartDataset,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
@@ -23,19 +22,6 @@ ChartJS.register(
     Tooltip,
     Legend
 )
-
-const labels = [
-    '9 Second ago',
-    '8 Second ago',
-    '7 Second ago',
-    '6 Second ago',
-    '5 Second ago',
-    '4 Second ago',
-    '3 Second ago',
-    '2 Second ago',
-    '1 Second ago',
-    'Now',
-]
 
 interface ChartProps {
     deviceName: string

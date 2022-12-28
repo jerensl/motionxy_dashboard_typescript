@@ -65,7 +65,6 @@ export function getTelemetryRealTime({
     const user = JSON.parse(userFromCookie)
 
     const query = '&' + sensors?.map((sensor) => `sensor=${sensor}`).join('&')
-    console.log(query)
     return window
         .fetch(
             `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry/realtime?deviceShortName=${deviceShortName}` +
