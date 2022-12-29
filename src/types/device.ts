@@ -11,6 +11,8 @@ export interface IDevice {
     sensors: Array<ISensor>
 }
 
+export type IDevices = Array<Omit<IDevice, 'sensors'>>
+
 export interface INewDevice {
     deviceName: string
     deviceShortName: string
@@ -28,6 +30,10 @@ export interface IQueryTelemetryRealtimeResponse {
     deviceName: string
     data: Array<Array<number>>
     sensors: Array<string>
+}
+
+export interface IQueryDevice {
+    deviceShortName: string
 }
 
 export interface IQueryTelemetry {

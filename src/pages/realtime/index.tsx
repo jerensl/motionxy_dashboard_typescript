@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import Chart from '../../components/Chart'
 import Layout from '../../components/Layout'
 import ListDevice from '../../components/ListDevice'
-import { useDevices } from '../../features/device/query'
+import { useDevice, useDevices } from '../../features/device/query'
 import { useTelemetryRealTime } from '../../features/telemetry'
 import { IDevice } from '../../types/device'
 import { NextPageWithLayout } from '../_app'
@@ -11,13 +11,20 @@ import SensorsDropdown from '../../components/Dropdown/Sensors.dropdown'
 import dayjs from 'dayjs'
 
 const Realtime: NextPageWithLayout = () => {
+    const [device, setDevice] = useState<IDevice | null>(null)
+    const [sensor, setSensor] = useState<Array<string>>([])
     const {
         data: devices,
+        isLoading: devicesIsLoading,
+        isError: devicesIsError,
+    } = useDevices()
+
+    const {
+        data: deviceDetail,
         isLoading: deviceIsLoading,
         isError: deviceIsError,
-    } = useDevices()
-    const [sensor, setSensor] = useState<Array<string>>([])
-    const [device, setDevice] = useState<IDevice | null>(null)
+    } = useDevice({ deviceShortName: device?.deviceShortName ?? '' })
+
     const {
         data: telemetry,
         isLoading: telemetryIsLoading,
@@ -41,7 +48,7 @@ const Realtime: NextPageWithLayout = () => {
         setSensor([])
     }, [device])
 
-    if (telemetryIsError || deviceIsError) {
+    if (telemetryIsError || devicesIsError || deviceIsError) {
         return (
             <>
                 <Head>
@@ -72,7 +79,7 @@ const Realtime: NextPageWithLayout = () => {
                     />
                     <SensorsDropdown
                         sensor={sensor}
-                        sensors={device?.sensors}
+                        sensors={deviceDetail?.sensors}
                         handleCheckSensor={handleCheckSensor}
                     />
                 </div>

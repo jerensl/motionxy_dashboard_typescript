@@ -1,9 +1,9 @@
 import { Listbox, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
-import { IDevice } from '../types/device'
+import { IDevices, IDevice } from '../types/device'
 
 interface ListDeviceProps {
-    devices: Array<IDevice> | undefined
+    devices: IDevices | undefined
     device: IDevice | null
     setDevice: React.Dispatch<React.SetStateAction<IDevice | null>>
 }

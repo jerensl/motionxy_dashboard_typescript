@@ -1,17 +1,32 @@
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { useAuth } from '../../context/useAuth'
-import { IDevice } from '../../types/device'
-import { getDevices, createNewDevice, deleteDevice } from '../../utils/device'
+import { IDevice, IDevices, IQueryDevice } from '../../types/device'
+import {
+    getDevices,
+    createNewDevice,
+    deleteDevice,
+    getDevice,
+} from '../../utils/device'
 
 export const queryClient = new QueryClient()
 
 export const useDevices = () => {
     const { user } = useAuth()
 
-    return useQuery<IDevice[], Error>({
+    return useQuery<IDevices, Error>({
         queryKey: ['devices'],
         queryFn: getDevices,
         enabled: !!user?.getIdTokenResult,
+    })
+}
+
+export const useDevice = ({ deviceShortName }: IQueryDevice) => {
+    const { user } = useAuth()
+
+    return useQuery<IDevice, Error>({
+        queryKey: ['device', deviceShortName],
+        queryFn: () => getDevice({ deviceShortName }),
+        enabled: !!user?.getIdTokenResult && !!deviceShortName,
     })
 }
 
