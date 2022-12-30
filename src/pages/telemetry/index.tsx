@@ -11,12 +11,12 @@ import { NextPageWithLayout } from '../_app'
 
 const TelemetryPage: NextPageWithLayout = () => {
     const [page, setPage] = React.useState(1)
+    const [device, setDevice] = useState<IDevice | null>(null)
     const {
         data: devices,
         isLoading: devicesIsLoading,
         isError: deviceIsError,
     } = useDevices()
-    const [device, setDevice] = useState<IDevice | null>(null)
     const {
         data: telemetry,
         isLoading: telemetryIsLoading,

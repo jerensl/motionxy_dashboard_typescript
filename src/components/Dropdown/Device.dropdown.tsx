@@ -3,10 +3,12 @@ import { Dispatch, Fragment, useState } from 'react'
 import { IDeletedDevice } from '../../types/device'
 
 interface DeviceDropdownProps {
+    handleOpenInfoModal: () => void
     handleOpenDeleteModal: () => void
 }
 
 const DeviceDropdown: React.FC<DeviceDropdownProps> = ({
+    handleOpenInfoModal,
     handleOpenDeleteModal,
 }) => {
     return (
@@ -49,6 +51,7 @@ const DeviceDropdown: React.FC<DeviceDropdownProps> = ({
                             <Menu.Item>
                                 {({ active }) => (
                                     <button
+                                        onClick={handleOpenInfoModal}
                                         className={`${
                                             active
                                                 ? 'bg-violet-500 text-white'

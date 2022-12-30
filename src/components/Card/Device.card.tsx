@@ -4,21 +4,31 @@ import React, { useState } from 'react'
 import { IDevice } from '../../types/device'
 import DeviceDropdown from '../Dropdown/Device.dropdown'
 import DeleteModal from '../Modal/ConfirmDelete.modal'
+import DeviceInfoModal from '../Modal/Info.modal'
 
 export const DeviceCard = ({
     deviceName,
     deviceShortName,
     token,
 }: Omit<IDevice, 'sensors'>) => {
-    const [showCopy, setShowCopy] = useState(false)
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+    const [showCopy, setShowCopy] = useState<boolean>(false)
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+    const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
 
     const handleCloseDeleteModal = () => {
         setIsDeleteModalOpen(false)
     }
 
     const handleOpenDeleteModal = () => {
-        setIsDeleteModalOpen(false)
+        setIsDeleteModalOpen(true)
+    }
+
+    const handleCloseInfoModal = () => {
+        setIsInfoModalOpen(false)
+    }
+
+    const handleOpenInfoModal = () => {
+        setIsInfoModalOpen(true)
     }
 
     return (
@@ -34,6 +44,7 @@ export const DeviceCard = ({
                     </h3>
                     <DeviceDropdown
                         handleOpenDeleteModal={handleOpenDeleteModal}
+                        handleOpenInfoModal={handleOpenInfoModal}
                     />
                 </div>
                 <p className="font-normal text-sm text-gray-700">
@@ -72,6 +83,11 @@ export const DeviceCard = ({
                 deviceShortName={deviceShortName}
                 isOpen={isDeleteModalOpen}
                 handleClose={handleCloseDeleteModal}
+            />
+            <DeviceInfoModal
+                deviceShortName={deviceShortName}
+                isOpen={isInfoModalOpen}
+                handleClose={handleCloseInfoModal}
             />
         </>
     )
