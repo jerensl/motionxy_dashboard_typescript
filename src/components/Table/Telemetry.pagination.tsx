@@ -58,7 +58,7 @@ const Page: React.FC<Omit<TelemetryProps, 'deviceShortName'>> = ({
                     </li>
                 )
             })}
-            {currentPage > 1 && (
+            {maxPage > 3 && (
                 <>
                     <li>
                         <a
