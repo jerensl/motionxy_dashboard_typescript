@@ -1,21 +1,23 @@
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import ListDevice from '../../components/ListDevice'
 import TelemetryTable from '../../components/Table/Telemetry.mainTable'
-import { queryClient, useDevices } from '../../features/device/query'
+import { queryClient, useDevice, useDevices } from '../../features/device/query'
 import { useTelemetry } from '../../features/telemetry'
 import { IDevice } from '../../types/device'
 import { getTelemetryDataCSV } from '../../utils/telemetry'
 import { NextPageWithLayout } from '../_app'
+import SensorsDropdown from '../../components/Dropdown/Sensors.dropdown'
 
 const TelemetryPage: NextPageWithLayout = () => {
     const [page, setPage] = React.useState(1)
+    const [sensor, setSensor] = useState<Array<string>>([])
     const [device, setDevice] = useState<IDevice | null>(null)
     const {
         data: devices,
         isLoading: devicesIsLoading,
-        isError: deviceIsError,
+        isError: devicesIsError,
     } = useDevices()
     const {
         data: telemetry,
@@ -23,12 +25,19 @@ const TelemetryPage: NextPageWithLayout = () => {
         isError: telemetryIsError,
     } = useTelemetry({
         deviceShortName: device?.deviceShortName,
+        sensors: sensor,
         page: page,
     })
+    const {
+        data: deviceDetail,
+        isLoading: deviceIsLoading,
+        isError: deviceIsError,
+    } = useDevice({ deviceShortName: device?.deviceShortName ?? '' })
 
     const handleDownloadCSV = async () => {
         await getTelemetryDataCSV({
             deviceShortName: device?.deviceShortName,
+            sensors: sensor,
         })
             .then((resp) => resp.blob())
             .then((blob) => {
@@ -42,33 +51,21 @@ const TelemetryPage: NextPageWithLayout = () => {
             })
     }
 
-    if (telemetryIsLoading) {
-        return (
-            <>
-                <Head>
-                    <title>Ovord 2</title>
-                    <meta name="description" content="Ovord 2 Dashboard" />
-                </Head>
-                <div className="flex flex-col pl-80 max-w-full max-h-full px-10">
-                    <div className="flex flex-row justify-between ">
-                        <ListDevice
-                            devices={devices}
-                            device={device}
-                            setDevice={setDevice}
-                        />
-                        <button
-                            onClick={handleDownloadCSV}
-                            className="m-auto text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2"
-                        >
-                            Download CSV
-                        </button>
-                    </div>
-                </div>
-            </>
-        )
+    const handleCheckSensor = (event: React.ChangeEvent<HTMLInputElement>) => {
+        let updatedList = [...sensor]
+        if (event.target.checked) {
+            updatedList = [...sensor, event.target.value]
+        } else {
+            updatedList.splice(sensor.indexOf(event.target.value), 1)
+        }
+        setSensor(updatedList)
     }
 
-    if (telemetryIsError) {
+    useEffect(() => {
+        setSensor([])
+    }, [device])
+
+    if (telemetryIsError || devicesIsError || deviceIsError) {
         return (
             <>
                 <Head>
@@ -88,24 +85,35 @@ const TelemetryPage: NextPageWithLayout = () => {
             </Head>
             <div className="flex flex-col pl-80 max-w-full max-h-full px-10">
                 <div className="flex flex-row justify-between ">
-                    <ListDevice
-                        devices={devices}
-                        device={device}
-                        setDevice={setDevice}
-                    />
+                    <div className="flex flex-row gap-8">
+                        <ListDevice
+                            devices={devices}
+                            device={device}
+                            setDevice={setDevice}
+                        />
+                        {deviceDetail !== undefined && (
+                            <SensorsDropdown
+                                sensor={sensor}
+                                sensors={deviceDetail.sensors}
+                                handleCheckSensor={handleCheckSensor}
+                            />
+                        )}
+                    </div>
                     <button
                         onClick={handleDownloadCSV}
-                        className="m-auto text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2"
+                        className="m-auto text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
                     >
                         Download CSV
                     </button>
                 </div>
-                <TelemetryTable
-                    deviceShortName={device?.deviceShortName ?? ''}
-                    telemetry={telemetry}
-                    page={page}
-                    setPage={setPage}
-                />
+                {!telemetryIsLoading && device?.deviceShortName && (
+                    <TelemetryTable
+                        deviceShortName={device.deviceShortName ?? ''}
+                        telemetry={telemetry}
+                        page={page}
+                        setPage={setPage}
+                    />
+                )}
             </div>
         </>
     )

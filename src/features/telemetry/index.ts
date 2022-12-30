@@ -2,12 +2,17 @@ import { useQuery } from '@tanstack/react-query'
 import { IQueryTelemetry, IQueryTelemetryRealtime } from '../../types/device'
 import { getTelemetryData, getTelemetryRealTime } from '../../utils/telemetry'
 
-export function useTelemetry({ deviceShortName, page }: IQueryTelemetry) {
+export function useTelemetry({
+    deviceShortName,
+    page,
+    sensors,
+}: IQueryTelemetry) {
     return useQuery({
-        queryKey: ['telemetry', deviceShortName, page],
-        queryFn: () => getTelemetryData({ deviceShortName, page }),
-        enabled: !!deviceShortName,
+        queryKey: ['telemetry', deviceShortName, page, sensors],
+        queryFn: () => getTelemetryData({ deviceShortName, page, sensors }),
+        enabled: deviceShortName !== undefined,
         refetchOnMount: true,
+        refetchOnWindowFocus: true,
     })
 }
 

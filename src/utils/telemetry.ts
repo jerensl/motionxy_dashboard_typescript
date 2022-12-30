@@ -4,6 +4,7 @@ import { IRealtimeData, ITelemetryData } from '../types/telemetry'
 
 export function getTelemetryData({
     deviceShortName,
+    sensors,
     page,
 }: IQueryTelemetry): Promise<ITelemetryData> {
     const userFromCookie = Cookies.get('auth')
@@ -14,9 +15,12 @@ export function getTelemetryData({
 
     const user = JSON.parse(userFromCookie)
 
+    const query = '&' + sensors?.map((sensor) => `sensor=${sensor}`).join('&')
+
     return window
         .fetch(
-            `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry?deviceShortName=${deviceShortName}&page=${page}`,
+            `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry?deviceShortName=${deviceShortName}&page=${page}` +
+                query,
             {
                 method: 'GET',
                 mode: 'cors',
@@ -31,7 +35,8 @@ export function getTelemetryData({
 
 export function getTelemetryDataCSV({
     deviceShortName,
-}: Pick<IQueryTelemetry, 'deviceShortName'>) {
+    sensors,
+}: Pick<IQueryTelemetry, 'deviceShortName' | 'sensors'>) {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
@@ -40,8 +45,11 @@ export function getTelemetryDataCSV({
 
     const user = JSON.parse(userFromCookie)
 
+    const query = '&' + sensors?.map((sensor) => `sensor=${sensor}`).join('&')
+
     return window.fetch(
-        `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry/export?deviceShortName=${deviceShortName}`,
+        `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry/export?deviceShortName=${deviceShortName}` +
+            query,
         {
             method: 'GET',
             mode: 'cors',
@@ -65,6 +73,7 @@ export function getTelemetryRealTime({
     const user = JSON.parse(userFromCookie)
 
     const query = '&' + sensors?.map((sensor) => `sensor=${sensor}`).join('&')
+
     return window
         .fetch(
             `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry/realtime?deviceShortName=${deviceShortName}` +

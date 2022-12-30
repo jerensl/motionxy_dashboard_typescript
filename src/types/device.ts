@@ -38,5 +38,6 @@ export interface IQueryDevice {
 
 export interface IQueryTelemetry {
     deviceShortName: string | undefined
+    sensors: Array<string>
     page: number
 }
