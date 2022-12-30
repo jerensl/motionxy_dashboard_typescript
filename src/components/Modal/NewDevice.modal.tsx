@@ -196,6 +196,39 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
     )
 }
 
+const sensorTypeItem = {
+    '': [
+        {
+            value: '',
+            label: 'Select a Unit',
+        },
+    ],
+    temperature: [
+        {
+            value: '',
+            label: 'Select a Unit',
+        },
+        {
+            value: 'celcius',
+            label: 'Temperature',
+        },
+    ],
+    energy: [
+        {
+            value: '',
+            label: 'Select a Unit',
+        },
+        {
+            value: 'volt',
+            label: 'Volt',
+        },
+        {
+            value: 'current',
+            label: 'Current',
+        },
+    ],
+} as any
+
 const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
     return (
         <FieldArray name="sensors">
@@ -252,7 +285,7 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                         className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     >
                                         <option value="" label="Select a Type">
-                                            Select a Type{' '}
+                                            Select a Type
                                         </option>
                                         <option
                                             value="temperature"
@@ -287,18 +320,24 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                         onBlur={props.handleBlur}
                                         className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     >
-                                        <option value="" label="Select a Unit">
-                                            Select a Unit{' '}
-                                        </option>
-                                        <option value="celsius" label="Celsius">
-                                            Celsius
-                                        </option>
-                                        <option value="volt" label="Volt">
-                                            Volt
-                                        </option>
-                                        <option value="current" label="Current">
-                                            Current
-                                        </option>
+                                        {sensorTypeItem[
+                                            props.values.sensors[idx].sensorType
+                                        ]?.map(
+                                            (
+                                                { value, label }: any,
+                                                index: number
+                                            ) => {
+                                                return (
+                                                    <option
+                                                        key={index}
+                                                        value={value}
+                                                        label={label}
+                                                    >
+                                                        {label}
+                                                    </option>
+                                                )
+                                            }
+                                        )}
                                     </select>
                                 </div>
                                 <div className="col">
