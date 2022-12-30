@@ -1,19 +1,14 @@
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Dispatch, Fragment, useState } from 'react'
 import { IDeletedDevice } from '../../types/device'
-import DeleteModal from '../Modal/ConfirmDelete.modal'
 
-const DeviceDropdown: React.FC<IDeletedDevice> = ({ deviceShortName }) => {
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+interface DeviceDropdownProps {
+    handleOpenDeleteModal: () => void
+}
 
-    const handleDeleteModalClosed = () => {
-        setIsDeleteModalOpen(false)
-    }
-
-    const handleDeleteModalOpen = () => {
-        setIsDeleteModalOpen(true)
-    }
-
+const DeviceDropdown: React.FC<DeviceDropdownProps> = ({
+    handleOpenDeleteModal,
+}) => {
     return (
         <div className="text-right">
             <Menu as="div" className="relative inline-block text-left">
@@ -60,18 +55,21 @@ const DeviceDropdown: React.FC<IDeletedDevice> = ({ deviceShortName }) => {
                                                 : 'text-gray-900'
                                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                                     >
-                                        {active ? (
-                                            <EditActiveIcon
-                                                className="mr-2 h-5 w-5"
-                                                aria-hidden="true"
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-5 h-5 mr-2"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
                                             />
-                                        ) : (
-                                            <EditInactiveIcon
-                                                className="mr-2 h-5 w-5"
-                                                aria-hidden="true"
-                                            />
-                                        )}
-                                        Edit
+                                        </svg>
+                                        Info
                                     </button>
                                 )}
                             </Menu.Item>
@@ -80,7 +78,7 @@ const DeviceDropdown: React.FC<IDeletedDevice> = ({ deviceShortName }) => {
                             <Menu.Item>
                                 {({ active }) => (
                                     <button
-                                        onClick={handleDeleteModalOpen}
+                                        onClick={handleOpenDeleteModal}
                                         className={`${
                                             active
                                                 ? 'bg-violet-500 text-white'
@@ -106,11 +104,6 @@ const DeviceDropdown: React.FC<IDeletedDevice> = ({ deviceShortName }) => {
                     </Menu.Items>
                 </Transition>
             </Menu>
-            <DeleteModal
-                deviceShortName={deviceShortName}
-                isOpen={isDeleteModalOpen}
-                handleClose={handleDeleteModalClosed}
-            />
         </div>
     )
 }

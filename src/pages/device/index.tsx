@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query'
 import Head from 'next/head'
 import React from 'react'
 import { DeviceCard } from '../../components/Card/Device.card'
