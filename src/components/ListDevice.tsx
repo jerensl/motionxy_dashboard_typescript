@@ -14,11 +14,11 @@ const ListDevice: React.FC<ListDeviceProps> = ({
     setDevice,
 }) => {
     return (
-        <div className="py-4 max-w-[200px] z-10">
+        <div className="py-4 max-w-[400px] z-10">
             <Listbox value={device} onChange={setDevice}>
                 <h3 className="font-medium text-sm">Choose the device :</h3>
                 <div className="relative mt-1">
-                    <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                    <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white hover:bg-gray-100 border-gray-300 border py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-orange-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                         <span className="block truncate">
                             {device?.deviceShortName ?? 'Select a devices'}
                         </span>
@@ -29,7 +29,7 @@ const ListDevice: React.FC<ListDeviceProps> = ({
                                 viewBox="0 0 24 24"
                                 strokeWidth={1.5}
                                 stroke="currentColor"
-                                className="w-6 h-6"
+                                className="w-5 h-5"
                             >
                                 <path
                                     strokeLinecap="round"

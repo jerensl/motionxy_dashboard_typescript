@@ -108,7 +108,7 @@ const TelemetryPage: NextPageWithLayout = () => {
                 </div>
                 {!telemetryIsLoading && device?.deviceShortName && (
                     <TelemetryTable
-                        deviceShortName={device.deviceShortName ?? ''}
+                        deviceShortName={device.deviceShortName}
                         telemetry={telemetry}
                         page={page}
                         setPage={setPage}

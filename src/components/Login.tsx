@@ -6,8 +6,7 @@ import auth from '../utils/firebase'
 import clsx from 'clsx'
 import { IUser } from '../types/user'
 import * as Yup from 'yup'
-import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { toast } from 'react-toastify'
 
 const LoginValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -133,7 +132,6 @@ export const Login: React.FC = () => {
                     </p>
                 </div>
             </form>
-            <ToastContainer />
         </div>
     )
 }

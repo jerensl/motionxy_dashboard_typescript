@@ -7,6 +7,8 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { queryClient } from '../features/device/query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -23,6 +25,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     return (
         <ErrorBoundary>
             <AuthProvider>
+                <ToastContainer />
                 <QueryClientProvider client={reactQueryClient}>
                     {getLayout(<Component {...pageProps} />)}
                     {process.env.NODE_ENV ? (

@@ -3,7 +3,7 @@ export function createNewUser(
     email: string,
     password: string
 ) {
-    return window.fetch('https://cec.azurewebsites.net/api/user/new', {
+    return window.fetch(`${process.env.NEXT_PUBLIC_REST_API}/api/user/new`, {
         method: 'POST',
         mode: 'cors',
         body: JSON.stringify({
