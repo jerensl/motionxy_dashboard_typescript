@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactChild }) {
     }
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-slate-50">
             <Navbar />
             <Sidebar />
             <main className="h-full">{children}</main>

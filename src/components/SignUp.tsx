@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import * as Yup from 'yup'
 import SuccessModal from './Modal/Sucess.modal'
 import { createNewUser } from '../utils/user'
+import { toast } from 'react-toastify'
 
 interface SignUpValues {
     email: string
@@ -34,11 +35,25 @@ export const SignUp: React.FC<{}> = () => {
         },
         validationSchema: SignUpValidation,
         onSubmit: async (values, action) => {
-            await createNewUser(
-                values.fullName,
-                values.email,
-                values.password
-            ).then(() => setIsOpen(true))
+            try {
+                const resp = await createNewUser(
+                    values.fullName,
+                    values.email,
+                    values.password
+                )
+
+                if (resp.status === 201) {
+                    setIsOpen(true)
+                } else if (resp.status === 500) {
+                    throw new Error('Cannot create an account')
+                }
+            } catch (error) {
+                console.log(error)
+                toast.error('Cannot create an account', {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                })
+            }
+            action.setSubmitting(false)
         },
     })
 

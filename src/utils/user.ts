@@ -1,4 +1,4 @@
-export function createNewUser(
+export async function createNewUser(
     fullName: string,
     email: string,
     password: string

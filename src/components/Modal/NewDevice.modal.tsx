@@ -207,7 +207,7 @@ const sensorTypeItem = {
         },
         {
             value: 'celcius',
-            label: 'Temperature',
+            label: 'Celcius',
         },
     ],
     energy: [

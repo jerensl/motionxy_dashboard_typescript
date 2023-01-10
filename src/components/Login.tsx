@@ -37,6 +37,7 @@ export const Login: React.FC = () => {
                     position: toast.POSITION.BOTTOM_RIGHT,
                 })
             )
+            action.setSubmitting(false)
         },
     })
 
