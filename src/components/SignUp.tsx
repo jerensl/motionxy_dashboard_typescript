@@ -45,13 +45,15 @@ export const SignUp: React.FC<{}> = () => {
                 if (resp.status === 201) {
                     setIsOpen(true)
                 } else if (resp.status === 500) {
-                    throw new Error('Cannot create an account')
+                    throw new Error(resp.statusText)
                 }
-            } catch (error) {
-                console.log(error)
-                toast.error('Cannot create an account', {
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                })
+            } catch (err) {
+                toast.error(
+                    typeof err === 'string' ? err : 'User cannot be created',
+                    {
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                    }
+                )
             }
             action.setSubmitting(false)
         },

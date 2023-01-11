@@ -32,11 +32,19 @@ export const Login: React.FC = () => {
                 auth,
                 values.email,
                 values.password
-            ).catch((e) =>
-                toast.error('Email or password is wrong!', {
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                })
             )
+                .then((user) => {
+                    if (!user.user.emailVerified) {
+                        toast.error('Please verified the email!', {
+                            position: toast.POSITION.BOTTOM_RIGHT,
+                        })
+                    }
+                })
+                .catch((e) =>
+                    toast.error('Email or password is wrong!', {
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                    })
+                )
             action.setSubmitting(false)
         },
     })

@@ -23,7 +23,7 @@ export function AuthProvider({ children }: any) {
         }
 
         const unsubscribe = onIdTokenChanged(auth, async (user) => {
-            if (user) {
+            if (user && user.emailVerified) {
                 setUser(user)
                 cookies.set('auth', JSON.stringify(user), { expires: 1 / 24 })
                 Router.push('/')
