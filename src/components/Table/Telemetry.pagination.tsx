@@ -20,8 +20,13 @@ const Page: React.FC<Omit<TelemetryProps, 'deviceShortName'>> = ({
         pages.push(currentPage - 1)
         pages.push(currentPage)
         pages.push(currentPage + 1)
-    } else if (currentPage === 1 && maxPage === 1) {
-        pages.push(currentPage)
+    } else if (currentPage > 0 && maxPage < 3) {
+        let count = 1
+
+        while (count <= maxPage) {
+            pages.push(count)
+            count++
+        }
     } else if (currentPage === maxPage) {
         pages.push(1)
         pages.push(2)

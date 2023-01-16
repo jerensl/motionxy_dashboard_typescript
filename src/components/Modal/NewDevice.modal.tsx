@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import { useAddDevice } from '../../features/device/query'
 import * as Yup from 'yup'
 import { INewDevice } from '../../types/device'
+import clsx from 'clsx'
 
 interface SuccessModalProps {
     isOpen: boolean
@@ -193,7 +194,12 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
     )
 }
 
-const sensorTypeItem = {
+interface ISelectSensorType {
+    value: string
+    label: string
+}
+
+const sensorTypeItem: Record<string, Array<ISelectSensorType>> = {
     '': [
         {
             value: '',
@@ -206,8 +212,8 @@ const sensorTypeItem = {
             label: 'Select a Unit',
         },
         {
-            value: 'celcius',
-            label: 'Celcius',
+            value: 'celsius',
+            label: 'Celsius',
         },
     ],
     energy: [
@@ -224,7 +230,7 @@ const sensorTypeItem = {
             label: 'Current',
         },
     ],
-} as any
+}
 
 const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
     return (
@@ -340,7 +346,13 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                 <div className="col">
                                     <button
                                         type="button"
-                                        className="secondary w-full pt-6 h-full m-auto"
+                                        disabled={idx === 0}
+                                        className={clsx(
+                                            'secondary w-full pt-6 h-full m-auto',
+                                            {
+                                                'text-gray-200': idx === 0,
+                                            }
+                                        )}
                                         onClick={() => remove(idx)}
                                     >
                                         <svg
@@ -363,7 +375,7 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                         ))}
                     <button
                         type="button"
-                        className="secondary"
+                        className="secondary m-auto flex-grow"
                         onClick={() =>
                             push({
                                 sensorName: '',
