@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { useFormik } from 'formik'
 import Link from 'next/link'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import auth from '../utils/firebase'
 import clsx from 'clsx'
 import { IUser } from '../types/user'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
+import { resendVerificationEmail } from '../utils/user'
 
 const LoginValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -14,37 +13,30 @@ const LoginValidationSchema = Yup.object().shape({
         .email('Emails is invalid')
         .min(3, 'Email name is too short - should be 3 chars minimum.')
         .max(50, 'Email name is too long - should be 50 chars maximum.'),
-    password: Yup.string()
-        .required('Password is Required')
-        .min(6, 'Password is too short - should be 6 chars minimum.')
-        .max(25, 'Password  is too long - should be 25 chars maximum.'),
 })
 
-export const Login: React.FC = () => {
-    const formik = useFormik<IUser>({
+export const EmailVerification: React.FC = () => {
+    const formik = useFormik<Pick<IUser, 'email'>>({
         initialValues: {
             email: '',
-            password: '',
         },
         validationSchema: LoginValidationSchema,
         onSubmit: async (values, action) => {
-            await signInWithEmailAndPassword(
-                auth,
-                values.email,
-                values.password
-            )
-                .then((user) => {
-                    if (!user.user.emailVerified) {
-                        toast.error('Please verified the email!', {
-                            position: toast.POSITION.BOTTOM_RIGHT,
-                        })
-                    }
-                })
-                .catch((e) =>
-                    toast.error('Email or password is wrong!', {
+            const resp = await resendVerificationEmail(values.email)
+
+            if (resp.status === 202) {
+                toast.success(
+                    'Verification link already being sent, please check your email!',
+                    {
                         position: toast.POSITION.BOTTOM_RIGHT,
-                    })
+                    }
                 )
+            } else {
+                toast.error('Fail to resend email verification!', {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                })
+            }
+
             action.setSubmitting(false)
         },
     })
@@ -74,28 +66,6 @@ export const Login: React.FC = () => {
                         placeholder="Email"
                         onChange={formik.handleChange}
                         value={formik.values.email}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 mt-2 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    />
-                </div>
-                <div>
-                    <label
-                        htmlFor="password"
-                        className="text-sm font-medium text-gray-900 block"
-                    >
-                        Password
-                    </label>
-                    {formik.errors.password && formik.touched.password ? (
-                        <span className="text-xs text-red-500">
-                            {formik.errors.password}
-                        </span>
-                    ) : null}
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        placeholder="password"
-                        onChange={formik.handleChange}
-                        value={formik.values.password}
                         className="bg-gray-50 border border-gray-300 text-gray-900 mt-2 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     />
                 </div>
@@ -132,18 +102,10 @@ export const Login: React.FC = () => {
                 </button>
                 <div className="block">
                     <p className="text-sm text-center">
-                        You don`t have an account?{' '}
-                        <Link href="/signup" passHref>
+                        Back to login?{' '}
+                        <Link href="/login" passHref>
                             <a className="text-sm text-purple-500 font-semibold">
-                                Register now
-                            </a>
-                        </Link>
-                    </p>
-                    <p className="text-sm text-center">
-                        Resend verification email?{' '}
-                        <Link href="/resend-email-verification" passHref>
-                            <a className="text-sm text-purple-500 font-semibold">
-                                Resend now
+                                Login now
                             </a>
                         </Link>
                     </p>

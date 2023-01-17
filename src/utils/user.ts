@@ -13,3 +13,16 @@ export async function createNewUser(
         }),
     })
 }
+
+export async function resendVerificationEmail(email: string) {
+    return window.fetch(
+        `${process.env.NEXT_PUBLIC_REST_API}/api/user/resend-email-verification`,
+        {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify({
+                email,
+            }),
+        }
+    )
+}
