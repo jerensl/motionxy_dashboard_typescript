@@ -83,7 +83,7 @@ const Realtime: NextPageWithLayout = () => {
                         handleCheckSensor={handleCheckSensor}
                     />
                 </div>
-                {!telemetryIsLoading && sensor.length > 0 ? (
+                {!telemetryIsLoading ? (
                     <Chart
                         deviceName={telemetry.deviceName}
                         sensors={telemetry.sensors}
@@ -92,7 +92,9 @@ const Realtime: NextPageWithLayout = () => {
                             dayjs(value).format('h:mm:ss A')
                         )}
                     />
-                ) : null}
+                ) : (
+                    'Select your device and sensor first'
+                )}
                 {/* <button className="fixed z-50 bottom-10 right-8 bg-primary w-14 h-14 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-orange-400 hover:drop-shadow-2xl">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -5,9 +5,9 @@ import clsx from 'clsx'
 import { IUser } from '../types/user'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
-import { resendVerificationEmail } from '../utils/user'
+import { resetPassword } from '../utils/user'
 
-const LoginValidationSchema = Yup.object().shape({
+const ForgotPasswordValidationSchema = Yup.object().shape({
     email: Yup.string()
         .required('Email is required')
         .email('Emails is invalid')
@@ -15,20 +15,20 @@ const LoginValidationSchema = Yup.object().shape({
         .max(50, 'Email name is too long - should be 50 chars maximum.'),
 })
 
-export const EmailVerification: React.FC = () => {
+export const ForgotPassword: React.FC = () => {
     const formik = useFormik<Pick<IUser, 'email'>>({
         initialValues: {
             email: '',
         },
-        validationSchema: LoginValidationSchema,
+        validationSchema: ForgotPasswordValidationSchema,
         onSubmit: async (values, action) => {
-            const resp = await resendVerificationEmail(values.email)
+            const resp = await resetPassword(values.email)
 
             const data = await resp.json()
 
             if (resp.status === 202) {
                 toast.success(
-                    'Verification link already being sent, please check your email!',
+                    'Reset password already sent to your email, please check your email!',
                     {
                         position: toast.POSITION.BOTTOM_RIGHT,
                     }
@@ -46,7 +46,7 @@ export const EmailVerification: React.FC = () => {
     return (
         <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm m-auto mt-32 p-4 sm:p-6 lg:p-8 ">
             <h1 className="text-2xl text-center font-bold pb-3">
-                Resend Email verification
+                Reset Password
             </h1>
             <form
                 onSubmit={formik.handleSubmit}

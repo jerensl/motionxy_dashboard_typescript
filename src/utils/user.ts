@@ -26,3 +26,16 @@ export async function resendVerificationEmail(email: string) {
         }
     )
 }
+
+export async function resetPassword(email: string) {
+    return window.fetch(
+        `${process.env.NEXT_PUBLIC_REST_API}/api/user/reset-password`,
+        {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify({
+                email,
+            }),
+        }
+    )
+}
