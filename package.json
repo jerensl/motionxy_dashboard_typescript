@@ -15,7 +15,7 @@
         "chart.js": "^3.9.1",
         "clsx": "^1.2.1",
         "copy-to-clipboard": "^3.3.2",
-        "dayjs": "^1.11.6",
+        "dayjs": "^1.11.7",
         "firebase": "^9.11.0",
         "formik": "^2.2.9",
         "js-cookie": "^3.0.1",
@@ -23,6 +23,7 @@
         "react": "18.2.0",
         "react-chartjs-2": "^4.3.1",
         "react-dom": "18.2.0",
+        "react-tailwindcss-datepicker": "^1.4.0",
         "react-toastify": "^9.1.1",
         "yup": "^0.32.11"
     },

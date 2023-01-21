@@ -3,22 +3,39 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import ListDevice from '../../components/ListDevice'
 import TelemetryTable from '../../components/Table/Telemetry.mainTable'
-import { queryClient, useDevice, useDevices } from '../../features/device/query'
+import { useDevice, useDevices } from '../../features/device/query'
 import { useTelemetry } from '../../features/telemetry'
 import { IDevice } from '../../types/device'
 import { getTelemetryDataCSV } from '../../utils/telemetry'
 import { NextPageWithLayout } from '../_app'
 import SensorsDropdown from '../../components/Dropdown/Sensors.dropdown'
+import Datepicker from 'react-tailwindcss-datepicker'
+import type { DateValueType } from 'react-tailwindcss-datepicker/dist/types'
+import dayjs from 'dayjs'
 
 const TelemetryPage: NextPageWithLayout = () => {
     const [page, setPage] = React.useState(1)
-    const [sensor, setSensor] = useState<Array<string>>([])
     const [device, setDevice] = useState<IDevice | null>(null)
+
+    const [date, setDate] = useState<DateValueType>({
+        startDate: dayjs().subtract(7, 'day').toString(),
+        endDate: dayjs().toString(),
+    })
+
     const {
         data: devices,
         isLoading: devicesIsLoading,
         isError: devicesIsError,
     } = useDevices()
+
+    const {
+        data: deviceDetail,
+        isLoading: deviceIsLoading,
+        isError: deviceIsError,
+    } = useDevice({ deviceShortName: device?.deviceShortName ?? '' })
+
+    const [sensor, setSensor] = useState<Array<string>>([])
+
     const {
         data: telemetry,
         isLoading: telemetryIsLoading,
@@ -28,11 +45,10 @@ const TelemetryPage: NextPageWithLayout = () => {
         sensors: sensor,
         page: page,
     })
-    const {
-        data: deviceDetail,
-        isLoading: deviceIsLoading,
-        isError: deviceIsError,
-    } = useDevice({ deviceShortName: device?.deviceShortName ?? '' })
+
+    const handleDateChange = (newValue: DateValueType) => {
+        setDate(newValue)
+    }
 
     const handleDownloadCSV = async () => {
         await getTelemetryDataCSV({
@@ -56,14 +72,16 @@ const TelemetryPage: NextPageWithLayout = () => {
         if (event.target.checked) {
             updatedList = [...sensor, event.target.value]
         } else {
-            updatedList.splice(sensor.indexOf(event.target.value), 1)
+            if (updatedList.length > 1) {
+                updatedList.splice(sensor.indexOf(event.target.value), 1)
+            }
         }
         setSensor(updatedList)
     }
 
     useEffect(() => {
-        setSensor([])
-    }, [device])
+        setSensor(deviceDetail?.sensors.map((item) => item.sensorName) ?? [])
+    }, [deviceDetail])
 
     if (telemetryIsError || devicesIsError || deviceIsError) {
         return (
@@ -84,7 +102,7 @@ const TelemetryPage: NextPageWithLayout = () => {
                 <meta name="description" content="Ovord 2 Dashboard" />
             </Head>
             <div className="flex flex-col pl-80 max-w-full max-h-full px-10">
-                <div className="flex flex-row justify-between ">
+                <div className="flex flex-row justify-between">
                     <div className="flex flex-row gap-8">
                         <ListDevice
                             devices={devices}
@@ -98,6 +116,15 @@ const TelemetryPage: NextPageWithLayout = () => {
                                 handleCheckSensor={handleCheckSensor}
                             />
                         )}
+                        <div className="m-auto pt-3">
+                            <Datepicker
+                                primaryColor="orange"
+                                inputClassName="group inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm "
+                                showShortcuts={true}
+                                value={date}
+                                onChange={handleDateChange}
+                            />
+                        </div>
                     </div>
                     <button
                         onClick={handleDownloadCSV}
