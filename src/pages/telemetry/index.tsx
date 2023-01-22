@@ -56,6 +56,8 @@ const TelemetryPage: NextPageWithLayout = () => {
         await getTelemetryDataCSV({
             deviceShortName: device?.deviceShortName,
             sensors: sensor,
+            startDate: dayjs(date?.startDate?.toString()).toISOString() ?? '',
+            endDate: dayjs(date?.endDate?.toString()).toISOString() ?? '',
         })
             .then((resp) => resp.blob())
             .then((blob) => {

@@ -38,7 +38,9 @@ export function getTelemetryData({
 export function getTelemetryDataCSV({
     deviceShortName,
     sensors,
-}: Pick<IQueryTelemetry, 'deviceShortName' | 'sensors'>) {
+    startDate,
+    endDate,
+}: Omit<IQueryTelemetry, 'page'>) {
     const userFromCookie = Cookies.get('auth')
 
     if (userFromCookie === undefined) {
@@ -50,7 +52,7 @@ export function getTelemetryDataCSV({
     const query = '&' + sensors?.map((sensor) => `sensor=${sensor}`).join('&')
 
     return window.fetch(
-        `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry/export?deviceShortName=${deviceShortName}` +
+        `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry/export?deviceShortName=${deviceShortName}&startDate=${startDate}&endDate=${endDate}` +
             query,
         {
             method: 'GET',
