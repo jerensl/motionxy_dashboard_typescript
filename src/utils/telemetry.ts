@@ -5,6 +5,8 @@ import { IRealtimeData, ITelemetryData } from '../types/telemetry'
 export function getTelemetryData({
     deviceShortName,
     sensors,
+    startDate,
+    endDate,
     page,
 }: IQueryTelemetry): Promise<ITelemetryData> {
     const userFromCookie = Cookies.get('auth')
@@ -19,7 +21,7 @@ export function getTelemetryData({
 
     return window
         .fetch(
-            `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry?deviceShortName=${deviceShortName}&page=${page}` +
+            `${process.env.NEXT_PUBLIC_REST_API}/api/telemetry?deviceShortName=${deviceShortName}&startDate=${startDate}&endDate=${endDate}&page=${page}` +
                 query,
             {
                 method: 'GET',

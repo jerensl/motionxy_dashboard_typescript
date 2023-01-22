@@ -5,11 +5,27 @@ import { getTelemetryData, getTelemetryRealTime } from '../../utils/telemetry'
 export function useTelemetry({
     deviceShortName,
     page,
+    startDate,
+    endDate,
     sensors,
 }: IQueryTelemetry) {
     return useQuery({
-        queryKey: ['telemetry', deviceShortName, page, sensors],
-        queryFn: () => getTelemetryData({ deviceShortName, page, sensors }),
+        queryKey: [
+            'telemetry',
+            deviceShortName,
+            page,
+            startDate,
+            endDate,
+            sensors,
+        ],
+        queryFn: () =>
+            getTelemetryData({
+                deviceShortName,
+                sensors,
+                startDate,
+                endDate,
+                page,
+            }),
         enabled: deviceShortName !== undefined,
         refetchOnMount: true,
         refetchOnWindowFocus: true,

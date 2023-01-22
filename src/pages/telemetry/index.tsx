@@ -43,6 +43,8 @@ const TelemetryPage: NextPageWithLayout = () => {
     } = useTelemetry({
         deviceShortName: device?.deviceShortName,
         sensors: sensor,
+        startDate: dayjs(date?.startDate?.toString()).toISOString() ?? '',
+        endDate: dayjs(date?.endDate?.toString()).toISOString() ?? '',
         page: page,
     })
 
@@ -123,6 +125,7 @@ const TelemetryPage: NextPageWithLayout = () => {
                                 showShortcuts={true}
                                 value={date}
                                 onChange={handleDateChange}
+                                displayFormat="DD/MM/YYYY"
                             />
                         </div>
                     </div>
