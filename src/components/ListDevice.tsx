@@ -18,7 +18,7 @@ const ListDevice: React.FC<ListDeviceProps> = ({
             <Listbox value={device} onChange={setDevice}>
                 <h3 className="font-medium text-sm">Choose the device :</h3>
                 <div className="relative mt-1">
-                    <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white hover:bg-gray-100 border-gray-300 border py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-orange-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                    <Listbox.Button className="relative w-full cursor-default py-2 pl-3 pr-10 text-left focus-visible:border-orange-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm group inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm">
                         <span className="block truncate">
                             {device?.deviceShortName ?? 'Select a devices'}
                         </span>

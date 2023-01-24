@@ -18,7 +18,7 @@ const TelemetryPage: NextPageWithLayout = () => {
     const [device, setDevice] = useState<IDevice | null>(null)
 
     const [date, setDate] = useState<DateValueType>({
-        startDate: dayjs().subtract(7, 'day').toString(),
+        startDate: dayjs().subtract(30, 'day').toString(),
         endDate: dayjs().toString(),
     })
 
@@ -50,6 +50,7 @@ const TelemetryPage: NextPageWithLayout = () => {
 
     const handleDateChange = (newValue: DateValueType) => {
         setDate(newValue)
+        setPage(1)
     }
 
     const handleDownloadCSV = async () => {
@@ -113,19 +114,22 @@ const TelemetryPage: NextPageWithLayout = () => {
                             device={device}
                             setDevice={setDevice}
                         />
-                        {deviceDetail !== undefined && (
-                            <SensorsDropdown
-                                sensor={sensor}
-                                sensors={deviceDetail.sensors}
-                                handleCheckSensor={handleCheckSensor}
-                            />
-                        )}
+
+                        <SensorsDropdown
+                            sensor={sensor}
+                            sensors={deviceDetail?.sensors}
+                            handleCheckSensor={handleCheckSensor}
+                        />
+
                         <div className="m-auto pt-3">
                             <Datepicker
+                                disabled={deviceDetail === undefined}
                                 primaryColor="orange"
-                                inputClassName="group inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm "
+                                inputClassName="group inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm"
                                 showShortcuts={true}
                                 value={date}
+                                startFrom={dayjs().subtract(30, 'day').toDate()}
+                                maxDate={dayjs().toDate()}
                                 onChange={handleDateChange}
                                 displayFormat="DD/MM/YYYY"
                             />
