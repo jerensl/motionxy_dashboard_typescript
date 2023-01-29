@@ -129,7 +129,7 @@ const TelemetryPage: NextPageWithLayout = () => {
                                 showShortcuts={true}
                                 value={date}
                                 startFrom={dayjs().subtract(30, 'day').toDate()}
-                                maxDate={dayjs().toDate()}
+                                maxDate={dayjs().add(1, 'day').toDate()}
                                 onChange={handleDateChange}
                                 displayFormat="DD/MM/YYYY"
                             />
