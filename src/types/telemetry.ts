@@ -10,8 +10,10 @@ export interface IRealtimeData {
 export interface IData {
     deviceName: string
     sensorName: string
+    sensorType: string
     timestamp: string
     value: string
+    unit: string
 }
 
 export interface ITelemetryData {

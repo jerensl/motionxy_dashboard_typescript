@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { IData } from '../../types/telemetry'
 
 const TelemetryTableBody = (
-    { deviceName, sensorName, timestamp, value }: IData,
+    { deviceName, sensorName, sensorType, timestamp, value, unit }: IData,
     index: number
 ) => {
     const date = dayjs(timestamp)
@@ -15,9 +15,12 @@ const TelemetryTableBody = (
                 {deviceName}
             </th>
             <td className="py-4 px-6">{sensorName}</td>
-            <td className="py-4 px-6">{date.format('HH:mm.ss A')}</td>
+            <td className="py-4 px-6">{sensorType}</td>
             <td className="py-4 px-6">{date.format('DD/MM/YYYY')}</td>
-            <td className="py-4 px-6">{value}</td>
+            <td className="py-4 px-6">{date.format('HH:mm.ss A')}</td>
+            <td className="py-4 px-6">
+                {value} {unit}
+            </td>
         </tr>
     )
 }

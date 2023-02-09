@@ -28,10 +28,13 @@ const Telemetry: React.FC<TelemetryProps> = ({
                             Sensor Name
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            Time
+                            Sensor Type
                         </th>
                         <th scope="col" className="py-3 px-6">
                             Date
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Time
                         </th>
                         <th scope="col" className="py-3 px-6">
                             Value
