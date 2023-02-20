@@ -1,5 +1,6 @@
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useAuth } from '../../context/useAuth'
+import { queryClient } from '../../utils/queryClient'
 import { IDevice, IDevices, IQueryDevice } from '../../types/device'
 import {
     getDevices,
@@ -7,8 +8,6 @@ import {
     deleteDevice,
     getDevice,
 } from '../../utils/device'
-
-export const queryClient = new QueryClient()
 
 export const useDevices = () => {
     const { user } = useAuth()

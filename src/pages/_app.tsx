@@ -5,10 +5,11 @@ import React from 'react'
 import { NextPage } from 'next'
 import { QueryClientProvider } from '@tanstack/react-query'
 import ErrorBoundary from '../components/ErrorBoundary'
-import { queryClient } from '../features/device/query'
+import { createIDBPersister, queryClient } from '../utils/queryClient'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -26,12 +27,15 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <ErrorBoundary>
             <AuthProvider>
                 <ToastContainer />
-                <QueryClientProvider client={reactQueryClient}>
+                <PersistQueryClientProvider
+                    client={reactQueryClient}
+                    persistOptions={{ persister: createIDBPersister() }}
+                >
                     {getLayout(<Component {...pageProps} />)}
                     {process.env.NODE_ENV ? (
                         <ReactQueryDevtools initialIsOpen={false} />
                     ) : null}
-                </QueryClientProvider>
+                </PersistQueryClientProvider>
             </AuthProvider>
         </ErrorBoundary>
     )

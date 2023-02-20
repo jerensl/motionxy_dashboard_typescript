@@ -640,33 +640,54 @@
   dependencies:
     tslib "^2.4.0"
 
-"@tanstack/match-sorter-utils@^8.1.1":
-  version "8.5.14"
-  resolved "https://registry.yarnpkg.com/@tanstack/match-sorter-utils/-/match-sorter-utils-8.5.14.tgz#12efcd536abe491d09521e0242bc4d51442f8a8a"
-  integrity sha512-lVNhzTcOJ2bZ4IU+PeCPQ36vowBHvviJb2ZfdRFX5uhy7G0jM8N34zAMbmS5ZmVH8D2B7oU82OWo0e/5ZFzQrw==
+"@tanstack/match-sorter-utils@^8.7.0":
+  version "8.7.6"
+  resolved "https://registry.yarnpkg.com/@tanstack/match-sorter-utils/-/match-sorter-utils-8.7.6.tgz#ccf54a37447770e0cf0fe49a579c595fd2655b16"
+  integrity sha512-2AMpRiA6QivHOUiBpQAVxjiHAA68Ei23ZUMNaRJrN6omWiSFLoYrxGcT6BXtuzp0Jw4h6HZCmGGIM/gbwebO2A==
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/query-core@4.14.1":
-  version "4.14.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.14.1.tgz#a74c4da03e79a8be07fa5ab2ebc12865146915e2"
-  integrity sha512-mUejKoFDe4NZB8jQJR1uuAl6IwvkUpOD2m8NcuTVPOu0pcxeeFPdrnHaljwOEFPtlqXoiiIIQGYy6whjCMN+iQ==
+"@tanstack/query-core@4.24.9":
+  version "4.24.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.24.9.tgz#52a5981d46f48e85630bcf5a645318e405493ce1"
+  integrity sha512-pZQ2NpdaHzx8gPPkAPh06d6zRkjfonUzILSYBXrdHDapP2eaBbGsx5L4/dMF+fyAglFzQZdDDzZgAykbM20QVw==
 
-"@tanstack/react-query-devtools@^4.14.3":
-  version "4.14.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-4.14.3.tgz#bcb50556aeceeed38e7d3688511550af52c9f857"
-  integrity sha512-yE3GOu7/+0LkeRoklKYrGaw1GRnJZUd5PHvVLbnPj5bDmaw56ric70qT7HKRP6P1ukuTeV2Fb09CuMEI5MN2Jw==
+"@tanstack/query-persist-client-core@4.24.9":
+  version "4.24.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-4.24.9.tgz#c684fab0c8c107706eed8653af18b712e08b6cc5"
+  integrity sha512-/pudjUvzemA5hyb0IQ6E6zMyoqci5izlKhtU5IwJyfjPikDIIcFUKbci6pSw01SJJQDX/+br8NRRmFzUNLi/pQ==
   dependencies:
-    "@tanstack/match-sorter-utils" "^8.1.1"
+    "@tanstack/query-core" "4.24.9"
+
+"@tanstack/query-sync-storage-persister@^4.24.9":
+  version "4.24.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-4.24.9.tgz#3d5c3af69e7da25b00d4b4346a51e1022f98ac72"
+  integrity sha512-2Z/mestkEMl4W5J2Ip5pLdL3IjQ2G040MH4rnsXfAe76I0BTs/xjVzf32imRDvbjTsQhWbkwXr2Dug1PxfM+9A==
+  dependencies:
+    "@tanstack/query-persist-client-core" "4.24.9"
+
+"@tanstack/react-query-devtools@^4.24.9":
+  version "4.24.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-4.24.9.tgz#039281a1ef0ac6ad1fdb6082e95ae013795a736d"
+  integrity sha512-NPsVf3pLMjH/XNTT5iP1q6isEBNE4kWF/IBSbxNUt0tDWK1nS1qgWr9ySTXwimsAHOWMjHkFuUF8VBRmz+axKg==
+  dependencies:
+    "@tanstack/match-sorter-utils" "^8.7.0"
     superjson "^1.10.0"
     use-sync-external-store "^1.2.0"
 
-"@tanstack/react-query@^4.14.1":
-  version "4.14.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.14.1.tgz#336545119b191e2096c394a3f2df2744cdc5e041"
-  integrity sha512-cRgNzigw4GSPwGlTEkXi8hi/xgUnSEt9jCkiC8oAT3PEIdsQ50onZcpXd+JNJcZk2RTh8KM1fGyWz6xYLiY8bg==
+"@tanstack/react-query-persist-client@^4.24.9":
+  version "4.24.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-4.24.9.tgz#f463a4911f5731e70139f6936a2fdba32d63f0c7"
+  integrity sha512-6PMhvN/QJZD/lxmTwFZi8pyuwbDi9Dib4S/bMTDHzHr+3iJEZi9/6ry/IwXSHa/ho3JlujWOm5Td7VJVv8MEyw==
   dependencies:
-    "@tanstack/query-core" "4.14.1"
+    "@tanstack/query-persist-client-core" "4.24.9"
+
+"@tanstack/react-query@^4.24.9":
+  version "4.24.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.24.9.tgz#8ec7e22dd3a858e174a90e81d20c85908f2ea653"
+  integrity sha512-6WLwUT9mrngIinRtcZjrWOUENOuLbWvQpKmU6DZCo2iPQVA+qvv3Ji90Amme4AkUyWQ8ZSSRTnAFq8V2tj2ACg==
+  dependencies:
+    "@tanstack/query-core" "4.24.9"
     use-sync-external-store "^1.2.0"
 
 "@types/js-cookie@^3.0.2":
@@ -1733,6 +1754,13 @@ http-parser-js@>=0.5.1:
   resolved "https://registry.yarnpkg.com/http-parser-js/-/http-parser-js-0.5.8.tgz#af23090d9ac4e24573de6f6aecc9d84a48bf20e3"
   integrity sha512-SGeBX54F94Wgu5RH3X5jsDtf4eHyRogWX1XGT3b4HuW3tQPM4AaBzoUji/4AAJNXCEOWZ5O0DgZmJw1947gD5Q==
 
+idb-keyval@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/idb-keyval/-/idb-keyval-6.2.0.tgz#3af94a3cc0689d6ee0bc9e045d2a3340ea897173"
+  integrity sha512-uw+MIyQn2jl3+hroD7hF8J7PUviBU7BPKWw4f/ISf32D4LoGu98yHjrzWWJDASu9QNrX10tCJqk9YY0ClWm8Ng==
+  dependencies:
+    safari-14-idb-fix "^3.0.0"
+
 idb@7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/idb/-/idb-7.0.1.tgz#d2875b3a2f205d854ee307f6d196f246fea590a7"
@@ -2584,6 +2612,11 @@ run-parallel@^1.1.9:
   integrity sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
   dependencies:
     queue-microtask "^1.2.2"
+
+safari-14-idb-fix@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/safari-14-idb-fix/-/safari-14-idb-fix-3.0.0.tgz#450fc049b996ec7f3fd9ca2f89d32e0761583440"
+  integrity sha512-eBNFLob4PMq8JA1dGyFn6G97q3/WzNtFK4RnzT1fnLq+9RyrGknzYiM/9B12MnKAxuj1IXr7UKYtTNtjyKMBog==
 
 safe-buffer@>=5.1.0:
   version "5.2.1"
