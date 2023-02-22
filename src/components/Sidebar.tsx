@@ -1,17 +1,49 @@
+import clsx from 'clsx'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
-export const Sidebar = () => {
+interface SidebarProps {
+    isMinimize: boolean
+    setMinimize: () => void
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isMinimize, setMinimize }) => {
     return (
-        <div className="min-h-fit flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
-            <div className="fixed flex flex-col left-0 w-64 bg-white h-full border-r-2">
+        <aside className="min-h-fit flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
+            <div
+                className={clsx(
+                    'fixed flex flex-col left-0 w-64 bg-white h-full border-r-2',
+                    { 'w-20': isMinimize }
+                )}
+            >
                 <div className="overflow-y-auto overflow-x-hidden flex-grow">
-                    <div className="flex flex-col py-4 space-y-1">
-                        <div className="text-sm font-light tracking-wide text-gray-500 px-5">
+                    <div className="flex flex-col py-4 space-y-1 ">
+                        <div className="flex justify-between text-sm font-light tracking-wide text-gray-500 px-5">
                             <p className="text-sm font-light tracking-wide text-gray-500">
                                 Menu
                             </p>
                         </div>
+                        <button onClick={setMinimize} className="px-5 py-2">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className={clsx(
+                                    'w-6 h-6 transition ease-in-out',
+                                    {
+                                        'rotate-180': isMinimize,
+                                    }
+                                )}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
+                                />
+                            </svg>
+                        </button>
                         <Link href="/" passHref>
                             <a className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
@@ -30,9 +62,11 @@ export const Sidebar = () => {
                                         ></path>
                                     </svg>
                                 </span>
-                                <p className="ml-2 text-sm tracking-wide truncate">
-                                    Dashboard
-                                </p>
+                                {!isMinimize ? (
+                                    <p className="ml-2 text-sm tracking-wide truncate">
+                                        Dashboard
+                                    </p>
+                                ) : null}
                             </a>
                         </Link>
                         <Link href="/device" passHref>
@@ -53,9 +87,11 @@ export const Sidebar = () => {
                                         />
                                     </svg>
                                 </span>
-                                <p className="ml-2 text-sm tracking-wide truncate">
-                                    Device
-                                </p>
+                                {!isMinimize ? (
+                                    <p className="ml-2 text-sm tracking-wide truncate">
+                                        Device
+                                    </p>
+                                ) : null}
                             </a>
                         </Link>
                         <Link href="/realtime" passHref>
@@ -76,9 +112,11 @@ export const Sidebar = () => {
                                         />
                                     </svg>
                                 </span>
-                                <p className="ml-2 text-sm tracking-wide truncate">
-                                    Realtime
-                                </p>
+                                {!isMinimize ? (
+                                    <p className="ml-2 text-sm tracking-wide truncate">
+                                        Realtime
+                                    </p>
+                                ) : null}
                             </a>
                         </Link>
                         <Link href="/telemetry" passHref>
@@ -99,14 +137,18 @@ export const Sidebar = () => {
                                         />
                                     </svg>
                                 </span>
-                                <p className="ml-2 text-sm tracking-wide truncate">
-                                    Telemetry
-                                </p>
+                                {!isMinimize ? (
+                                    <p className="ml-2 text-sm tracking-wide truncate">
+                                        Telemetry
+                                    </p>
+                                ) : null}
                             </a>
                         </Link>
                     </div>
                 </div>
             </div>
-        </div>
+        </aside>
     )
 }
+
+export { Sidebar }

@@ -21,7 +21,7 @@ const Home: NextPageWithLayout = () => {
                 <link rel="manifest" href="/manifest.json" />
                 <meta name="theme-color" content="#90cdf4" />
             </Head>
-            <div className="grid grid-cols-12 gap-4 ml-80 mt-10 max-w-4xl">
+            <div className="grid grid-cols-12 gap-4 mt-10 max-w-4xl">
                 <h1 className="col-span-full text-3xl font-semibold">
                     Dashboard
                 </h1>

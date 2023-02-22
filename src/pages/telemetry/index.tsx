@@ -106,7 +106,7 @@ const TelemetryPage: NextPageWithLayout = () => {
                 <title>Ovord 2</title>
                 <meta name="description" content="Ovord 2 Dashboard" />
             </Head>
-            <div className="flex flex-col pl-80 max-w-full max-h-full px-10">
+            <div className="flex flex-col max-w-full max-h-full px-10">
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-row gap-8">
                         <ListDevice

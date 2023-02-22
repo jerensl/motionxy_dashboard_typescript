@@ -57,7 +57,7 @@ const Realtime: NextPageWithLayout = () => {
                     <link rel="manifest" href="/manifest.json" />
                     <meta name="theme-color" content="#90cdf4" />
                 </Head>
-                <div className="ml-80 max-w-4xl">Something wrong...</div>
+                <div className="max-w-4xl">Something wrong...</div>
             </>
         )
     }
@@ -70,7 +70,7 @@ const Realtime: NextPageWithLayout = () => {
                 <link rel="manifest" href="/manifest.json" />
                 <meta name="theme-color" content="#90cdf4" />
             </Head>
-            <div className="ml-80 max-w-4xl">
+            <div className="max-w-4xl">
                 <div className="flex flex-row m-auto gap-4">
                     <ListDevice
                         devices={devices}
