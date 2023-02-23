@@ -3,13 +3,15 @@ import type { AppProps } from 'next/app'
 import { AuthProvider } from '../context/useAuth'
 import React from 'react'
 import { NextPage } from 'next'
-import { QueryClientProvider } from '@tanstack/react-query'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { createIDBPersister, queryClient } from '../utils/queryClient'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
+import {
+    PersistQueryClientProvider,
+    persistQueryClient,
+} from '@tanstack/react-query-persist-client'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -17,6 +19,13 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 
 type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout
+}
+
+if (typeof window !== 'undefined') {
+    persistQueryClient({
+        queryClient,
+        persister: createIDBPersister(),
+    })
 }
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
