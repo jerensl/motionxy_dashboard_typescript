@@ -6,7 +6,7 @@ import clsx from 'clsx'
 
 export default function Layout({ children }: { children: React.ReactChild }) {
     const { user, isLoading } = useAuth()
-    const [isMinimizeSidebar, setMinimizeSidebar] = useState<boolean>(false)
+    const [isMinimizeSidebar, setMinimizeSidebar] = useState<boolean>(true)
 
     if (!user || isLoading) {
         return <p>loading</p>
