@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Layout from '../components/Layout'
 import { NextPageWithLayout } from './_app'
 import { useStats } from '../features/stats/query'
+import { Grid } from '../components/Grid'
 
 const Home: NextPageWithLayout = () => {
     const {
@@ -21,11 +22,11 @@ const Home: NextPageWithLayout = () => {
                 <link rel="manifest" href="/manifest.json" />
                 <meta name="theme-color" content="#90cdf4" />
             </Head>
-            <div className="grid grid-cols-12 gap-4 mt-10 max-w-4xl">
+            <Grid className="grid grid-cols-12 gap-4 mt-10 max-w-4xl">
                 <h1 className="col-span-full text-3xl font-semibold">
                     Dashboard
                 </h1>
-                <div className="col-span-4 max-w-xs p-6 text-center bg-white border border-gray-200 rounded-lg shadow-md">
+                <div className="col-span-full md:col-span-4 max-w-xs p-6 text-center bg-white border border-gray-200 rounded-lg shadow-md">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -108,7 +109,7 @@ const Home: NextPageWithLayout = () => {
                         Total Sensors
                     </p>
                 </div>
-            </div>
+            </Grid>
         </>
     )
 }

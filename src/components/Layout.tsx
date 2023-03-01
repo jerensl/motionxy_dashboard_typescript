@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactChild }) {
             />
             <main
                 className={clsx('h-full pl-80', {
-                    'pl-32': isMinimizeSidebar,
+                    'pl-24 md:pl-32': isMinimizeSidebar,
                 })}
             >
                 {children}
