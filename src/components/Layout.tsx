@@ -6,7 +6,7 @@ import clsx from 'clsx'
 
 export default function Layout({ children }: { children: React.ReactChild }) {
     const { user, isLoading } = useAuth()
-    const [isMinimizeSidebar, setMinimizeSidebar] = useState<boolean>(false)
+    const [isMinimizeSidebar, setMinimizeSidebar] = useState<boolean>(true)
 
     if (!user || isLoading) {
         return <p>loading</p>
@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactChild }) {
             />
             <main
                 className={clsx('h-full pl-80', {
-                    'pl-32': isMinimizeSidebar,
+                    'pl-24 md:pl-32': isMinimizeSidebar,
                 })}
             >
                 {children}

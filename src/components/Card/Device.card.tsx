@@ -36,7 +36,7 @@ export const DeviceCard = ({
             <div
                 onMouseEnter={() => setShowCopy(true)}
                 onMouseLeave={() => setShowCopy(false)}
-                className="p-6 grid gap-2 max-w-sm bg-white rounded-lg border border-gray-200 shadow-sm hover:bg-gray-100"
+                className="col-span-full md:col-span-4 p-6 grid gap-2 max-w-sm bg-white rounded-lg border border-gray-200 shadow-sm hover:bg-gray-100"
             >
                 <div className="flex flex-row justify-between">
                     <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">

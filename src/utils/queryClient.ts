@@ -3,6 +3,7 @@ import {
     Persister,
     persistQueryClient,
 } from '@tanstack/react-query-persist-client'
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
 import { QueryClient } from '@tanstack/react-query'
 import { get, set, del } from 'idb-keyval'
 

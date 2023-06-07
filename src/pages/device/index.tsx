@@ -5,6 +5,7 @@ import Layout from '../../components/Layout'
 import NewDeviceModal from '../../components/Modal/NewDevice.modal'
 import { useDevices } from '../../features/device/query'
 import { NextPageWithLayout } from '../_app'
+import { Grid } from '../../components/Grid'
 
 const DevicePage: NextPageWithLayout = () => {
     const [newDeviceOpen, setNewDeviceOpen] = React.useState(false)
@@ -34,7 +35,7 @@ const DevicePage: NextPageWithLayout = () => {
                     isOpen={newDeviceOpen}
                     handleClose={handleNewDeviceClosed}
                 />
-                <div className="grid grid-cols-2 gap-4">
+                <Grid>
                     {devices?.map(
                         ({ deviceName, deviceShortName, token }: any) => (
                             <DeviceCard
@@ -45,7 +46,7 @@ const DevicePage: NextPageWithLayout = () => {
                             />
                         )
                     )}
-                </div>
+                </Grid>
             </div>
         </>
     )
