@@ -1,1 +1,1 @@
-# Ovord 2 Dashboard - Typescript
+# Iot Platform Dashboard - Typescript
