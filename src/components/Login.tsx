@@ -132,10 +132,11 @@ export const Login: React.FC = () => {
                         Submit
                     </button>
                     <p className="text-sm text-right">
-                        <Link href="/reset-password" passHref>
-                            <a className="text-sm font-semibold">
-                                Forgot Password?
-                            </a>
+                        <Link
+                            href="/reset-password"
+                            className="text-sm font-semibold"
+                        >
+                            Forgot Password?
                         </Link>
                     </p>
                 </div>
@@ -143,18 +144,20 @@ export const Login: React.FC = () => {
                 <div className="block">
                     <p className="text-sm text-center">
                         You don`t have an account?{' '}
-                        <Link href="/signup" passHref>
-                            <a className="text-sm text-orange-500 font-semibold">
-                                Register now
-                            </a>
+                        <Link
+                            href="/signup"
+                            className="text-sm text-orange-500 font-semibold"
+                        >
+                            Register now
                         </Link>
                     </p>
                     <p className="text-sm text-center">
                         Resend verification email?{' '}
-                        <Link href="/resend-email-verification" passHref>
-                            <a className="text-sm text-orange-500 font-semibold">
-                                Resend now
-                            </a>
+                        <Link
+                            href="/resend-email-verification"
+                            className="text-sm text-orange-500 font-semibold"
+                        >
+                            Resend now
                         </Link>
                     </p>
                 </div>

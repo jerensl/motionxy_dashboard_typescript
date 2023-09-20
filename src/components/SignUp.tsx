@@ -168,10 +168,11 @@ export const SignUp: React.FC<{}> = () => {
                 <div className="block">
                     <p className="text-sm text-center">
                         Already have an account?{' '}
-                        <Link href="/login" passHref>
-                            <a className="text-sm text-purple-500 font-semibold">
-                                Login now
-                            </a>
+                        <Link
+                            href="/login"
+                            className="text-sm text-purple-500 font-semibold"
+                        >
+                            Login now
                         </Link>
                     </p>
                 </div>

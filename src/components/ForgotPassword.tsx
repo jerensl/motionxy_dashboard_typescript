@@ -107,10 +107,12 @@ export const ForgotPassword: React.FC = () => {
                 <div className="block">
                     <p className="text-sm text-center">
                         Back to login?{' '}
-                        <Link href="/login" passHref>
-                            <a className="text-sm text-purple-500 font-semibold">
-                                Login now
-                            </a>
+                        <Link
+                            href="/login"
+                            passHref
+                            className='className="text-sm text-purple-500 font-semibold"'
+                        >
+                            Login now
                         </Link>
                     </p>
                 </div>
