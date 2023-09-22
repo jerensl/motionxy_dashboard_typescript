@@ -27,7 +27,8 @@
   - [🚀 Future Scope ](#-future-scope-)
   - [🏁 Getting Started ](#-getting-started-)
     - [Prerequisites](#prerequisites)
-    - [Installing](#installing)
+  - [⚒️ Development ](#️-development-)
+      - [`yarn or npm dev`](#yarn-or-npm-dev)
   - [🎈 Usage ](#-usage-)
   - [⛏️ Built With ](#️-built-with-)
   - [✍️ Authors ](#️-authors-)
@@ -35,34 +36,31 @@
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
 
-It is useful to design and follow a specific format when writing a problem statement. While there are several options
-for doing this, the following is a simple and straightforward template often used in Business Analysis to maintain
-focus on defining the problem.
+The Internet of Things (IoT) has revolutionized the way we interact with technology. It has enabled the seamless connection of devices, sensors, and applications, leading to increased efficiency and productivity. However, despite its numerous benefits, there are still challenges associated with finding and using IoT platforms effectively.
 
--   IDEAL: This section is used to describe the desired or “to be” state of the process or product. At large, this section
-    should illustrate what the expected environment would look like once the solution is implemented.
--   REALITY: This section is used to describe the current or “as is” state of the process or product.
--   CONSEQUENCES: This section is used to describe the impacts on the business if the problem is not fixed or improved upon.
-    This includes costs associated with loss of money, time, productivity, competitive advantage, and so forth.
+-   IDEAL: The ideal IoT platform should be easily discoverable and user-friendly. It should have a well-designed user interface and provide comprehensive documentation and support. The platform should also offer a wide range of features and capabilities to meet the diverse needs of users.
+-   REALITY: Currently, there is a lack of IoT platforms that are easy to find and use. Many existing platforms have poor user interfaces, limited documentation, and inadequate support. Users often struggle to find the right platform for their needs and face difficulties in navigating and utilizing the available features.
+-   CONSEQUENCES: The consequences of this problem are significant. Users waste valuable time and resources searching for suitable IoT platforms. They may end up choosing platforms that do not fully meet their requirements, resulting in suboptimal performance and limited functionality. The lack of user-friendly platforms also hinders the adoption of IoT technology, limiting its potential benefits for businesses and individuals.
 
-Following this format will result in a workable document that can be used to understand the problem and elicit
-requirements that will lead to a winning solution.
+To address this problem, it is crucial to develop IoT platforms that are easily discoverable and intuitive to use. Improving the user interface, providing comprehensive documentation, and offering responsive customer support are key steps towards creating a positive user experience. By doing so, businesses can unlock the full potential of IoT technology and drive innovation in various industries.
 
 ## 💡 Idea / Solution <a name = "idea"></a>
 
-This section is used to describe potential solutions.
+1. Improved search and discovery: Develop a comprehensive directory of IoT platforms that is easily searchable and filterable. The directory should include detailed information about each platform, such as features, pricing, user reviews, and ratings. This will help users quickly find the right platform for their needs.
 
-Once the ideal, reality, and consequences sections have been
-completed, and understood, it becomes easier to provide a solution for solving the problem.
+2. Simplified user interface: Design an intuitive and user-friendly interface for IoT platforms that makes it easy for users to navigate and utilize the available features. The interface should be optimized for both desktop and mobile devices.
+
+3. Comprehensive documentation and support: Provide detailed documentation and responsive customer support to help users troubleshoot issues and get the most out of the platform. This will reduce the learning curve associated with using IoT platforms.
+
+4. Customizable solutions: Offer customizable solutions that can be tailored to meet the specific needs of users. This will ensure that users have access to the features and capabilities they need to achieve their goals.
+
+5. Real-time data analytics: Provide real-time data analytics and insights to help businesses make informed decisions based on up-to-date information. This will enable businesses to optimize their operations and improve their bottom line.
+
+By implementing these ideas, businesses can create IoT platforms that are easy to find, intuitive to use, and offer a wide range of features and capabilities. This will help drive innovation in various industries and unlock the full potential of IoT technology.
 
 ## ⛓️ Dependencies / Limitations <a name = "limitations"></a>
 
--   What are the dependencies of your project?
--   Describe each limitation in detailed but concise terms
--   Explain why each limitation exists
--   Provide the reasons why each limitation could not be overcome using the method(s) chosen to acquire.
--   Assess the impact of each limitation in relation to the overall findings and conclusions of your project, and if
-    appropriate, describe how these limitations could point to the need for further research.
+-
 
 ## 🚀 Future Scope <a name = "future_scope"></a>
 
@@ -82,21 +80,13 @@ What things you need to install the software and how to install them.
 Give examples
 ```
 
-### Installing
+## ⚒️ Development <a name="development"></a>
 
-A step by step series of examples that tell you how to get a development env running.
+To get started, you can run this command:
 
-Say what the step will be
+#### `yarn or npm dev`
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
+> Runs in development mode
 
 ## 🎈 Usage <a name="usage"></a>
 
