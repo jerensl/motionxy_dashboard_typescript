@@ -52,7 +52,7 @@ export const DeviceCard = ({
                 </p>
                 <div className="flex">
                     <p className="font-bold text-sm text-gray-700">Token:</p>
-                    <p className="font-normal text-sm ml-1">{token}</p>
+                    <p className="font-normal text-sm ml-1">***************</p>
                     <button
                         className={clsx(
                             'ml-1 p-1 hover:bg-slate-200 block active:bg-slate-300 active:text-green-600',
