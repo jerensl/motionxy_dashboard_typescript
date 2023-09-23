@@ -50,12 +50,19 @@ export const DeviceCard = ({
                 <p className="font-normal text-sm text-gray-700">
                     <b>Short Name: </b> {deviceShortName}
                 </p>
-                <div className="flex">
-                    <p className="font-bold text-sm text-gray-700">Token:</p>
-                    <p className="font-normal text-sm ml-1">***************</p>
+                <div className="flex justify-between">
+                    <div className="flex">
+                        <p className="font-bold text-sm text-gray-700">
+                            Token:
+                        </p>
+
+                        <p className="font-normal text-sm ml-1">
+                            ***************
+                        </p>
+                    </div>
                     <button
                         className={clsx(
-                            'ml-1 p-1 hover:bg-slate-200 block active:bg-slate-300 active:text-green-600',
+                            'p-2 hover:bg-slate-200 block active:bg-slate-300 active:text-green-600',
                             {
                                 hidden: !showCopy,
                             }

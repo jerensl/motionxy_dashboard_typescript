@@ -6,8 +6,8 @@ const ResendEmailVerification: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Ovord 2</title>
-                <meta name="description" content="Ovord 2 Dashboard" />
+                <title>MotionXY</title>
+                <meta name="description" content="MotionXY Dashboard" />
             </Head>
             <EmailVerification />
         </>

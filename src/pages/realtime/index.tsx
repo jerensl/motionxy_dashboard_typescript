@@ -52,8 +52,8 @@ const Realtime: NextPageWithLayout = () => {
         return (
             <>
                 <Head>
-                    <title>Ovord 2</title>
-                    <meta name="description" content="Ovord 2 Dashboard" />
+                    <title>MotionXY</title>
+                    <meta name="description" content="MotionXY Dashboard" />
                     <link rel="manifest" href="/manifest.json" />
                     <meta name="theme-color" content="#90cdf4" />
                 </Head>
@@ -65,8 +65,8 @@ const Realtime: NextPageWithLayout = () => {
     return (
         <>
             <Head>
-                <title>Ovord 2</title>
-                <meta name="description" content="Ovord 2 Dashboard" />
+                <title>MotionXY</title>
+                <meta name="description" content="MotionXY Dashboard" />
                 <link rel="manifest" href="/manifest.json" />
                 <meta name="theme-color" content="#90cdf4" />
             </Head>
