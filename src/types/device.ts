@@ -43,3 +43,8 @@ export interface IQueryTelemetry {
     endDate: string
     page: number
 }
+
+export interface ISelectSensorType {
+    value: string
+    label: string
+}

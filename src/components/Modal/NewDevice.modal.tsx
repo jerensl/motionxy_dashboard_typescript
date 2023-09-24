@@ -1,10 +1,16 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { ErrorMessage, FieldArray, Formik, FormikProps } from 'formik'
+import { FieldArray, Formik, FormikProps } from 'formik'
 import { Fragment } from 'react'
 import { useAddDevice } from '../../features/device/query'
 import * as Yup from 'yup'
 import { INewDevice } from '../../types/device'
 import clsx from 'clsx'
+import { InputFieldWithError } from '../Forms/InputFieldWithError'
+import {
+    SelectFieldWithError,
+    SelectDependendFieldWithError,
+} from '../Forms/SelectFieldWithError'
+import { sensorsType, sensorsUnit } from '../../constant/sensor'
 
 interface SuccessModalProps {
     isOpen: boolean
@@ -106,69 +112,24 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
                                             className="mt-4 space-y-6 flex flex-col"
                                         >
                                             <div>
-                                                <label
-                                                    htmlFor="deviceName"
-                                                    className="text-sm font-medium text-gray-900 block "
-                                                >
-                                                    Device Name
-                                                    <span className="text-red-500">
-                                                        *
-                                                    </span>
-                                                </label>
-                                                {props.errors.deviceName &&
-                                                props.touched.deviceName ? (
-                                                    <span className="text-xs text-red-500">
-                                                        {
-                                                            props.errors
-                                                                .deviceName
-                                                        }
-                                                    </span>
-                                                ) : null}
-                                                <input
-                                                    id="deviceName"
-                                                    name="deviceName"
-                                                    placeholder="Device Name"
-                                                    onChange={
-                                                        props.handleChange
-                                                    }
+                                                <InputFieldWithError
+                                                    props={props}
+                                                    label="Device Name"
+                                                    fieldName="deviceName"
                                                     value={
                                                         props.values.deviceName
                                                     }
-                                                    className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                 />
                                             </div>
                                             <div>
-                                                <label
-                                                    htmlFor="deviceShortName"
-                                                    className="text-sm font-medium text-gray-900 block "
-                                                >
-                                                    Device Short Name
-                                                    <span className="text-red-500">
-                                                        *
-                                                    </span>
-                                                </label>
-                                                {props.errors.deviceShortName &&
-                                                props.touched
-                                                    .deviceShortName ? (
-                                                    <span className="text-xs text-red-500">
-                                                        {
-                                                            props.errors
-                                                                .deviceShortName
-                                                        }
-                                                    </span>
-                                                ) : null}
-                                                <input
-                                                    id="deviceShortName"
-                                                    name="deviceShortName"
-                                                    placeholder="Device Short Name"
-                                                    onChange={
-                                                        props.handleChange
-                                                    }
+                                                <InputFieldWithError
+                                                    props={props}
+                                                    label="Device Short Name"
+                                                    fieldName="deviceShortName"
                                                     value={
                                                         props.values
                                                             .deviceShortName
                                                     }
-                                                    className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                 />
                                             </div>
                                             <Sensors props={props} />
@@ -194,44 +155,6 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
     )
 }
 
-interface ISelectSensorType {
-    value: string
-    label: string
-}
-
-const sensorTypeItem: Record<string, Array<ISelectSensorType>> = {
-    '': [
-        {
-            value: '',
-            label: 'Select a Unit',
-        },
-    ],
-    temperature: [
-        {
-            value: '',
-            label: 'Select a Unit',
-        },
-        {
-            value: 'celsius',
-            label: 'Celsius',
-        },
-    ],
-    energy: [
-        {
-            value: '',
-            label: 'Select a Unit',
-        },
-        {
-            value: 'volt',
-            label: 'Volt',
-        },
-        {
-            value: 'current',
-            label: 'Current',
-        },
-    ],
-}
-
 const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
     return (
         <FieldArray name="sensors">
@@ -242,107 +165,30 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                             <div className="flex flex-row gap-2 mb-2" key={idx}>
                                 <p className="m-auto pt-6">{idx + 1}.</p>
                                 <div className="col">
-                                    <label
-                                        htmlFor={`sensors.${idx}.sensorName`}
-                                        className="text-sm font-medium text-gray-900 block "
-                                    >
-                                        Name
-                                        <span className="text-red-500">*</span>
-                                    </label>
-                                    <ErrorMessage
-                                        className="text-red-500 text-xs"
-                                        component="div"
-                                        name={`sensors.${idx}.sensorName`}
-                                    />
-                                    <input
-                                        id={`sensors.${idx}.sensorName`}
-                                        name={`sensors.${idx}.sensorName`}
-                                        placeholder="Sensor Name"
-                                        onChange={props.handleChange}
+                                    <InputFieldWithError
+                                        props={props}
+                                        label="Sensor Name"
+                                        fieldName={`sensors.${idx}.sensorName`}
                                         value={
                                             props.values.sensors[idx].sensorName
                                         }
-                                        className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     />
                                 </div>
-                                <div className="col">
-                                    <label
-                                        htmlFor={`sensors.${idx}.sensorType`}
-                                        className="text-sm font-medium text-gray-900 block "
-                                    >
-                                        Type
-                                        <span className="text-red-500">*</span>
-                                    </label>
-                                    <ErrorMessage
-                                        className="text-red-500 text-xs"
-                                        component="div"
-                                        name={`sensors.${idx}.sensorType`}
-                                    />
-                                    <select
-                                        name={`sensors.${idx}.sensorType`}
-                                        onChange={props.handleChange}
-                                        value={
-                                            props.values.sensors[idx].sensorType
-                                        }
-                                        onBlur={props.handleBlur}
-                                        className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    >
-                                        <option value="" label="Select a Type">
-                                            Select a Type
-                                        </option>
-                                        <option
-                                            value="temperature"
-                                            label="Temperature"
-                                        >
-                                            Temperature
-                                        </option>
-                                        <option value="energy" label="Energy">
-                                            Energy
-                                        </option>
-                                    </select>
-                                </div>
-                                <div className="col">
-                                    <label
-                                        htmlFor={`sensors.${idx}.sensorUnit`}
-                                        className="text-sm font-medium text-gray-900 block "
-                                    >
-                                        Unit
-                                        <span className="text-red-500">*</span>
-                                    </label>
-                                    <ErrorMessage
-                                        className="text-red-500 text-xs"
-                                        component="div"
-                                        name={`sensors.${idx}.sensorUnit`}
-                                    />
-                                    <select
-                                        name={`sensors.${idx}.sensorUnit`}
-                                        onChange={props.handleChange}
-                                        value={
-                                            props.values.sensors[idx].sensorUnit
-                                        }
-                                        onBlur={props.handleBlur}
-                                        className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    >
-                                        {sensorTypeItem[
-                                            props.values.sensors[idx].sensorType
-                                        ]?.map(
-                                            (
-                                                { value, label }: any,
-                                                index: number
-                                            ) => {
-                                                return (
-                                                    <option
-                                                        key={index}
-                                                        value={value}
-                                                        label={label}
-                                                    >
-                                                        {label}
-                                                    </option>
-                                                )
-                                            }
-                                        )}
-                                    </select>
-                                </div>
+                                <SelectFieldWithError
+                                    idx={idx}
+                                    props={props}
+                                    label="Type"
+                                    fieldName="sensorType"
+                                    options={sensorsType}
+                                />
+                                <SelectDependendFieldWithError
+                                    idx={idx}
+                                    props={props}
+                                    label="Unit"
+                                    fieldName="sensorUnit"
+                                    options={sensorsUnit}
+                                />
+
                                 <div className="col">
                                     <button
                                         type="button"
