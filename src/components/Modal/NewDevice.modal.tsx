@@ -11,6 +11,7 @@ import {
 } from '../Forms/SelectField'
 import { sensorsType, sensorsUnit } from '../../constant/sensor'
 import { NewDeviceValidationSchema } from '../../constant/validation'
+import { IconButton } from '../Button/IconButton'
 
 interface SuccessModalProps {
     isOpen: boolean
@@ -134,7 +135,7 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
     return (
         <FieldArray name="sensors">
             {({ insert, remove, push }) => (
-                <div>
+                <div className="flex flex-col">
                     {props.values.sensors.length > 0 &&
                         props.values.sensors.map((sensor, idx) => (
                             <div className="flex flex-row gap-2 mb-2" key={idx}>
@@ -163,17 +164,14 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                     fieldName="sensorUnit"
                                     options={sensorsUnit}
                                 />
-
-                                <div className="col">
-                                    <button
+                                <div className="col mt-auto">
+                                    <IconButton
                                         type="button"
                                         disabled={idx === 0}
-                                        className={clsx(
-                                            'secondary w-full pt-6 h-full m-auto',
-                                            {
-                                                'text-gray-200': idx === 0,
-                                            }
-                                        )}
+                                        className={clsx('secondary w-full', {
+                                            'text-gray-200': idx === 0,
+                                        })}
+                                        shape="circle"
                                         onClick={() => remove(idx)}
                                     >
                                         <svg
@@ -190,13 +188,14 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                                 d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                                             />
                                         </svg>
-                                    </button>
+                                    </IconButton>
                                 </div>
                             </div>
                         ))}
-                    <button
+                    <IconButton
                         type="button"
-                        className="secondary m-auto flex-grow"
+                        className="secondary flex-grow"
+                        shape="circle"
                         onClick={() =>
                             push({
                                 sensorName: '',
@@ -219,7 +218,7 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                 d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                         </svg>
-                    </button>
+                    </IconButton>
                 </div>
             )}
         </FieldArray>

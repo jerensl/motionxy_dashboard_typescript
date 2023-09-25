@@ -1,6 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { IDevice } from '../../types/device'
 import { useDevice } from '../../features/device/query'
 
 interface DeviceInfoModalProps {
@@ -132,7 +131,6 @@ export default function DeviceInfoModal({
                                         )}
                                     </table>
                                 </div>
-
                                 <div className="mt-4">
                                     <button
                                         type="button"
