@@ -1,15 +1,15 @@
-import React, { InputHTMLAttributes } from 'react'
+import React from 'react'
 import { ErrorMessage, FormikProps } from 'formik'
-import { INewDevice, ISensor } from '../../types/device'
+import { INewDevice } from '../../types/device'
 
-interface InputFieldWithErrorProps {
+interface InputFieldProps {
     props: FormikProps<INewDevice>
     label: string
     fieldName: string
     value: string
 }
 
-export const InputFieldWithError: React.FC<InputFieldWithErrorProps> = ({
+export const InputField: React.FC<InputFieldProps> = ({
     props,
     label,
     fieldName,

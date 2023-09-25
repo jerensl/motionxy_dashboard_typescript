@@ -1,17 +1,17 @@
 import type { Meta, StoryFn } from '@storybook/react'
-import { SelectFieldWithError } from './SelectField'
+import { SelectField } from './SelectField'
 import { Formik } from 'formik'
 import { NewDeviceValidationSchema } from '../../constant/validation'
 import { sensorsType } from '../../constant/sensor'
 
-const meta: Meta<typeof SelectFieldWithError> = {
+const meta: Meta<typeof SelectField> = {
     title: 'components/Forms/SelectField',
-    component: SelectFieldWithError,
+    component: SelectField,
 }
 
 export default meta
 
-export const Basic: StoryFn<typeof SelectFieldWithError> = () => {
+export const Basic: StoryFn<typeof SelectField> = () => {
     return (
         <Formik
             initialValues={{
@@ -30,7 +30,7 @@ export const Basic: StoryFn<typeof SelectFieldWithError> = () => {
         >
             {(props) => (
                 <form>
-                    <SelectFieldWithError
+                    <SelectField
                         idx={0}
                         props={props}
                         label="Type"

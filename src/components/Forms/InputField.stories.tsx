@@ -1,16 +1,16 @@
 import type { Meta, StoryFn } from '@storybook/react'
-import { InputFieldWithError } from './InputField'
+import { InputField } from './InputField'
 import { Formik } from 'formik'
 import { NewDeviceValidationSchema } from '../../constant/validation'
 
-const meta: Meta<typeof InputFieldWithError> = {
+const meta: Meta<typeof InputField> = {
     title: 'components/Forms/InputField',
-    component: InputFieldWithError,
+    component: InputField,
 }
 
 export default meta
 
-export const Basic: StoryFn<typeof InputFieldWithError> = () => {
+export const Basic: StoryFn<typeof InputField> = () => {
     return (
         <Formik
             initialValues={{
@@ -29,7 +29,7 @@ export const Basic: StoryFn<typeof InputFieldWithError> = () => {
         >
             {(props) => (
                 <form>
-                    <InputFieldWithError
+                    <InputField
                         props={props}
                         fieldName="deviceName"
                         label="Device Name"

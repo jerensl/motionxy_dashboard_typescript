@@ -7,7 +7,7 @@ interface ISelectSensorType {
     label: string
 }
 
-interface SelectFieldWithErrorProps {
+interface SelectFieldProps {
     idx: number
     props: FormikProps<INewDevice>
     label: string
@@ -15,7 +15,7 @@ interface SelectFieldWithErrorProps {
     options: Array<ISelectSensorType>
 }
 
-export const SelectFieldWithError: React.FC<SelectFieldWithErrorProps> = ({
+export const SelectField: React.FC<SelectFieldProps> = ({
     idx,
     props,
     label,

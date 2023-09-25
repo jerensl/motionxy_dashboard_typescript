@@ -4,9 +4,9 @@ import { Fragment } from 'react'
 import { useAddDevice } from '../../features/device/query'
 import { INewDevice } from '../../types/device'
 import clsx from 'clsx'
-import { InputFieldWithError } from '../Forms/InputField'
+import { InputField } from '../Forms/InputField'
 import {
-    SelectFieldWithError,
+    SelectField,
     SelectDependendFieldWithError,
 } from '../Forms/SelectField'
 import { sensorsType, sensorsUnit } from '../../constant/sensor'
@@ -87,7 +87,7 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
                                             className="mt-4 space-y-6 flex flex-col"
                                         >
                                             <div>
-                                                <InputFieldWithError
+                                                <InputField
                                                     props={props}
                                                     label="Device Name"
                                                     fieldName="deviceName"
@@ -97,7 +97,7 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
                                                 />
                                             </div>
                                             <div>
-                                                <InputFieldWithError
+                                                <InputField
                                                     props={props}
                                                     label="Device Short Name"
                                                     fieldName="deviceShortName"
@@ -140,7 +140,7 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                             <div className="flex flex-row gap-2 mb-2" key={idx}>
                                 <p className="m-auto pt-6">{idx + 1}.</p>
                                 <div className="col">
-                                    <InputFieldWithError
+                                    <InputField
                                         props={props}
                                         label="Sensor Name"
                                         fieldName={`sensors.${idx}.sensorName`}
@@ -149,7 +149,7 @@ const Sensors = ({ props }: { props: FormikProps<INewDevice> }) => {
                                         }
                                     />
                                 </div>
-                                <SelectFieldWithError
+                                <SelectField
                                     idx={idx}
                                     props={props}
                                     label="Type"
