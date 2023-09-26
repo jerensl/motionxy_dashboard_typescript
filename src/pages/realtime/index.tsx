@@ -9,6 +9,8 @@ import { IDevice } from '../../types/device'
 import { NextPageWithLayout } from '../_app'
 import SensorsDropdown from '../../components/Dropdown/Sensors.dropdown'
 import dayjs from 'dayjs'
+import { Rnd } from 'react-rnd'
+import { MenuDropdown } from '../../components/Dropdown/Menu.dropdown'
 
 const Realtime: NextPageWithLayout = () => {
     const [device, setDevice] = useState<IDevice | null>(null)
@@ -70,32 +72,44 @@ const Realtime: NextPageWithLayout = () => {
                 <link rel="manifest" href="/manifest.json" />
                 <meta name="theme-color" content="#90cdf4" />
             </Head>
-            <div className="max-w-4xl">
-                <div className="flex flex-row m-auto gap-4">
-                    <ListDevice
-                        devices={devices}
-                        device={device}
-                        setDevice={setDevice}
-                    />
-                    <SensorsDropdown
-                        sensor={sensor}
-                        sensors={deviceDetail?.sensors}
-                        handleCheckSensor={handleCheckSensor}
-                    />
-                </div>
-                {!telemetryIsLoading ? (
-                    <Chart
-                        deviceName={telemetry.deviceName}
-                        sensors={telemetry.sensors}
-                        data={telemetry.data}
-                        timestamps={telemetry.timestamps.map((value) =>
-                            dayjs(value).format('h:mm:ss A')
-                        )}
-                    />
-                ) : (
-                    'Select your device and sensor first'
-                )}
-                {/* <button className="fixed z-50 bottom-10 right-8 bg-primary w-14 h-14 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-orange-400 hover:drop-shadow-2xl">
+            <div className="max-w-6xl min-h-[90vh] w-full h-full">
+                <Rnd
+                    bounds="parent"
+                    default={{
+                        x: 0,
+                        y: 0,
+                        width: 450,
+                        height: 450,
+                    }}
+                    className="bg-white p-3 border border-black"
+                >
+                    <MenuDropdown />
+                    <div className="flex flex-row m-auto gap-4">
+                        <ListDevice
+                            devices={devices}
+                            device={device}
+                            setDevice={setDevice}
+                        />
+                        <SensorsDropdown
+                            sensor={sensor}
+                            sensors={deviceDetail?.sensors}
+                            handleCheckSensor={handleCheckSensor}
+                        />
+                    </div>
+                    {!telemetryIsLoading ? (
+                        <Chart
+                            deviceName={telemetry.deviceName}
+                            sensors={telemetry.sensors}
+                            data={telemetry.data}
+                            timestamps={telemetry.timestamps.map((value) =>
+                                dayjs(value).format('h:mm:ss A')
+                            )}
+                        />
+                    ) : (
+                        'Select your device and sensor first'
+                    )}
+                </Rnd>
+                <button className="fixed z-50 bottom-10 right-8 bg-primary w-14 h-14 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-orange-400 hover:drop-shadow-2xl">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -110,7 +124,7 @@ const Realtime: NextPageWithLayout = () => {
                             d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                     </svg>
-                </button> */}
+                </button>
             </div>
         </>
     )
