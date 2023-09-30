@@ -39,7 +39,7 @@ export function useTelemetryRealTime({
     return useQuery({
         queryKey: ['telemetry-real-time', deviceShortName],
         queryFn: () => getTelemetryRealTime({ deviceShortName, sensors }),
-        enabled: deviceShortName !== undefined && sensors.length > 0,
+        enabled: !!deviceShortName && !!(sensors.length > 0),
         refetchInterval: 1000,
     })
 }

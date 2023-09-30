@@ -2,12 +2,10 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import Chart from '../../components/Chart'
 import Layout from '../../components/Layout'
-import ListDevice from '../../components/ListDevice'
 import { useDevice, useDevices } from '../../features/device/query'
 import { useTelemetryRealTime } from '../../features/telemetry'
 import { IDevice } from '../../types/device'
 import { NextPageWithLayout } from '../_app'
-import SensorsDropdown from '../../components/Dropdown/Sensors.dropdown'
 import dayjs from 'dayjs'
 import { Rnd } from 'react-rnd'
 import { MenuDropdown } from '../../components/Dropdown/Menu.dropdown'
@@ -18,12 +16,14 @@ const Realtime: NextPageWithLayout = () => {
     const {
         data: devices,
         isLoading: devicesIsLoading,
+        isSuccess: devicesIsSuccess,
         isError: devicesIsError,
     } = useDevices()
 
     const {
         data: deviceDetail,
         isLoading: deviceIsLoading,
+        isSuccess: deviceIsSuccess,
         isError: deviceIsError,
     } = useDevice({ deviceShortName: device?.deviceShortName ?? '' })
 
@@ -35,16 +35,6 @@ const Realtime: NextPageWithLayout = () => {
         deviceShortName: device?.deviceShortName,
         sensors: sensor,
     })
-
-    const handleCheckSensor = (event: React.ChangeEvent<HTMLInputElement>) => {
-        let updatedList = [...sensor]
-        if (event.target.checked) {
-            updatedList = [...sensor, event.target.value]
-        } else {
-            updatedList.splice(sensor.indexOf(event.target.value), 1)
-        }
-        setSensor(updatedList)
-    }
 
     useEffect(() => {
         setSensor([])
@@ -83,19 +73,15 @@ const Realtime: NextPageWithLayout = () => {
                     }}
                     className="bg-white p-3 border border-black"
                 >
-                    <MenuDropdown />
-                    <div className="flex flex-row m-auto gap-4">
-                        <ListDevice
+                    {devicesIsSuccess && (
+                        <MenuDropdown
                             devices={devices}
-                            device={device}
                             setDevice={setDevice}
+                            setSensor={setSensor}
+                            sensors={deviceDetail?.sensors ?? []}
+                            sensorChecked={sensor}
                         />
-                        <SensorsDropdown
-                            sensor={sensor}
-                            sensors={deviceDetail?.sensors}
-                            handleCheckSensor={handleCheckSensor}
-                        />
-                    </div>
+                    )}
                     {!telemetryIsLoading ? (
                         <Chart
                             deviceName={telemetry.deviceName}
@@ -109,7 +95,7 @@ const Realtime: NextPageWithLayout = () => {
                         'Select your device and sensor first'
                     )}
                 </Rnd>
-                <button className="fixed z-50 bottom-10 right-8 bg-primary w-14 h-14 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-orange-400 hover:drop-shadow-2xl">
+                {/* <button className="fixed z-50 bottom-10 right-8 bg-primary w-14 h-14 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-orange-400 hover:drop-shadow-2xl">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -124,7 +110,7 @@ const Realtime: NextPageWithLayout = () => {
                             d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                     </svg>
-                </button>
+                </button> */}
             </div>
         </>
     )

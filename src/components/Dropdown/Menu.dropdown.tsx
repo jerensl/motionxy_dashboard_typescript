@@ -1,7 +1,23 @@
 import clsx from 'clsx'
 import React, { useEffect, useRef, useState } from 'react'
+import { SubMenuDropdown } from './SubMenu.dropdown'
+import { IDevice, ISensor } from '../../types/device'
 
-export const MenuDropdown = () => {
+interface MenuDropdownProps {
+    devices: Array<Omit<IDevice, 'sensors'>>
+    sensors: Array<ISensor>
+    sensorChecked: Array<string>
+    setDevice: React.Dispatch<React.SetStateAction<IDevice | null>>
+    setSensor: React.Dispatch<React.SetStateAction<Array<string>>>
+}
+
+export const MenuDropdown: React.FC<MenuDropdownProps> = ({
+    devices,
+    sensors,
+    sensorChecked,
+    setDevice,
+    setSensor,
+}) => {
     const dropdownRef = useRef<HTMLDivElement | null>(null)
     const [isActive, setIsActive] = useState(false)
 
@@ -26,9 +42,8 @@ export const MenuDropdown = () => {
 
     return (
         <div className="flex justify-between" ref={dropdownRef}>
-            <div></div>
             <button
-                className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="ml-auto inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 onClick={() => setIsActive(!isActive)}
             >
                 <svg
@@ -44,49 +59,30 @@ export const MenuDropdown = () => {
 
             <div
                 className={clsx(
-                    'z-100 absolute top-14 right-3 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600',
+                    'absolute top-14 right-0 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600',
                     {
                         hidden: !isActive,
                     }
                 )}
             >
                 <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    className="flex flex-col py-2 text-sm text-gray-700 dark:text-gray-200"
                     aria-labelledby="dropdownMenuIconButton"
                 >
-                    <li>
-                        <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            Earnings
-                        </a>
-                    </li>
+                    <SubMenuDropdown
+                        items={devices}
+                        setStateT={setDevice}
+                        name="Devices"
+                        key={'devices'}
+                    />
+                    <SubMenuDropdown
+                        items={sensors}
+                        setStateT={setSensor}
+                        name="Sensors"
+                        key={'sensors'}
+                        currentState={sensorChecked}
+                    />
                 </ul>
-                <div className="py-2">
-                    <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                        Separated link
-                    </a>
-                </div>
             </div>
         </div>
     )
