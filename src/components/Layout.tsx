@@ -15,7 +15,6 @@ export default function Layout({ children }: { children: React.ReactChild }) {
     return (
         <div className="min-h-screen bg-slate-50">
             <Navbar />
-
             <Sidebar
                 isMinimize={isMinimizeSidebar}
                 setMinimize={() => setMinimizeSidebar(!isMinimizeSidebar)}

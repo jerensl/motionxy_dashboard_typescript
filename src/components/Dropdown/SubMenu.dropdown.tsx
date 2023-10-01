@@ -61,7 +61,6 @@ const SubMenuDropdown = memo(function SubMenuDropdown<
         }
         setStateT(updatedList)
     }
-    console.log(items)
 
     return (
         <>
@@ -69,22 +68,24 @@ const SubMenuDropdown = memo(function SubMenuDropdown<
                 className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 onClick={() => setShowDropdown((prev) => !prev)}
                 onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
             >
                 {name}
             </button>
             <div
                 className={clsx(
-                    'absolute top-0 left-[-180px] z-10 w-48 bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600',
+                    'absolute top-0 left-[-145px] z-10 w-36 bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600',
                     {
                         hidden: !showDropdown,
                     }
                 )}
+                onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 ref={ref}
             >
                 <ul
                     className={clsx(
-                        'p-3 space-y-1 text-sm text-gray-700 bg-white dark:text-gray-200'
+                        'space-y-1 text-sm text-gray-700 bg-white dark:text-gray-200'
                     )}
                 >
                     {items?.map((item, idx) => (
@@ -113,7 +114,7 @@ const SubMenuDropdown = memo(function SubMenuDropdown<
                             )}
                             {item?.sensorName && (
                                 <li>
-                                    <div className="flex items-center">
+                                    <div className="flex items-center p-2 rounded">
                                         <input
                                             id={item.sensorName}
                                             value={item.sensorName}

@@ -59,7 +59,7 @@ export const MenuDropdown: React.FC<MenuDropdownProps> = ({
 
             <div
                 className={clsx(
-                    'absolute top-14 right-0 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600',
+                    'absolute top-14 right-0 bg-white divide-y divide-gray-100 rounded-lg shadow w-36 dark:bg-gray-700 dark:divide-gray-600',
                     {
                         hidden: !isActive,
                     }
