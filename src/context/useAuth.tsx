@@ -2,7 +2,7 @@ import * as React from 'react'
 import { User, onIdTokenChanged } from 'firebase/auth'
 import auth from '../utils/firebase'
 import cookies from 'js-cookie'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 
 const AuthContext = React.createContext<{
     user: User | null
@@ -15,6 +15,7 @@ const AuthContext = React.createContext<{
 export function AuthProvider({ children }: any) {
     const [user, setUser] = React.useState<User | null>(null)
     const [isLoading, setIsLoading] = React.useState(true)
+    const router = useRouter()
 
     React.useEffect(() => {
         const userFromCookie = cookies.get('auth')
@@ -26,7 +27,9 @@ export function AuthProvider({ children }: any) {
             if (user && user.emailVerified) {
                 setUser(user)
                 cookies.set('auth', JSON.stringify(user), { expires: 1 / 24 })
-                Router.push('/')
+                if (router.pathname === '/login') {
+                    Router.push('/')
+                }
             } else {
                 setUser(null)
                 cookies.remove('auth')
