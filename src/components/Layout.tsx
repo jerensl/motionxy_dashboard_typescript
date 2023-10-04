@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { useAuth } from '../context/useAuth'
 import { Navbar } from './Navbar'
 import { Sidebar } from './Sidebar'
 import clsx from 'clsx'
 
-export default function Layout({ children }: { children: React.ReactChild }) {
+export default function Layout({ children }: { children: ReactNode }) {
     const { user, isLoading } = useAuth()
     const [isMinimizeSidebar, setMinimizeSidebar] = useState<boolean>(true)
 

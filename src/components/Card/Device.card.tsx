@@ -55,7 +55,6 @@ export const DeviceCard = ({
                         <p className="font-bold text-sm text-gray-700">
                             Token:
                         </p>
-
                         <p className="font-normal text-sm ml-1">
                             ***************
                         </p>

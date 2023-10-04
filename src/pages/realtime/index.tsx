@@ -7,8 +7,8 @@ import { useTelemetryRealTime } from '../../features/telemetry'
 import { IDevice } from '../../types/device'
 import { NextPageWithLayout } from '../_app'
 import dayjs from 'dayjs'
-import { Rnd } from 'react-rnd'
 import { MenuDropdown } from '../../components/Dropdown/Menu.dropdown'
+import { VisualizationCard } from '../../components/Card/Visualization.card'
 
 const Realtime: NextPageWithLayout = () => {
     const [device, setDevice] = useState<IDevice | null>(null)
@@ -63,25 +63,22 @@ const Realtime: NextPageWithLayout = () => {
                 <meta name="theme-color" content="#90cdf4" />
             </Head>
             <div className="max-w-6xl min-h-[90vh] w-full h-full">
-                <Rnd
-                    bounds="parent"
-                    default={{
-                        x: 0,
-                        y: 0,
-                        width: 450,
-                        height: 450,
-                    }}
-                    className="bg-white p-3 border border-black"
+                <VisualizationCard
+                    title={
+                        <>
+                            <h2>{telemetry?.deviceName}</h2>
+                            {devicesIsSuccess && (
+                                <MenuDropdown
+                                    devices={devices}
+                                    setDevice={setDevice}
+                                    setSensor={setSensor}
+                                    sensors={deviceDetail?.sensors ?? []}
+                                    sensorChecked={sensor}
+                                />
+                            )}
+                        </>
+                    }
                 >
-                    {devicesIsSuccess && (
-                        <MenuDropdown
-                            devices={devices}
-                            setDevice={setDevice}
-                            setSensor={setSensor}
-                            sensors={deviceDetail?.sensors ?? []}
-                            sensorChecked={sensor}
-                        />
-                    )}
                     {!telemetryIsLoading ? (
                         <Chart
                             deviceName={telemetry.deviceName}
@@ -98,7 +95,7 @@ const Realtime: NextPageWithLayout = () => {
                             </div>
                         </div>
                     )}
-                </Rnd>
+                </VisualizationCard>
                 {/* <button className="fixed z-50 bottom-10 right-8 bg-primary w-14 h-14 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-orange-400 hover:drop-shadow-2xl">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -68,10 +68,6 @@ const Chart: React.FC<ChartProps> = ({
                     legend: {
                         position: 'top' as const,
                     },
-                    title: {
-                        display: true,
-                        text: deviceName,
-                    },
                 },
             }}
             data={{
