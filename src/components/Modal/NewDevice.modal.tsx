@@ -12,6 +12,7 @@ import {
 import { sensorsType, sensorsUnit } from '../../constant/sensor'
 import { NewDeviceValidationSchema } from '../../constant/validation'
 import { IconButton } from '../Button/IconButton'
+import Container from './Container'
 
 interface SuccessModalProps {
     isOpen: boolean
@@ -23,109 +24,118 @@ export const NewDeviceModal = ({ isOpen, handleClose }: SuccessModalProps) => {
 
     return (
         <Transition appear show={isOpen} as={Fragment}>
-            <Dialog as="div" className="relative z-50" onClose={handleClose}>
-                <Transition.Child
-                    as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                >
-                    <div className="fixed inset-0 bg-black bg-opacity-25" />
-                </Transition.Child>
+            <Dialog as="div" className="relative" onClose={handleClose}>
+                <Container>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    </Transition.Child>
 
-                <div className="fixed inset-0 overflow-y-auto">
-                    <div className="flex min-h-full items-center justify-center p-4 text-center">
-                        <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0 scale-95"
-                            enterTo="opacity-100 scale-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100 scale-100"
-                            leaveTo="opacity-0 scale-95"
-                        >
-                            <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                                <Dialog.Title
-                                    as="h3"
-                                    className="text-lg text-center font-medium leading-6 text-gray-900"
-                                >
-                                    New Device
-                                </Dialog.Title>
-                                <Formik
-                                    initialValues={{
-                                        deviceName: '',
-                                        deviceShortName: '',
-                                        sensors: [
-                                            {
-                                                sensorName: '',
-                                                sensorType: '',
-                                                sensorUnit: '',
-                                            },
-                                        ],
-                                    }}
-                                    validationSchema={NewDeviceValidationSchema}
-                                    onSubmit={async (values, { resetForm }) => {
-                                        const deviceShortName =
-                                            values.deviceShortName
-                                                .trim()
-                                                .replace(/ /g, '')
-                                        mutation.mutate({
-                                            deviceName: values.deviceName,
-                                            deviceShortName: deviceShortName,
-                                            sensors: values.sensors,
-                                        })
+                    <div className="fixed inset-0 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                    <Dialog.Title
+                                        as="h3"
+                                        className="text-lg text-center font-medium leading-6 text-gray-900"
+                                    >
+                                        New Device
+                                    </Dialog.Title>
+                                    <Formik
+                                        initialValues={{
+                                            deviceName: '',
+                                            deviceShortName: '',
+                                            sensors: [
+                                                {
+                                                    sensorName: '',
+                                                    sensorType: '',
+                                                    sensorUnit: '',
+                                                },
+                                            ],
+                                        }}
+                                        validationSchema={
+                                            NewDeviceValidationSchema
+                                        }
+                                        onSubmit={async (
+                                            values,
+                                            { resetForm }
+                                        ) => {
+                                            const deviceShortName =
+                                                values.deviceShortName
+                                                    .trim()
+                                                    .replace(/ /g, '')
+                                            mutation.mutate({
+                                                deviceName: values.deviceName,
+                                                deviceShortName:
+                                                    deviceShortName,
+                                                sensors: values.sensors,
+                                            })
 
-                                        handleClose()
-                                        resetForm()
-                                    }}
-                                >
-                                    {(props) => (
-                                        <form
-                                            onSubmit={props.handleSubmit}
-                                            className="mt-4 space-y-6 flex flex-col"
-                                        >
-                                            <div>
-                                                <InputField
-                                                    props={props}
-                                                    label="Device Name"
-                                                    fieldName="deviceName"
-                                                    value={
-                                                        props.values.deviceName
-                                                    }
-                                                />
-                                            </div>
-                                            <div>
-                                                <InputField
-                                                    props={props}
-                                                    label="Device Short Name"
-                                                    fieldName="deviceShortName"
-                                                    value={
-                                                        props.values
-                                                            .deviceShortName
-                                                    }
-                                                />
-                                            </div>
-                                            <Sensors props={props} />
-                                            <button
-                                                disabled={
-                                                    !props.isValidating &&
-                                                    props.isSubmitting
-                                                }
-                                                type="submit"
-                                                className="inline-flex justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                                            handleClose()
+                                            resetForm()
+                                        }}
+                                    >
+                                        {(props) => (
+                                            <form
+                                                onSubmit={props.handleSubmit}
+                                                className="mt-4 space-y-6 flex flex-col"
                                             >
-                                                Submit
-                                            </button>
-                                        </form>
-                                    )}
-                                </Formik>
-                            </Dialog.Panel>
-                        </Transition.Child>
+                                                <div>
+                                                    <InputField
+                                                        props={props}
+                                                        label="Device Name"
+                                                        fieldName="deviceName"
+                                                        value={
+                                                            props.values
+                                                                .deviceName
+                                                        }
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <InputField
+                                                        props={props}
+                                                        label="Device Short Name"
+                                                        fieldName="deviceShortName"
+                                                        value={
+                                                            props.values
+                                                                .deviceShortName
+                                                        }
+                                                    />
+                                                </div>
+                                                <Sensors props={props} />
+                                                <button
+                                                    disabled={
+                                                        !props.isValidating &&
+                                                        props.isSubmitting
+                                                    }
+                                                    type="submit"
+                                                    className="inline-flex justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                                                >
+                                                    Submit
+                                                </button>
+                                            </form>
+                                        )}
+                                    </Formik>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
                     </div>
-                </div>
+                </Container>
             </Dialog>
         </Transition>
     )
