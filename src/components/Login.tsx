@@ -7,6 +7,7 @@ import clsx from 'clsx'
 import { IUser } from '../types/user'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 const LoginValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -21,6 +22,7 @@ const LoginValidationSchema = Yup.object().shape({
 })
 
 export const Login: React.FC = () => {
+    const router = useRouter()
     const formik = useFormik<IUser>({
         initialValues: {
             email: '',
@@ -38,6 +40,8 @@ export const Login: React.FC = () => {
                         toast.error('Please verified the email!', {
                             position: toast.POSITION.BOTTOM_RIGHT,
                         })
+                    } else {
+                        router.push('/login')
                     }
                 })
                 .catch((e) =>

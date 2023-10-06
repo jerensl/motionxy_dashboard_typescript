@@ -14,6 +14,7 @@ const Home: NextPageWithLayout = () => {
     if (statsIsError) {
         return <p>Error...</p>
     }
+
     return (
         <>
             <Head>

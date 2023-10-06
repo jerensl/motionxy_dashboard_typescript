@@ -18,7 +18,7 @@ export const MenuDropdown: React.FC<MenuDropdownProps> = ({
     setDevice,
     setSensor,
 }) => {
-    const dropdownRef = useRef<HTMLDivElement | null>(null)
+    const dropdownRef = useRef<HTMLDivElement>(null)
     const [isActive, setIsActive] = useState(false)
 
     useEffect(() => {

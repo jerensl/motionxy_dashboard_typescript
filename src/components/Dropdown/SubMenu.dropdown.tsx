@@ -8,7 +8,7 @@ interface SubMenuDropdownProps<T> {
     currentState?: Array<string>
 }
 
-const SubMenuDropdown = memo(function SubMenuDropdown<
+const SubMenuDropdown = function SubMenuDropdown<
     T extends Record<string, any>
 >({ name, items, setStateT, currentState }: SubMenuDropdownProps<T>) {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -91,7 +91,7 @@ const SubMenuDropdown = memo(function SubMenuDropdown<
                     {items?.map((item, idx) => (
                         <>
                             {item?.deviceShortName && (
-                                <li>
+                                <li key={idx}>
                                     <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600r">
                                         <input
                                             id={item.deviceShortName}
@@ -140,6 +140,6 @@ const SubMenuDropdown = memo(function SubMenuDropdown<
             </div>
         </>
     )
-})
+}
 
 export { SubMenuDropdown }

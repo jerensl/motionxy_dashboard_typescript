@@ -1,11 +1,13 @@
+import React from 'react'
 import { Menu } from '@headlessui/react'
 import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
-import React from 'react'
 import { useAuth } from '../context/useAuth'
 import auth from '../utils/firebase'
+import clsx from 'clsx'
+import Container from './Modal/Container'
 
-export const Profile = () => {
+export const Profile: React.FC = () => {
     const router = useRouter()
     const { user } = useAuth()
 
@@ -39,7 +41,6 @@ export const Profile = () => {
                         </g>
                     </svg>
                 </div>
-
                 <div className="block flex-grow-0 flex-shrink-0 h-10 w-12 pl-5">
                     <svg
                         viewBox="0 0 32 32"
@@ -58,34 +59,40 @@ export const Profile = () => {
                     </svg>
                 </div>
             </Menu.Button>
-            <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="px-1 py-1 ">
-                    <Menu.Item disabled>
-                        <p className="text-sm px-2 py-2">
-                            Welcome
-                            <span className="font-bold ml-1">
-                                {user?.displayName?.split(' ')[0]}
-                            </span>
-                        </p>
-                    </Menu.Item>
-                    <Menu.Item>
-                        {({ active }) => (
-                            <button
-                                onClick={() =>
-                                    signOut(auth).then(() =>
-                                        router.push('/login')
-                                    )
-                                }
-                                className={`${
-                                    active && 'bg-primary'
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                            >
-                                Logout
-                            </button>
-                        )}
-                    </Menu.Item>
-                </div>
-            </Menu.Items>
+            <Container>
+                <Menu.Items className="absolute top-12 right-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="px-1 py-1 ">
+                        <Menu.Item disabled>
+                            <p className="text-sm px-2 py-2">
+                                Welcome
+                                <span className="font-bold ml-1">
+                                    {user?.displayName?.split(' ')[0]}
+                                </span>
+                            </p>
+                        </Menu.Item>
+                        <Menu.Item>
+                            {({ active }) => (
+                                <button
+                                    onClick={() =>
+                                        signOut(auth).then(() =>
+                                            router.push('/login')
+                                        )
+                                    }
+                                    className={clsx(
+                                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                        {
+                                            'bg-primary': active,
+                                        }
+                                    )}
+                                    title="logout-button"
+                                >
+                                    Logout
+                                </button>
+                            )}
+                        </Menu.Item>
+                    </div>
+                </Menu.Items>
+            </Container>
         </Menu>
     )
 }
