@@ -1,6 +1,5 @@
 import React from 'react'
 import { Profile } from './Profile'
-import { NavMenuDropdown } from './Dropdown/NavMenu.dropdown'
 
 export const Navbar: React.FC = () => {
     return (

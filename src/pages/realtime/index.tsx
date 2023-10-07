@@ -11,7 +11,7 @@ import { MenuDropdown } from '../../components/Dropdown/Menu.dropdown'
 import { VisualizationCard } from '../../components/Card/Visualization.card'
 
 const Realtime: NextPageWithLayout = () => {
-    const [device, setDevice] = useState<IDevice | null>(null)
+    const [device, setDevice] = useState<string>('')
     const [sensor, setSensor] = useState<Array<string>>([])
     const {
         data: devices,
@@ -25,14 +25,14 @@ const Realtime: NextPageWithLayout = () => {
         isLoading: deviceIsLoading,
         isSuccess: deviceIsSuccess,
         isError: deviceIsError,
-    } = useDevice({ deviceShortName: device?.deviceShortName ?? '' })
+    } = useDevice({ deviceShortName: device })
 
     const {
         data: telemetry,
         isLoading: telemetryIsLoading,
         isError: telemetryIsError,
     } = useTelemetryRealTime({
-        deviceShortName: device?.deviceShortName,
+        deviceShortName: device,
         sensors: sensor,
     })
 

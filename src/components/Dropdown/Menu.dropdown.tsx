@@ -1,13 +1,14 @@
 import clsx from 'clsx'
 import React, { useEffect, useRef, useState } from 'react'
-import { SubMenuDropdown } from './SubMenu.dropdown'
 import { IDevice, ISensor } from '../../types/device'
+import { RadioInput } from '../Input/Radio.input'
+import { CheckboxInput } from '../Input/Checkbox.input'
 
 interface MenuDropdownProps {
     devices: Array<Omit<IDevice, 'sensors'>>
     sensors: Array<ISensor>
     sensorChecked: Array<string>
-    setDevice: React.Dispatch<React.SetStateAction<IDevice | null>>
+    setDevice: React.Dispatch<React.SetStateAction<string>>
     setSensor: React.Dispatch<React.SetStateAction<Array<string>>>
 }
 
@@ -43,7 +44,7 @@ export const MenuDropdown: React.FC<MenuDropdownProps> = ({
     return (
         <div className="flex justify-between" ref={dropdownRef}>
             <button
-                className="ml-auto inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="ml-auto inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50"
                 onClick={() => setIsActive(!isActive)}
             >
                 <svg
@@ -56,31 +57,31 @@ export const MenuDropdown: React.FC<MenuDropdownProps> = ({
                     <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                 </svg>
             </button>
-
             <div
                 className={clsx(
-                    'absolute top-14 right-0 bg-white divide-y divide-gray-100 rounded-lg shadow w-36 dark:bg-gray-700 dark:divide-gray-600',
+                    'absolute top-14 right-0 bg-white rounded-lg shadow w-36',
                     {
                         hidden: !isActive,
                     }
                 )}
             >
                 <ul
-                    className="flex flex-col py-2 text-sm text-gray-700 dark:text-gray-200"
+                    className="flex flex-col py-2 text-sm text-gray-700 rounded-lg shadow"
                     aria-labelledby="dropdownMenuIconButton"
                 >
-                    <SubMenuDropdown
-                        items={devices}
-                        setStateT={setDevice}
+                    <RadioInput
                         name="Devices"
-                        key={'devices'}
+                        items={devices.map(({ deviceShortName }) => ({
+                            name: deviceShortName,
+                        }))}
+                        setStateT={setDevice}
                     />
-                    <SubMenuDropdown
-                        items={sensors}
-                        setStateT={setSensor}
+                    <CheckboxInput
                         name="Sensors"
-                        key={'sensors'}
-                        currentState={sensorChecked}
+                        labels={sensors.map(({ sensorName }) => sensorName)}
+                        values={sensors.map(({ sensorName }) => sensorName)}
+                        setStateT={setSensor}
+                        checkedItems={sensorChecked}
                     />
                 </ul>
             </div>
