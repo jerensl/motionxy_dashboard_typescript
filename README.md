@@ -13,26 +13,26 @@
 
 ---
 
-<p align="center"> MotionXY is an IoT Platform for data vizualisation.
+<p align="center"> MotionXY is an IoT Platform for data visualization.
     <br> 
 </p>
 
 ## 📝 Table of Contents
 
-- [Iot Platform Dashboard - Typescript](#iot-platform-dashboard---typescript)
-  - [📝 Table of Contents](#-table-of-contents)
-  - [🧐 Problem Statement ](#-problem-statement-)
-  - [💡 Idea / Solution ](#-idea--solution-)
-  - [⛓️ Dependencies / Limitations ](#️-dependencies--limitations-)
-  - [🚀 Future Scope ](#-future-scope-)
-  - [🏁 Getting Started ](#-getting-started-)
-    - [Prerequisites](#prerequisites)
-  - [⚒️ Development ](#️-development-)
-      - [`yarn or npm dev`](#yarn-or-npm-dev)
-  - [🎈 Usage ](#-usage-)
-  - [⛏️ Built With ](#️-built-with-)
-  - [✍️ Authors ](#️-authors-)
-  - [🎉 Acknowledgments ](#-acknowledgments-)
+-   [Iot Platform Dashboard - Typescript](#iot-platform-dashboard---typescript)
+    -   [📝 Table of Contents](#-table-of-contents)
+    -   [🧐 Problem Statement ](#-problem-statement-)
+    -   [💡 Idea / Solution ](#-idea--solution-)
+    -   [⛓️ Dependencies / Limitations ](#️-dependencies--limitations-)
+    -   [🚀 Future Scope ](#-future-scope-)
+    -   [🏁 Getting Started ](#-getting-started-)
+        -   [Prerequisites](#prerequisites)
+    -   [⚒️ Development ](#️-development-)
+        -   [`yarn or npm dev`](#yarn-or-npm-dev)
+    -   [🎈 Usage ](#-usage-)
+    -   [⛏️ Built With ](#️-built-with-)
+    -   [✍️ Authors ](#️-authors-)
+    -   [🎉 Acknowledgments ](#-acknowledgments-)
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
 
