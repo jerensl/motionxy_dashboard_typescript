@@ -1,6 +1,6 @@
 # Iot Platform Dashboard - Typescript
 
-<h3 align="center"MotionXY</h3>
+<h3 align="center"MotionXY - IoT Platform</h3>
 
 <div align="center">
 
