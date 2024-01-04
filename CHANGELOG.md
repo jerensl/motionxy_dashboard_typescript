@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.0](https://github.com/jerensl/motionxy_dashboard_typescript/compare/v1.0.0...v1.1.0) (2023-12-18)
+
+
+### Features
+
+* **card-data:** add card data and have minimum size on the card ([8df19b4](https://github.com/jerensl/motionxy_dashboard_typescript/commit/8df19b406ebd975d2bcb486affd94637b5be9a58))
+* **costum-error:** add costum error pages ([5221e10](https://github.com/jerensl/motionxy_dashboard_typescript/commit/5221e1060fa5aff4118e52f1ec61e12a68f9c8d7))
+* **drag&drop:** add drag and drop and refactor the toggle ([937141c](https://github.com/jerensl/motionxy_dashboard_typescript/commit/937141c00c24673d08b3aaeea973fa69006aa4bc))
+* **drag&drop:** add drag and drop on data visualization ([907f524](https://github.com/jerensl/motionxy_dashboard_typescript/commit/907f524d368d860a012498829e5cdec998c2534a))
+
+
+### Bug Fixes
+
+* **profile-logout:** add react portal for modal ([ad73460](https://github.com/jerensl/motionxy_dashboard_typescript/commit/ad73460506d81bd574224c14259e0ebc7730c305))
+
 ## 1.0.0 (2023-09-22)
 
 
