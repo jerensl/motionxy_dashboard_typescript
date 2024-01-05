@@ -39,7 +39,7 @@ export function AuthProvider({ children }: any) {
 
         setIsLoading(false)
         return () => unsubscribe()
-    }, [])
+    }, [router.pathname])
 
     React.useEffect(() => {
         const intervalID = setInterval(async () => {
