@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Docs Overview/Commit Structure" />
+
+# Spesification
+
+For this project, we will using [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary).
+
+The commit message should be structured as follows:
+
+```bash
+<type>[optional scope]: <description>
+[optional body]
+[optional footer(s)]
+```
+
+For example:
+
+```bash
+git commit -m "feat(feature-name): allow provided message to describe feature release"
+```
+
+Commit message with ! to draw attention to breaking change
+
+```bash
+feat!: send an email to the customer when a product is shipped
+```
+
+The commit types are used to categorize the changes made in a commit. They help to understand the nature of the changes and their impact on the codebase. Here is a brief description of each commit type:
+
+-   build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm).
+-   chore: Changes that don’t modify source or test files. Examples include changes to the build process, auxiliary tools, and libraries.
+-   ci: Changes to the continuous integration (CI) configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs).
+-   docs: Documentation only changes.
+-   feat: A new feature.
+-   fix: A bug fix.
+-   perf: A code change that improves performance.
+-   refactor: A code change that neither fixes a bug nor adds a feature.
+-   revert: Reverts a previous commit.
+-   style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc).
+-   test: Adding missing tests or correcting existing tests.
+-   translation: Changes related to translation.
+-   security: Changes related to security.
+-   changeset: Changes related to changeset.
+
+These commit types are used in conventional commits, which is a specification for adding human and machine-readable meaning to commit messages. By following this specification, it becomes easier to understand the purpose of each commit and to generate changelogs automatically.

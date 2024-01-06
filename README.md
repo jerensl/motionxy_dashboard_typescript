@@ -83,7 +83,7 @@ What things you need to install the and know about.
 
 ### Environment Variables <a name = "environment_variables"></a>
 
-For environment variable, you can see on [.env.example](https://github.com/jerensl/motionxy_dashboard_typescript/contributors/.env.example) for the list of enviroment variable needed on this project. On how NextJS loaded the enviroment variable, you can refer to this [docs](https://github.com/jerensl/motionxy_dashboard_typescript/contributors).
+For environment variable, you can see on [.env.example](./.env.example) for the list of enviroment variable needed on this project. On how NextJS loaded the enviroment variable, you can refer to this [docs](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#default-environment-variables).
 
 ### Installing dependencies <a name = "installing_dependencies"></a>
 

@@ -31,7 +31,6 @@ const Configuration: UserConfig = {
             2,
             'always',
             [
-                'blog',
                 'build',
                 'chore',
                 'ci',
