@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.1](https://github.com/jerensl/motionxy_dashboard_typescript/compare/v1.1.0...v1.1.1) (2024-01-06)
+
+
+### Bug Fixes
+
+* **husky-commit-lint:** specify on package json using node js 18 above ([4ca43e0](https://github.com/jerensl/motionxy_dashboard_typescript/commit/4ca43e082f72e3fb656a02572b852c6f9576ff52))
+* **husky-commit-lint:** upgrade nodejs to version 18 ([f200711](https://github.com/jerensl/motionxy_dashboard_typescript/commit/f200711908382c5ecb7d722985f2a969df92b8a5))
+* **storybook-ci:** add cache to github action ([105856b](https://github.com/jerensl/motionxy_dashboard_typescript/commit/105856b1ca0dc4149a1f0b88402aa4e66a777c20))
+* **storybook-ci:** add gh action permision ([518ed8b](https://github.com/jerensl/motionxy_dashboard_typescript/commit/518ed8b329fd3fece6396b2e17c4b23327a573a8))
+* **storybook-ci:** add gh action permision ([ec4c394](https://github.com/jerensl/motionxy_dashboard_typescript/commit/ec4c39496e66c41de2e53303bb196274888552f2))
+* **storybook-ci:** change package.json ([a0e9d42](https://github.com/jerensl/motionxy_dashboard_typescript/commit/a0e9d425b750e03c4e044b747c42e83f7dfe7b12))
+* **storybook-ci:** update pages version gh action to latest version ([08e306e](https://github.com/jerensl/motionxy_dashboard_typescript/commit/08e306e1685baa0a34fe87fe6ce9c746becf2caf))
+
 ## [1.1.0](https://github.com/jerensl/motionxy_dashboard_typescript/compare/v1.0.0...v1.1.0) (2023-12-18)
 
 
